@@ -200,7 +200,7 @@ To meet the URLLC key requirement, we should do a good job of studying $T_{Total
 
 In this part, we discuss the latency mainly on the User Plane(UP) rather than Control Plane(C-Plane). That because most of latency is attributed to the UP. UP latency is the communication time between network nodes and UE when transmission and reception of the data at the corresponding IP layer. Whereas, the C-Plane latency is the time spend on radio resource allocating and state switching from idle to active. Compared with UP latency, the C-Plane delay is tiny and can be ignored.
 
-\subsection{Problem Description and Model Building}
+\subsection{Problem Description}
 The data transport from UEs and go through every nodes to cloud at the end.
 according to the requirement of URLLC, the reliability and latency can be described as Formula.\ref{eq_urllc_problem}:
 
@@ -208,7 +208,7 @@ according to the requirement of URLLC, the reliability and latency can be descri
 P\{delay > \delta \} < \epsilon
 \end{equation}
 
-The delay should be within 1ms, so the $\delta < 1$, the unit is microsecond(ms). Where $epsilon$ is defined as a very small probability. Meanwhile the block error rate(BLER) must be 99.999\%. It means that the value of $\epsilon$ must be less than $1*10^{-5}$, (i.e. $1 - 1*10^{-5} = 0.99999$, It equals to BLER $99.999\%$). The Formula.\ref{eq_urllc_problem} represents the 5G URLLC network successfully transport data and satisfy the delay and reliability requirements.
+The delay should be within 1ms, so the $\delta < 1$, the unit is microsecond(ms). Where $\epsilon$ is defined as a very small probability. Meanwhile the block error rate(BLER) must be 99.999\%. It means that the value of $\epsilon$ must be less than $1*10^{-5}$, (i.e. $1 - 1*10^{-5} = 0.99999$, It equals to BLER $99.999\%$). The Formula.\ref{eq_urllc_problem} represents the 5G URLLC network successfully transport data and satisfy the delay and reliability requirements.
 %in here, I assume the ultra reliable and low latency in one formula, it may be not accurate.
 
 \subsection{Stochastic Network Calculus}
@@ -276,6 +276,7 @@ Consider a flow passing through a network of $N$ systems in tandem. If each syst
 \end{theorem}
 %here need to operation!
 
+\subsection{Model Building}
 As assumption the latency of URLLC in Formula.\ref{eq_delay_composition},  We consider the URLLC network is a tandem system. So the delay of URLLC should fall in the concatenation characterization in SNC.
 
 We consider that a UE's network flow passing through the gNB, CN and Cloud in tandem mode. Each network node $k(=gNB, AAU, DU, CU, CN, Cloud)$ provides a stochastic service curve $S_{k}\sim<g_k, \beta_k>$ to its flow, according to the concatenation property which mentioned in article \cite{b4}, then the network guarantees to the flow a stochastic service curve $S_{All}\sim<g_{All},\beta_{All}>$ with
@@ -315,8 +316,14 @@ add some proof in the theory description.
 
 Consider the URLLC system traffic arrival process and service process are both independent and stationary increments. the delay can be bounded by
 \begin{equation}
-P\{L(t)>d\} \leq E[e^{-\theta x}]
+P\{L(t)>d\} \leq P{A(t)>D(t+d)}
 \end{equation}
+and then 
+\begin{align*}
+&P{A(t)>D(t+d)} \\
+=&P\{\sup_{0\leq s\leq t-1}\{A(s,t)-S(s,t+x)\}>0\} \\
+=&P\{\sup_{0\leq s\leq t-1}e^{A(s,t)-S(s,t+x)}>1\} \\
+\end{align*}
 
 We suppose $C$ denote amount of UEs in URLLC system, and $n$ is the index of UEs, which $n\in[1, C]$, let us denotes $l(n)$ as the data size in transmission. Each server in tandem system has the constant service rate. The Stochastic arrival process can be write as:
 \begin{equation}
