@@ -277,7 +277,7 @@ Consider a flow passing through a network of $N$ systems in tandem. If each syst
 %here need to operation!
 
 \subsection{Model Building}
-As assumption the latency of URLLC in Formula.\ref{eq_delay_composition},  We consider the URLLC network is a tandem system. So the delay of URLLC should fall in the concatenation characterization in SNC.
+As assumption the latency of URLLC in (\ref{eq_delay_composition}), We consider the URLLC network is a tandem system. So the delay of URLLC should fall in the concatenation characterization in SNC.
 
 We consider that a UE's network flow passing through the gNB, CN and Cloud in tandem mode. Each network node $k(=gNB, AAU, DU, CU, CN, Cloud)$ provides a stochastic service curve $S_{k}\sim<g_k, \beta_k>$ to its flow, according to the concatenation property which mentioned in article \cite{b4}, then the network guarantees to the flow a stochastic service curve $S_{All}\sim<g_{All},\beta_{All}>$ with
 \begin{equation}\label{eq_tandem_ssc}
@@ -316,11 +316,11 @@ add some proof in the theory description.
 
 Consider the URLLC system traffic arrival process and service process are both independent and stationary increments. the delay can be bounded by
 \begin{equation}
-P\{L(t)>d\} \leq P{A(t)>D(t+d)}
+P\{L(t)>d\} \leq P\{A(t)>D(t+d)\}
 \end{equation}
-and then 
+and then
 \begin{align*}
-&P{A(t)>D(t+d)} \\
+&P\{A(t)>D(t+d)\} \\
 =&P\{\sup_{0\leq s\leq t-1}\{A(s,t)-S(s,t+x)\}>0\} \\
 =&P\{\sup_{0\leq s\leq t-1}e^{A(s,t)-S(s,t+x)}>1\} \\
 \end{align*}
