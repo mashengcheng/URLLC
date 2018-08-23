@@ -160,7 +160,7 @@ In these teams, there are often cooperation. The document \cite{MF_jiang} is an 
 %\FloatBarrier
 \section{System Model}
 
-\subsection{URLLC Network architecture}
+\subsection{URLLC Network Architecture}
 We consider URLLC network as a concatenate system from UE to Cloud. We only consider the 5G standalone network situation.
 The 4G LTE network is composed by UE, RRU(Radio Remote Unit), BBU(Building Base band Unit), the EPC(Evolved Packet Core) which is the LTE's core network, and end by cloud servers.
 
@@ -200,7 +200,7 @@ To meet the URLLC key requirement, we should do a good job of studying $T_{Total
 
 In this part, we discuss the latency mainly on the User Plane(UP) rather than Control Plane(C-Plane). That because most of latency is attributed to the UP. UP latency is the communication time between network nodes and UE when transmission and reception of the data at the corresponding IP layer. Whereas, the C-Plane latency is the time spend on radio resource allocating and state switching from idle to active. Compared with UP latency, the C-Plane delay is tiny and can be ignored.
 
-\subsection{Problem Description and Model Building}
+\subsection{Problem Description}
 The data transport from UEs and go through every nodes to cloud at the end.
 according to the requirement of URLLC, the reliability and latency can be described as Formula.\ref{eq_urllc_problem}:
 
@@ -208,7 +208,7 @@ according to the requirement of URLLC, the reliability and latency can be descri
 P\{delay > \delta \} < \epsilon
 \end{equation}
 
-The delay should be within 1ms, so the $\delta < 1$, the unit is microsecond(ms). Where $epsilon$ is defined as a very small probability. Meanwhile the block error rate(BLER) must be 99.999\%. It means that the value of $\epsilon$ must be less than $1*10^{-5}$, (i.e. $1 - 1*10^{-5} = 0.99999$, It equals to BLER $99.999\%$). The Formula.\ref{eq_urllc_problem} represents the 5G URLLC network successfully transport data and satisfy the delay and reliability requirements.
+The delay should be within 1ms, so the $\delta < 1$, the unit is microsecond(ms). Where $\epsilon$ is defined as a very small probability. Meanwhile the block error rate(BLER) must be 99.999\%. It means that the value of $\epsilon$ must be less than $1*10^{-5}$, (i.e. $1 - 1*10^{-5} = 0.99999$, It equals to BLER $99.999\%$). The Formula.\ref{eq_urllc_problem} represents the 5G URLLC network successfully transport data and satisfy the delay and reliability requirements.
 %in here, I assume the ultra reliable and low latency in one formula, it may be not accurate.
 
 \subsection{Stochastic Network Calculus}
@@ -276,6 +276,7 @@ Consider a flow passing through a network of $N$ systems in tandem. If each syst
 \end{theorem}
 %here need to operation!
 
+\subsection{Model Building}
 As assumption the latency of URLLC in Formula.\ref{eq_delay_composition},  We consider the URLLC network is a tandem system. So the delay of URLLC should fall in the concatenation characterization in SNC.
 
 We consider that a UE's network flow passing through the gNB, CN and Cloud in tandem mode. Each network node $k(=gNB, AAU, DU, CU, CN, Cloud)$ provides a stochastic service curve $S_{k}\sim<g_k, \beta_k>$ to its flow, according to the concatenation property which mentioned in article \cite{b4}, then the network guarantees to the flow a stochastic service curve $S_{All}\sim<g_{All},\beta_{All}>$ with
@@ -315,8 +316,14 @@ add some proof in the theory description.
 
 Consider the URLLC system traffic arrival process and service process are both independent and stationary increments. the delay can be bounded by
 \begin{equation}
-P\{L(t)>d\} \leq E[e^{-\theta x}]
+P\{L(t)>d\} \leq P{A(t)>D(t+d)}
 \end{equation}
+and then 
+\begin{align*}
+&P{A(t)>D(t+d)} \\
+=&P\{\sup_{0\leq s\leq t-1}\{A(s,t)-S(s,t+x)\}>0\} \\
+=&P\{\sup_{0\leq s\leq t-1}e^{A(s,t)-S(s,t+x)}>1\} \\
+\end{align*}
 
 We suppose $C$ denote amount of UEs in URLLC system, and $n$ is the index of UEs, which $n\in[1, C]$, let us denotes $l(n)$ as the data size in transmission. Each server in tandem system has the constant service rate. The Stochastic arrival process can be write as:
 \begin{equation}
@@ -392,20 +399,20 @@ Beijing Municipal Program for Excellent Teacher Promotion
 (No.PXM2017\_014224.000028).
 
 \begin{thebibliography}{00}
-\bibitem{b1} ITU-R M.2083-0, ‚ÄúIMT Vision - Framework and Overall Objectives of the Future Development of IMT for 2020 and Beyond,‚Äù Sept 2015.
-\bibitem{b2} 3GPP TR 38.913, ‚ÄúStudy on Scenarios and Requirements for Next Generation Access Technologies,‚Äù June 2017.
-\bibitem{b3} Soldani D, Guo Y J, Barani B, et al, ‚Äú5G for Ultra-Reliable Low-Latency Communications,‚Äù IEEE Network, 2018, vol.32, no.2, pp.6-7.
-\bibitem{b4} Jiang Y, Liu Y. ‚ÄúStochastic Network Calculus,‚Äù Springer London, 2009.
+\bibitem{b1} ITU-R M.2083-0, °∞IMT Vision - Framework and Overall Objectives of the Future Development of IMT for 2020 and Beyond,°± Sept 2015.
+\bibitem{b2} 3GPP TR 38.913, °∞Study on Scenarios and Requirements for Next Generation Access Technologies,°± June 2017.
+\bibitem{b3} Soldani D, Guo Y J, Barani B, et al, °∞5G for Ultra-Reliable Low-Latency Communications,°± IEEE Network, 2018, vol.32, no.2, pp.6-7.
+\bibitem{b4} Jiang Y, Liu Y. °∞Stochastic Network Calculus,°± Springer London, 2009.
 \bibitem{b5} M. Fidler and A. Rizk, "A Guide to the Stochastic Network Calculus," in IEEE Communications Surveys \& Tutorials, vol. 17, no. 1, pp. 92-105, Firstquarter 2015. pp.92-105.
-\bibitem{interface} J. J. Nielsen, R. Liu and P. Popovski, ‚ÄúUltra-Reliable Low Latency Communication Using Interface Diversity,‚Äù IEEE Transactions on Communications, vol.66, no.3, pp.1322-1334, March 2018
-\bibitem{multiconnectivity} Delgado R A, Lau K, Middleton R H, et al. ‚ÄúNetworked Delay Control for 5G Wireless Machine-Type Communications Using Multiconnectivity,‚Äù IEEE Transactions on Control Systems Technology, vol.99, pp.1-16, 2018.
-\bibitem{PD} Rao J, Vrzic S, ‚ÄúPacket Duplication for URLLC in 5G: Architectural Enhancements and Performance Analysis,‚Äù IEEE Network, vol.32, no.2, pp.32-40, 2018.
-\bibitem{Anand} Anand A, De Veciana G, ‚ÄúResource Allocation and HARQ Optimization for URLLC Traffic in 5G Wireless Networks,‚Äù 2018.
-\bibitem{Energy} Mukherjee A, ‚ÄúEnergy Efficiency and Delay in 5G Ultra-Reliable Low-Latency Communications System Architectures,‚Äù IEEE Network, 2018, 32(2):55-61.
-\bibitem{joachim} Sachs J, Wikstrom G, Dudda T, et al, ‚Äú5G Radio Network Design for Ultra-Reliable Low-Latency Communication,‚Äù IEEE Network, 2018, vol.32, no.2, pp.24-31.
-\bibitem{Huawei} Wang C, Chen Y, Wu Y, et al. ‚ÄúPerformance Evaluation of Grant-Free Transmission for Uplink URLLC Services,‚Äù IEEE, Vehicular Technology Conference: Vtc2017-Spring. IEEE, 2017:1-6.
+\bibitem{interface} J. J. Nielsen, R. Liu and P. Popovski, °∞Ultra-Reliable Low Latency Communication Using Interface Diversity,°± IEEE Transactions on Communications, vol.66, no.3, pp.1322-1334, March 2018
+\bibitem{multiconnectivity} Delgado R A, Lau K, Middleton R H, et al. °∞Networked Delay Control for 5G Wireless Machine-Type Communications Using Multiconnectivity,°± IEEE Transactions on Control Systems Technology, vol.99, pp.1-16, 2018.
+\bibitem{PD} Rao J, Vrzic S, °∞Packet Duplication for URLLC in 5G: Architectural Enhancements and Performance Analysis,°± IEEE Network, vol.32, no.2, pp.32-40, 2018.
+\bibitem{Anand} Anand A, De Veciana G, °∞Resource Allocation and HARQ Optimization for URLLC Traffic in 5G Wireless Networks,°± 2018.
+\bibitem{Energy} Mukherjee A, °∞Energy Efficiency and Delay in 5G Ultra-Reliable Low-Latency Communications System Architectures,°± IEEE Network, 2018, 32(2):55-61.
+\bibitem{joachim} Sachs J, Wikstrom G, Dudda T, et al, °∞5G Radio Network Design for Ultra-Reliable Low-Latency Communication,°± IEEE Network, 2018, vol.32, no.2, pp.24-31.
+\bibitem{Huawei} Wang C, Chen Y, Wu Y, et al. °∞Performance Evaluation of Grant-Free Transmission for Uplink URLLC Services,°± IEEE, Vehicular Technology Conference: Vtc2017-Spring. IEEE, 2017:1-6.
 
-\bibitem{Achieving} Pocovi G, Shariatmadari H, Berardinelli G, et al. ‚ÄúAchieving Ultra-Reliable Low-Latency Communications: Challenges and Envisioned System Enhancements,‚Äù IEEE Network, vol.32, no.2, pp.8-15, 2018.
+\bibitem{Achieving} Pocovi G, Shariatmadari H, Berardinelli G, et al. °∞Achieving Ultra-Reliable Low-Latency Communications: Challenges and Envisioned System Enhancements,°± IEEE Network, vol.32, no.2, pp.8-15, 2018.
 \bibitem{Wireless} Popovski P, Nielsen J J, Stefanovic C, et al. Wireless Access for Ultra-Reliable Low-Latency Communication: Principles and Building Blocks[J]. IEEE Network, 2018, 32(2):16-23.
 \bibitem{Introduction} Ji H, Park S, Yeo J, et al. Introduction to Ultra Reliable and Low Latency Communications in 5G[J]. 2017.
 \bibitem{Physical} Ji H, Park S, Yeo J, et al. Ultra Reliable and Low Latency Communications in 5G Downlink: Physical Layer Aspects[J]. 2018.
@@ -418,13 +425,13 @@ Beijing Municipal Program for Excellent Teacher Promotion
 
 %M Fidler
 \bibitem{MF_cross} S. Akin and M. Fidler, "A Method for Cross-Layer Analysis of Transmit Buffer Delays in Message Index Domain," in IEEE Transactions on Vehicular Technology, vol. 67, no. 3, pp. 2698-2712, March 2018.
-\bibitem{MF_Service} R. L√ºbben and M. Fidler, "Service Curve Estimation-Based Characterization and Evaluation of Closed-Loop Flow Control," in IEEE Transactions on Network and Service Management, vol. 14, no. 1, pp. 161-175, March 2017.
-\bibitem{MF_Estimation} R. L√ºbben and M. Fidler, "Estimation method for the delay performance of closed-loop flow control with application to TCP," IEEE INFOCOM 2016 - The 35th Annual IEEE International Conference on Computer Communications, San Francisco, CA, 2016, pp. 1-9.
-\bibitem{MF_Random} R. L√ºbben, M. Fidler and J. Liebeherr, "Stochastic Bandwidth Estimation in Networks With Random Service," in IEEE/ACM Transactions on Networking, vol. 22, no. 2, pp. 484-497, April 2014.
+\bibitem{MF_Service} R. L®πbben and M. Fidler, "Service Curve Estimation-Based Characterization and Evaluation of Closed-Loop Flow Control," in IEEE Transactions on Network and Service Management, vol. 14, no. 1, pp. 161-175, March 2017.
+\bibitem{MF_Estimation} R. L®πbben and M. Fidler, "Estimation method for the delay performance of closed-loop flow control with application to TCP," IEEE INFOCOM 2016 - The 35th Annual IEEE International Conference on Computer Communications, San Francisco, CA, 2016, pp. 1-9.
+\bibitem{MF_Random} R. L®πbben, M. Fidler and J. Liebeherr, "Stochastic Bandwidth Estimation in Networks With Random Service," in IEEE/ACM Transactions on Networking, vol. 22, no. 2, pp. 484-497, April 2014.
 
 %BUPT
 \bibitem{beiyou_1} Z. Li, Y. Jiang, Y. Gao, P. Li, L. Sang and D. Yang, "Delay and Delay-Constrained Throughput Performance of a Wireless-Powered Communication System," in IEEE Access, vol. 5, pp. 21620-21631, 2017.
-\bibitem{beiyou_2} Z. Li, Y. Gao, B. A. Salihu, et al, ‚ÄúNetwork Calculus Delay Bounds in Multi-Server Queueing Networks with Stochastic Arrivals and Stochastic Services‚Äù, IEEE Global Communications Conference. IEEE, 2015:1-7.
+\bibitem{beiyou_2} Z. Li, Y. Gao, B. A. Salihu, et al, °∞Network Calculus Delay Bounds in Multi-Server Queueing Networks with Stochastic Arrivals and Stochastic Services°±, IEEE Global Communications Conference. IEEE, 2015:1-7.
 \bibitem{beiyou_lei1} K. Zheng, F. Liu, L. Lei, C. Lin and Y. Jiang, "Stochastic Performance Analysis of a Wireless Finite-State Markov Channel," in IEEE Transactions on Wireless Communications, vol. 12, no. 2, pp. 782-793, February 2013.
 \bibitem{beiyou_lei2} Y. Li, L. Lei, Z. Zhong and S. Lin, "Performance analysis for high-speed railway communication network using stochastic network calculus," 5th IET International Conference on Wireless, Mobile and Multimedia Networks (ICWMMN 2013), Beijing, 2013, pp. 100-105.
 
