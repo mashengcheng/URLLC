@@ -281,6 +281,9 @@ As assumption the latency of URLLC in (\ref{eq_delay_composition}), We consider 
 
 %与其它的5G应用场景不同，URLLC的延时标准是有严格要求的，必须要保证在1ms以内，并且保证误码率要在1*10-5次幂以内，来保证可靠性。那么我们就应用随机网络演算理论来设定模型，假定时延通常都要保证在1ms以内，但是偶尔有大于1ms的情况出现，但这种情况出现的违背概率要小于1*10的-5次幂。
 
+%用户端发送的流量可以用随机到达过程来描述,而网络节点提供的服务能力用服务过程来描述
+The network traffic of URLLC can be described by stochastic processes as introducing in above. The data sent by UEs can be described as arrival process $A(t)$ and the service capacity provided by the network server node can be represented by stochastic service process $S(t)$.
+
 We consider that a UE's network flow passing through the gNB, CN and Cloud in tandem mode. Each network node $k(=gNB, AAU, DU, CU, CN, Cloud)$ provides a stochastic service curve $S_{k}\sim<g_k, \beta_k>$ to its flow, according to the concatenation property which mentioned in article \cite{b4}, then the network guarantees to the flow a stochastic service curve $S_{All}\sim<g_{All},\beta_{All}>$ with
 \begin{equation}\label{eq_tandem_ssc}
 \beta_{All}(t)=\beta_{gNB}\otimes\beta_{CN}\otimes\beta_{Cloud}(t)

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2017.3.8)  23 AUG 2018 19:22
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2017.3.8)  23 AUG 2018 21:35
 entering extended mode
 **E:/GitHub/URLLC/URLLC.tex
 (E:/GitHub/URLLC/URLLC.tex
@@ -410,7 +410,7 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 137.
 (C:\CTEX\MiKTeX\tex\latex\amsfonts\umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ) [2] [3 <E:/GitHub/URLLC/5G_delay_en.jpg>] [4]
-Overfull \hbox (15.12752pt too wide) detected at line 356
+Overfull \hbox (15.12752pt too wide) detected at line 361
 \OML/cmm/m/it/10 P\OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 L\OT1/cmr/m/n/10 (\OML/cmm
 /m/it/10 t\OT1/cmr/m/n/10 ) \OML/cmm/m/it/10 > d\OMS/cmsy/m/n/10 g \U/msa/m/n/1
 0 6 \OML/cmm/m/it/10 P\OMS/cmsy/m/n/10 f[]g \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 
@@ -421,75 +421,73 @@ OT1/cmr/m/n/10 0\OMS/cmsy/m/n/10 g\OML/cmm/m/it/10 :
  []
 
 
-Overfull \hbox (31.10828pt too wide) in paragraph at lines 370--370
-[] 
- []
-
-
-Overfull \hbox (17.16992pt too wide) in paragraph at lines 383--383
+Overfull \hbox (31.10828pt too wide) in paragraph at lines 375--375
 [] 
  []
 
 [5]
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ° in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ± in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ° in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ± in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ° in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ± in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ° in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ± in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ° in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ± in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ° in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ± in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ° in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ± in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ° in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ± in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ° in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ± in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ° in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ± in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ° in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ± in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ° in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ± in font ptmr7t!
-Missing character: There is no ¨ in font ptmr7t!
-Missing character: There is no ¹ in font ptmr7t!
-Missing character: There is no ¨ in font ptmr7t!
-Missing character: There is no ¹ in font ptmr7t!
-Missing character: There is no ¨ in font ptmr7t!
-Missing character: There is no ¹ in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ° in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
-Missing character: There is no ± in font ptmr7t!
+Overfull \hbox (17.16992pt too wide) in paragraph at lines 388--388
+[] 
+ []
 
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ° in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ± in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ° in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ± in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ° in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ± in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ° in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ± in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ° in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ± in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ° in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ± in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ° in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ± in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ° in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ± in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ° in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ± in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ° in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ± in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ° in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ± in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ° in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ± in font ptmr7t!
+Missing character: There is no ¨ in font ptmr7t!
+Missing character: There is no ¹ in font ptmr7t!
+Missing character: There is no ¨ in font ptmr7t!
+Missing character: There is no ¹ in font ptmr7t!
+Missing character: There is no ¨ in font ptmr7t!
+Missing character: There is no ¹ in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ° in font ptmr7t!
+Missing character: There is no ¡ in font ptmr7t!
+Missing character: There is no ± in font ptmr7t!
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -524,7 +522,7 @@ ype1/public/amsfonts/symbols/msam10.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsf
 onts/symbols/msam7.pfb><C:/CTEX/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/CTE
 X/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/CTEX/MiKTeX/fonts/type1/urw/time
 s/utmr8a.pfb><C:/CTEX/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on URLLC.pdf (6 pages, 337537 bytes).
+Output written on URLLC.pdf (6 pages, 337775 bytes).
 PDF statistics:
  75 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
