@@ -87,7 +87,7 @@ So stringent delay requirement need new 5G NR technology to bridge the gap. Thou
 
 Stochastic network calculus(SNC) theory is very good at delay performance analysis. The SNC is a continuous development method to analysis network traffic characteristic and evaluate performance. The fundamental theory of SNC is network calculus, it was presented in the early 1990s. Network Stochastic has divided into two branches, deterministic network calculus and stochastic network calculus\cite{b4}. The deterministic network calculus system can provide minimize service guarantees by service curves\cite{b5}. But the deterministic model has the weakness that it can not utilize the statistical feature of traffic flow. To deal with random service and statistical guarantee, the SNC theory comes into being with a large number of stochastic processes and traffic models. Because of permitting some packets violates the desired performance, SNC can better take advantage of statistical multiplexing gains. Under a suitable traffic model and a chosen server model, The SNC theory can easily address delay, backlog and other service guarantee analysis of communication network. So we capitalize on the SNC method to build a model to simulate the 5G URLLC uplink and downlink transmission in this paper.
 
-We use traffic-amount-centric stochastic arrival curve to describe the process that user equipment(UE) data sends to gNodeB side. It can be deduced the rest stages of data transmission from gNodeB to cloud server according to the 5G network topology architecture. Every stage of stochastic arrival curve characterizes the delay property, the whole delay of URLLC system is comprised by delays which generated from UE to cloud server.
+We use traffic-amount-centric stochastic arrival curve to describe the process that user equipment(UE) data sends to gNodeB(gNB) side. It can be deduced the rest stages of data transmission from gNB to cloud server according to the 5G network topology architecture. Every stage of stochastic arrival curve characterizes the delay property, the whole delay of URLLC system is comprised by delays which generated from UE to cloud server.
 
 Our main contributions of this paper can be summarized as follows:
 
@@ -118,7 +118,7 @@ Jaya Rao and Sophie Vrzic have propose an approach to adopt packet duplication(P
 
 In terms of resource allocation and energy efficiency, there are also some researches on URLLC.
 How frequency resource are allocated to send a user data in URLLC scenario? That is an interesting study which plunged by Anand A and De Veciana G\cite{Anand}. Based on the 5G standard technology Orthogonal Frequency Division Multiple Access (OFDMA), they build a One Shot Transmission model which does not allow retransmission.  Adopting queuing theory analysis, they find out a result that a small bandwidth over a longer duration is better than a large swath of bandwidth for short duration in One Shot Transmission system.
-Green energy saving is getting more and more attention. The article \cite{Energy} provides a coordinated on-off switching scheme across a set of adjacent gNodeBs. The gNodeBs share a sleep schedule among themselves, where gNodeBs with lower offered traffic and fewer connected UEs select longer OFF durations. This is more energy-efficient with on-off mode than traditional mode on the premise of guaranteeing the time delay.
+Green energy saving is getting more and more attention. The article \cite{Energy} provides a coordinated on-off switching scheme across a set of adjacent gNBs. The gNBs share a sleep schedule among themselves, where gNBs with lower offered traffic and fewer connected UEs select longer OFF durations. This is more energy-efficient with on-off mode than traditional mode on the premise of guaranteeing the time delay.
 
 Because URLLC has strict requirements for delay and reliability, it is very meaningful to evaluate the performance of URLLC.
 Joachim et al. provide an achievable latency bound evaluation in their article\cite{joachim}. They compare the worst case RAN transmission latencies for different 5G URLLC configurations. The configuration contains FDD, TDD, frequency numerologies and usage of slots. According the analysis, a frequency with higher numerology can be used to reduce the latency.
@@ -237,11 +237,13 @@ A\otimes\beta(t) = \inf_{0 \leqslant s \leqslant t}\{A(s)+\beta(s,t)\}
 \end{equation}
 $\beta(t)$ is the stochastic service curve which means the worst service capability provided by the server. Similar to the stochastic arrival curve, the data that already have been served are probably to be more than the leaving data. The probability of producing exceeding data can be constrained by the boundary function $g(x)$.
 
-Similarly as in (\ref{eq_ssc}), the departure process can be related to the arrival and service process, for all $s,t \geqslant 0$ and $s \leqslant t$:
+Similarly as in (\ref{eq_ssc}), the departure process relates to the arrival and service process and it is described as
 \begin{equation}\label{eq_departure}
-D(t) = \inf_{0\leqslant s \leqslant t}\{A(s)+ S(s,t)\} =  A \otimes \beta(t).
+D(t) \geq \inf_{0\leqslant s \leqslant t}\{A(s)+ S(s,t)\} =  A \otimes \beta(t).
 \end{equation}
-from the (\ref{eq_departure}), we can better understand the relationship among arrival process, departure process and service process. With these basic processes and curves, we can discuss the definition of the delay boundary.
+where for all $s,t \geqslant 0$ and $s \leqslant t$.
+That is also the concept of a dynamic server which mentioned in \cite{b5}.
+From the (\ref{eq_departure}), we can better understand the relationship among arrival process, departure process and service process. With these basic processes and curves, we can discuss the definition of the delay boundary.
 
 \begin{definition}
 {\bfseries(Latency Process)}.
@@ -271,20 +273,21 @@ $Proof:$ Please see Appendix A.
 Consider a flow passing through a network of $N$ systems in tandem. If each system $n(=1,2,...,N)$ provides a stochastic service curve $S^{n}~<g^{n}, \beta^{n}>$ to its input, then the network guarantees to the flow a stochastic service curve $S~<g,\beta>$ with
 \begin{align*}
 \beta(t)=\beta^{1}\otimes\beta^{2}\otimes\cdot\cdot\cdot\otimes\beta^{N}(t) \\
-\beta(x)=g^{1}\otimes g^{2}\otimes\cdot\cdot\cdot\otimes g^{N}(t)
+g(x)=g^{1}\otimes g^{2}\otimes\cdot\cdot\cdot\otimes g^{N}(t)
 \end{align*}
 \end{theorem}
 %here need to operation!
 
 \subsection{Model Building}
+The network character of URLLC can be described as a dynamic server by stochastic processes as introducing in above. The data sent by UE can be described as arrival process $A(t)$ and the service capacity provided by the network server node can be represented by stochastic service process $S(t)$.
+
 As assumption the latency of URLLC in (\ref{eq_delay_composition}), We consider the URLLC network is a tandem system. So the delay of URLLC should fall in the concatenation characterization in SNC.
 
 %与其它的5G应用场景不同，URLLC的延时标准是有严格要求的，必须要保证在1ms以内，并且保证误码率要在1*10-5次幂以内，来保证可靠性。那么我们就应用随机网络演算理论来设定模型，假定时延通常都要保证在1ms以内，但是偶尔有大于1ms的情况出现，但这种情况出现的违背概率要小于1*10的-5次幂。
 
-%用户端发送的流量可以用随机到达过程来描述,而网络节点提供的服务能力用服务过程来描述
-The network traffic of URLLC can be described by stochastic processes as introducing in above. The data sent by UEs can be described as arrival process $A(t)$ and the service capacity provided by the network server node can be represented by stochastic service process $S(t)$.
-
-We consider that a UE's network flow passing through the gNB, CN and Cloud in tandem mode. Each network node $k(=gNB, AAU, DU, CU, CN, Cloud)$ provides a stochastic service curve $S_{k}\sim<g_k, \beta_k>$ to its flow, according to the concatenation property which mentioned in article \cite{b4}, then the network guarantees to the flow a stochastic service curve $S_{All}\sim<g_{All},\beta_{All}>$ with
+We consider that a UE's network flow passing through the gNB, CN and Cloud in tandem mode. Each network node $k(=gNB, AAU, DU, CU, CN, Cloud)$ provides a stochastic service curve $S_{k}\sim<g_k, \beta_k>$ to its flow,
+%这里不应该是根据串联特性的文献了，应该是前面提到的定理了。
+according to the concatenation property which mentioned in article \cite{b4}, then the network guarantees to the flow a stochastic service curve $S_{All}\sim<g_{All},\beta_{All}>$ with
 \begin{equation}\label{eq_tandem_ssc}
 \beta_{All}(t)=\beta_{gNB}\otimes\beta_{CN}\otimes\beta_{Cloud}(t)
 \end{equation}
