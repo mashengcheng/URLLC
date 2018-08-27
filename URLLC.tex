@@ -283,11 +283,14 @@ The network character of URLLC can be described as a dynamic server by stochasti
 
 As assumption the latency of URLLC in (\ref{eq_delay_composition}), We consider the URLLC network is a tandem system. So the delay of URLLC should fall in the concatenation characterization in SNC.
 
-%与其它的5G应用场景不同，URLLC的延时标准是有严格要求的，必须要保证在1ms以内，并且保证误码率要在1*10-5次幂以内，来保证可靠性。那么我们就应用随机网络演算理论来设定模型，假定时延通常都要保证在1ms以内，但是偶尔有大于1ms的情况出现，但这种情况出现的违背概率要小于1*10的-5次幂。
+%与其它的5G应用场景不同，URLLC的延时标准是有严格要求的，必须要保证在1ms以内，并且保证误码率要在1*10-5次幂以内，来保证可靠性。那么我们就应用随机网络演算理论来设定模型，假定时延通常都要保证在1ms以内，但是偶尔有大于1ms的情况出现，但这种情况出现的违背概率要小于1*10的-5 次幂。
 
-We consider that a UE's network flow passing through the gNB, CN and Cloud in tandem mode. Each network node $k(=gNB, AAU, DU, CU, CN, Cloud)$ provides a stochastic service curve $S_{k}\sim<g_k, \beta_k>$ to its flow,
+We consider that a UE's network flow passing through the gNB, CN and Cloud in tandem mode. Each network node $k(=gNB, AAU, DU, CU, CN, Cloud)$ provides a stochastic service curve $S_{k}\sim<g_k, \beta_k>$ to its flow. We first consider the gNB subsystem. The gNB includes AAU, DU and CU, so $S_{AAU}(s,t)$, $S_{DU}(s,t)$ and $S_{CU}(s,t)$ are in series. We use the same indices to denote the arrival and departure process of the respective systems. Especially the source of data is from UE. So $A_{AAU}(t)$ as arrival process denotes the input data of AAU from UE in gNB subsystem. The arrival process of DU $A_{DU}(t)$ actually equals to the departure process of AAU $D_{AAU}(t)$, where $A_{DU}(t) = D_{AAU}(t)$. By the same token, $A_{CU}(t) = D_{DU}(t)$ similarly for CU server. The departure process of CU is $D_{CU}(t)$. It is also the departure process of the gNB subsystem.
+
+%rewrite this part.
+
 %这里不应该是根据串联特性的文献了，应该是前面提到的定理了。
-according to the concatenation property which mentioned in article \cite{b4}, then the network guarantees to the flow a stochastic service curve $S_{All}\sim<g_{All},\beta_{All}>$ with
+According to the concatenation property which mentioned in article \cite{b4}, then the network guarantees to the flow a stochastic service curve $S_{All}\sim<g_{All},\beta_{All}>$ with
 \begin{equation}\label{eq_tandem_ssc}
 \beta_{All}(t)=\beta_{gNB}\otimes\beta_{CN}\otimes\beta_{Cloud}(t)
 \end{equation}
