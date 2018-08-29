@@ -239,13 +239,13 @@ $\beta(t)$ is the stochastic service curve which means the worst service capabil
 
 Similarly as in (\ref{eq_ssc}), the departure process relates to the arrival and service process and it is described as
 \begin{equation}\label{eq_departure}
-D(t) \geq \inf_{0\leqslant s \leqslant t}\{A(s)+ S(s,t)\} =  A \otimes \beta(t).
+D(t) \geq \inf_{0\leqslant s \leqslant t}\{A(s)+ S(s,t)\} =  A \otimes S(t).
 \end{equation}
 where for all $s,t \geqslant 0$ and $s \leqslant t$.
 That is also the concept of a dynamic server which mentioned in \cite{b5}.
 From the (\ref{eq_departure}), we can better understand the relationship among arrival process, departure process and service process. With these basic processes and curves, we can discuss the definition of the delay boundary.
 
-\begin{definition}
+\begin{definition}\label{def_delay_process}
 {\bfseries(Latency Process)}.
 Let $A(t)$ and $D(t)$ respectively be the arrival process and departure process. The latency process $L(t)$ at time $t \geq 0$ is defined as
 \begin{equation}\label{eq_delay_define}
@@ -286,6 +286,45 @@ As assumption the latency of URLLC in (\ref{eq_delay_composition}), We consider 
 %与其它的5G应用场景不同，URLLC的延时标准是有严格要求的，必须要保证在1ms以内，并且保证误码率要在1*10-5次幂以内，来保证可靠性。那么我们就应用随机网络演算理论来设定模型，假定时延通常都要保证在1ms以内，但是偶尔有大于1ms的情况出现，但这种情况出现的违背概率要小于1*10的-5 次幂。
 
 We consider that a UE's network flow passing through the gNB, CN and Cloud in tandem mode. Each network node $k(=gNB, AAU, DU, CU, CN, Cloud)$ provides a stochastic service curve $S_{k}\sim<g_k, \beta_k>$ to its flow. We first consider the gNB subsystem. The gNB includes AAU, DU and CU, so $S_{AAU}(s,t)$, $S_{DU}(s,t)$ and $S_{CU}(s,t)$ are in series. We use the same indices to denote the arrival and departure process of the respective systems. Especially the source of data is from UE. So $A_{AAU}(t)$ as arrival process denotes the input data of AAU from UE in gNB subsystem. The arrival process of DU $A_{DU}(t)$ actually equals to the departure process of AAU $D_{AAU}(t)$, where $A_{DU}(t) = D_{AAU}(t)$. By the same token, $A_{CU}(t) = D_{DU}(t)$ similarly for CU server. The departure process of CU is $D_{CU}(t)$. It is also the departure process of the gNB subsystem.
+
+Consider the gNB subsystem is tandem deploy, we assume that the AAU server provides a $S_{AAU}(t)$ capacity to deal with the arrival data. Applying (\ref{eq_departure}), the departure process can be represent as
+\begin{equation} \label{eq_departure_AAU}
+D_{AAU}(t)\geq A_{AAU}\otimes S_{AAU}(t).
+\end{equation}
+similar to the departure process of AAU, we can get the process of DU
+\begin{equation}\label{eq_departure_DU}
+D_{DU}(t) \geq A_{DU}\otimes S_{DU}(t).
+\end{equation}
+because of $A_{DU}(t) = D_{AAU}(t) = A_{AAU}\otimes S_{AAU}(t)$, we put (\ref{eq_departure_AAU}) into (\ref{eq_departure_DU}) to replace $A_{DU}(t)$ by $A_{AAU}\otimes S_{AAU}(t)$ and get
+\begin{equation}\label{eq_departure_DU2}
+D_{DU}(t) \geq (A_{AAU}\otimes S_{AAU}(t))\otimes S_{DU}(t).
+\end{equation}
+By recursive insertion, we can obtain
+\begin{equation}\label{eq_departure_CU}
+D_{CU}(t) \geq ((A_{AAU}\otimes S_{AAU}) \otimes S_{DU})\otimes S_{CU}(t).
+\end{equation}
+Applying the associativity of min-plus convolution, it holds that
+\begin{align*}
+D_{CU}(t) &\geq ((A_{AAU}\otimes S_{AAU}) \otimes S_{DU})\otimes S_{CU}(t) \\
+&= A_{AAU}\otimes (S_{AAU}\otimes S_{DU} \otimes S_{CU})(t).
+\end{align*}
+From the gNB subsystem perspective to see, $A_{AAU}(t)$ is the first input and $D_{CU}(t)$ is the last output of gNB. So $A_{AAU}(t)$ equal to $A_{gNB}(t)$, and $D_{CU}(t)$ is the departure process of the gNB $D_{gNB}(t)$. Then we can get gNB subsystem
+\begin{equation}\label{eq_departure_gNB}
+D_{gNB} = A_{gNB}\otimes (S_{AAU}\otimes S_{DU} \otimes S_{CU})(t).
+\end{equation}
+Assuming first-come first-served order, we use definition.\ref{def_delay_process} and equation (\ref{eq_departure_gNB}), and let $L_{gNB}$ denotes the latency process of gNB, there holds
+\begin{equation}
+L_{gNB}(t) = \inf\{d\geqslant0: A_{gNB}(t) - D_{gNB}(t+d) \leqslant 0 \}
+\end{equation}
+
+\begin{equation}
+L_{gNB}(t) = \inf\{d\geqslant0: A_{gNB}(t) - A_{gNB}\otimes (S_{AAU}\otimes S_{DU} \otimes S_{CU})(t+d) \leqslant 0 \}
+\end{equation}
+
+\begin{equation}
+P\{L_{gNB}(t) \geq d\} 
+\end{equation}
+
 
 %rewrite this part.
 
@@ -385,7 +424,8 @@ Based on the stochastic arrival curve (\ref{eq_sac}) and stochastic service curv
 \end{equation}
 we can obtain
 \begin{align*}
-P\{L(t)>h(\alpha+x, \beta)\} &\leqslant P\{\{A(t) - D(t+h(\alpha+x, \beta))\} > 0\}  \\
+&P\{L(t)>h(\alpha+x, \beta)\} \\
+&\leqslant P\{\{A(t) - D(t+h(\alpha+x, \beta))\} > 0\}  \\
 &\leqslant P\{\sup_{0\leqslant s \leqslant t}\{A(t-s)-\alpha(t-s)\}  \\
 &+\sup_{0\leqslant s \leqslant t+h(\alpha+x, \beta)}\{A\otimes \beta(s)-D(s)\} \} \\
 &\leqslant f(t)+g(x) \\
