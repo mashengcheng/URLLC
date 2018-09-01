@@ -318,11 +318,14 @@ L_{gNB}(t) = \inf\{d\geqslant0: A_{gNB}(t) - D_{gNB}(t+d) \leqslant 0 \}
 \end{equation}
 
 \begin{equation}
-L_{gNB}(t) = \inf\{d\geqslant0: A_{gNB}(t) - A_{gNB}\otimes (S_{AAU}\otimes S_{DU} \otimes S_{CU})(t+d) \leqslant 0 \}
+\begin{split}
+L_{gNB}(t) = &\inf\{d\geqslant0: A_{AAU}(t) - \\
+&A_{AAU}\otimes (S_{AAU}\otimes S_{DU} \otimes S_{CU})(t+d) \leqslant 0 \}
+\end{split}
 \end{equation}
 
 \begin{equation}
-P\{L_{gNB}(t) \geq d\} 
+P\{L_{gNB}(t) \geq d\}
 \end{equation}
 
 
@@ -434,6 +437,13 @@ we can obtain
 \end{align*}
 
 \section*{Acknowledgment}
+
+%毫米波，MIMO，网络切片，边缘计算，这些都算是能够提升网络速率降低实验的方法，怎么提升可靠性呢？这个也好好好考虑与一下。
+%HARQ，这是一种重传的校验机制。也可以思考一下怎么利用。
+%关于这个实验的标准，ITU是1ms，而3GPP是0.5ms。
+%如果在DU和CU之间加入IPSEC加密传输，可以提高安全性，但这样会带来时延的问题。
+%D2D的形式，比MEC还要节省传输路径，如果是小规模数据的话，这样还是很节省时间的。
+%可以结合5G的3GPP里面设想的几个场景，来做实验分析，因为里面有实际的数据，关于性能的指标要求。
 
 This work was supported by these programs:
 
