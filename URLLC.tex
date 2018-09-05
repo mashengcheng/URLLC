@@ -17,6 +17,8 @@
 \newtheorem{theorem}{\textbf{Theorem}}
 \newtheorem{definition}{\textbf{Definition}}
 \newtheorem{lemma}{\textbf{Lemma}}
+\newtheorem{corollary}{\textbf{Corollary}}
+\newtheorem{proof}{\textbf{Proof}}
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}  % Use Input in the format of Algorithm
 \renewcommand{\algorithmicensure}{\textbf{Output:}} % Use Output in the format of Algorithm
 %\usepackage[section]{placeins}
@@ -164,64 +166,80 @@ In these teams, there are often cooperation. The document \cite{MF_jiang} is an 
 We consider URLLC network as a concatenate system from UE to Cloud. We only consider the 5G standalone network situation.
 The 4G LTE network is composed by UE, RRU(Radio Remote Unit), BBU(Building Base band Unit), the EPC(Evolved Packet Core) which is the LTE's core network, and end by cloud servers.
 
-Different to the 4G LTE, 5G networks are composed by UE, gNB, CN and Cloud.
+Different to the 4G LTE, 5G networks are composed by UE, gNB, NGC and Cloud.
 The gNB contains three parts that are AAU(Active Antenna Unit), DU(Distributed Unit) and CU(Centralized Unit).
 AAU takes the place of the original RRU and combines some physical layer processing functions of BBU.
 The BBU function of 4G will be rebuilt into DU and CU in 5G.
 CU provides the service convergence function in the access side. It focuses on the low real-time capabilities of the protocol stack and adopt a centralized deployment.
 DU mainly provides data access function to the terminal, including radio frequency and partial signal processing. DU concentrate on the high real-time capabilities of the transport requirements and suit for a distributed deployment method.
-The CN(Core Network) in 5G replace the EPC. 5G CN is based on SDN/NFV technology and designed to better fit the cloud platform.
+The NGC(Next Generation Core Network) as Core Network in 5G replace the EPC. 5G NGC is based on SDN/NFV technology and designed to better fit the cloud platform.
 The architecture is depicted as Fig.\ref{fig_architecture}.
 
 \subsection{Delay of URLLC Network}
 UE devices firstly access to AAU. The AAU is actually a part of base station. This part of the communication belongs to RAN.
 UE's data will be accepted by AAU, and AAU put forward the data to DU.
 There are two situations when data arrive at DU.
-If CU and DU are deployed together, the data can be CU immediately. Otherwise, the data will be sent to CU from DU.
+If CU and DU are deployed together, the data can be arrived at CU immediately. Otherwise, the data will be sent to CU from DU.
 The communication from AAU to CU belongs to fronthaul.
-The data leave CU and continue upward to the CN. This part of the communication is called hackhaul.
-CN will process the data and it will take some time.
-Finally, CN will send the data to Cloud servers. The unidirectional transmission is finished.
+The data leave CU and continue upward to the NGC. This part of the communication is called hackhaul.
+NGC will process the data and it will take some time.
+Finally, NGC sends the data to Cloud servers. The unidirectional transmission is finished.
 
-So the whole delay or latency in 5G system is contribute by the time processing of RAN, fronthual, backhaul, CN and Cloud server. It can be expressed as Formula.\ref{eq_delay_composition}.
-\begin{equation}\label{eq_delay_composition}
-T_{Total} = T_{RAN} + T_{Fronthaul} + T_{Backhaul} + T_{CN} + T_{Cloud}
+So the whole delay or latency in 5G system is contribute by the time processing of RAN, fronthual, backhaul, Core Network and Cloud server. It can be expressed as Formula.\ref{eq_delay_composition}.
+\begin{equation}\label{eq_urllc_delay_composition}
+T_{Total} = T_{RAN} + T_{Fronthaul} + T_{Backhaul} + T_{NGC} + T_{Cloud}
 \end{equation}
 where
 \begin{itemize}
 \item $T_{RAN}$ is the time cost by physical layer transmission between UEs and AAU.
 \item $T_{Fronthaul}$ is the delay between AAU to CU. It is the time taken in gNB.
-\item $T_{Backhaul}$ is the time taken to communication between gNB to CN.
-\item $T_{CN}$ is the delay taken place in CN.
-\item $T_{Cloud}$ is the latency which data transmission between CN and Cloud server.
+\item $T_{Backhaul}$ is the time taken to communication between gNB to NGC.
+\item $T_{NGC}$ is the delay taken place in NGC.
+\item $T_{Cloud}$ is the latency which data transmission between NGC and Cloud server.
 \end{itemize}
 
 To meet the URLLC key requirement, we should do a good job of studying $T_{Total}$.
 
-In this part, we discuss the latency mainly on the User Plane(UP) rather than Control Plane(C-Plane). That because most of latency is attributed to the UP. UP latency is the communication time between network nodes and UE when transmission and reception of the data at the corresponding IP layer. Whereas, the C-Plane latency is the time spend on radio resource allocating and state switching from idle to active. Compared with UP latency, the C-Plane delay is tiny and can be ignored.
+In this part, we discuss the latency mainly on the User Plane(UP) rather than Control Plane(C-Plane).
+That because most of latency is attributed to the UP.
+UP latency is the communication time between UE and network nodes when transmission and reception of the data at the corresponding IP layer.
+Whereas, the C-Plane latency is the time spend on radio resource allocating and state switching from idle to active.
+Compared with UP latency, the C-Plane delay is tiny and can be ignored.
 
 \subsection{Problem Description}
 The data transport from UEs and go through every nodes to cloud at the end.
-according to the requirement of URLLC, the reliability and latency can be described as Formula.\ref{eq_urllc_problem}:
+According to the requirement of URLLC, the reliability and latency can be described as Formula.\ref{eq_urllc_problem}:
 
-\begin{equation}\label{eq_urllc_problem}
+\begin{equation}\label{eq_urllc_delay_problem}
 P\{delay > \delta \} < \epsilon
 \end{equation}
 
-The delay should be within 1ms, so the $\delta < 1$, the unit is microsecond(ms). Where $\epsilon$ is defined as a very small probability. Meanwhile the block error rate(BLER) must be 99.999\%. It means that the value of $\epsilon$ must be less than $1*10^{-5}$, (i.e. $1 - 1*10^{-5} = 0.99999$, It equals to BLER $99.999\%$). The Formula.\ref{eq_urllc_problem} represents the 5G URLLC network successfully transport data and satisfy the delay and reliability requirements.
+The delay should be within 1ms, so the $\delta < 1$, the unit is millisecond(ms).
+Where $\epsilon$ is defined as a very small probability.
+Meanwhile the block error rate(BLER) must be 99.999\%.
+It means that the value of $\epsilon$ must be less than $1*10^{-5}$, (i.e. $1 - 1*10^{-5} = 0.99999$, It equals to BLER $99.999\%$).
+The Formula.\ref{eq_urllc_problem} represents the 5G URLLC network successfully transport data and satisfy the delay and reliability requirements.
 %in here, I assume the ultra reliable and low latency in one formula, it may be not accurate.
 
 \subsection{Stochastic Network Calculus}
-In SNC theory, the min-plus algebra is applied to analyze queueing system. Let $\mathcal{F}$ denotes the set of non-negative non-decreasing functions and $\mathcal{\bar{F}}$ denotes the set of non-negative non-increasing function. We employ the cumulative process to represent amount of traffic flow. Arrival process, departure process and service process are denoted as $A(t)$, $D(t)$, and $S(t)$ respectively. For any $0 \leqslant s \leqslant t, A(0)=0, A(s,t) = A(t) - A(s)$, and practical significance of $A(t)$ is the cumulative arrival data at time $t$. It same to the $D(t)$ and $S(t)$. Some fundamental definitions of curve are well described in literature \cite{b4}, we utilize and expand the following in this paper.
+In SNC theory, the min-plus algebra is applied to analyze queueing system.
+Let $\mathcal{F}$ denotes the set of non-negative non-decreasing functions and $\mathcal{\bar{F}}$ denotes the set of non-negative non-increasing function.
+We employ the cumulative process to represent amount of traffic flow. Arrival process, departure process and service process are denoted as $A(t)$, $D(t)$, and $S(t)$ respectively.
+For any $0 \leqslant s \leqslant t, A(0)=0, A(s,t) = A(t) - A(s)$, and practical significance of $A(t)$ is the cumulative arrival data at time $t$.
+It same to the $D(t)$ and $S(t)$.
+Some fundamental definitions of curve are well described in literature \cite{b4}.
+We utilize and expand the following in this paper.
 
 \begin{definition}\label{def_SAC}
-{\bfseries (Stochastic Arrival Curve)}. A flow is said to have a stochastic arrival curve $\alpha\in\mathcal{F}$ with bounding function $f\in\mathcal{\bar{F}}$, denoted by $A(t) \sim <f,\alpha>$, if for all $t \geq 0$ and all $x\geq0$ there holds
+{\bfseries (Stochastic Arrival Curve)}.
+A flow is said to have a stochastic arrival curve $\alpha\in\mathcal{F}$ with bounding function $f\in\mathcal{\bar{F}}$, denoted by $A(t) \sim <f,\alpha>$, if for all $t \geq 0$ and all $x\geq0$ there holds
 \begin{equation}\label{eq_sac}
 P\Bigl\{\sup_{0\leq s \leq t}\{A(s,t) - \alpha(t-s)\} > x \Bigr\} \leq f(x).
 \end{equation}
 \end{definition}
 
-where $\alpha(\tau)$ is the stochastic arrival curve, and it denotes the supremum of flow $A(\tau)$. Function $f(x)$ denotes the violation probability. It assumes that the stochastic arrival curve $\alpha(\tau)$ may be exceeded by arrival process $A(\tau)$ in sometimes, but the probability of being exceeded is constrained by the boundary function $f(x)$.
+where $\alpha(\tau)$ is the stochastic arrival curve, and it denotes the supremum of flow $A(\tau)$. Function $f(x)$ denotes the violation probability.
+It assumes that the stochastic arrival curve $\alpha(\tau)$ may be exceeded by arrival process $A(\tau)$ in sometimes, but the probability of being exceeded is constrained by the boundary function $f(x)$.
 
 \begin{definition}\label{def_SSC}
 {\bfseries(Stochastic Service Curve)}. A system $S$ is said to provide a stochastic service curve $\beta\in\mathcal{F}$ with bounding function $g \in \mathcal{\bar{F}}$, denoted by $S \sim<g, \beta>$, if for all $t\geq0$ there holds
@@ -231,11 +249,14 @@ P\Bigl\{\sup_{0\leq s \leq t}[A\otimes\beta(s) - D(s)] > x \Bigr\} \leq g(x).
 \end{definition}
 %Current editing!
 
-The operator/symbol $\otimes$ represents the cumulative min-plus convolution operation. Which
+The operator/symbol $\otimes$ represents the cumulative min-plus convolution operation.
+Which
 \begin{equation}\label{eq_convolution}
 A\otimes\beta(t) = \inf_{0 \leqslant s \leqslant t}\{A(s)+\beta(s,t)\}
 \end{equation}
-$\beta(t)$ is the stochastic service curve which means the worst service capability provided by the server. Similar to the stochastic arrival curve, the data that already have been served are probably to be more than the leaving data. The probability of producing exceeding data can be constrained by the boundary function $g(x)$.
+$\beta(t)$ is the stochastic service curve which means the worst service capability provided by the server.
+Similar to the stochastic arrival curve, the data that already have been served are probably to be more than the leaving data.
+The probability of producing exceeding data can be constrained by the boundary function $g(x)$.
 
 Similarly as in (\ref{eq_ssc}), the departure process relates to the arrival and service process and it is described as
 \begin{equation}\label{eq_departure}
@@ -243,34 +264,45 @@ D(t) \geq \inf_{0\leqslant s \leqslant t}\{A(s)+ S(s,t)\} =  A \otimes S(t).
 \end{equation}
 where for all $s,t \geqslant 0$ and $s \leqslant t$.
 That is also the concept of a dynamic server which mentioned in \cite{b5}.
-From the (\ref{eq_departure}), we can better understand the relationship among arrival process, departure process and service process. With these basic processes and curves, we can discuss the definition of the delay boundary.
+From the (\ref{eq_departure}), we can better understand the relationship among arrival process, departure process and service process.
+With these basic processes and curves, we can discuss the definition of the delay boundary.
 
 \begin{definition}\label{def_delay_process}
 {\bfseries(Latency Process)}.
-Let $A(t)$ and $D(t)$ respectively be the arrival process and departure process. The latency process $L(t)$ at time $t \geq 0$ is defined as
+Let $A(t)$ and $D(t)$ respectively be the arrival process and departure process.
+The latency process $L(t)$ at time $t \geq 0$ is defined as
 \begin{equation}\label{eq_delay_define}
 L(t) = \inf\{d \geq 0 : A(t) \leq D(t+d)\}.
 \end{equation}
 \end{definition}
 
-The Formula.\ref{eq_delay_define} express that latency $L(t)$ is the least value of $d$, and the $d$ must meet the condition which the amount of arrival data at time $t$ is less than or equal to the departure data at time $t+d$. It also means that the data do not leave the server immediately. The duration of the data in server is the delay time. In Formula.\ref{eq_delay_define}, the arrival process $A(t)$ is little than or equal to the departure process $D(t+d)$. It means that the data arrived in server at time $t$ are all leave from server at time $t+d$. If $A(t)$ is large than or equal to the departure process $D(t+d)$, that represents the data arrived at $t$ moment have not been completed by service during $d$ period of time. So the $A(t)$ little than or equal to $D(t+d)$ situation is utilized to describe the shortest time that server takes for the data to be serviced. That is the latency or delay.
+The Formula.\ref{eq_delay_define} express that latency $L(t)$ is the least value of $d$, and the $d$ must meet the condition which the amount of arrival data at time $t$ is less than or equal to the departure data at time $t+d$.
+It also means that the data do not leave the server immediately.
+The duration of the data in server is the delay time.
+In Formula.\ref{eq_delay_define}, the arrival process $A(t)$ is little than or equal to the departure process $D(t+d)$.
+It means that the data arrived in server at time $t$ are all leaving from server at time $t+d$.
+If $A(t)$ is large than or equal to the departure process $D(t+d)$, that represents the data arrived at $t$ moment have not been completed by service during $d$ period of time.
+So the $A(t)$ little than or equal to $D(t+d)$ situation is utilized to describe the shortest time that server takes for the data to be serviced.
+That is the latency or delay.
 
-According to the latency process definition, and utilizing stochastic arrival process and stochastic service process, we have the result for stochastic latency bound.
+According to the latency process definition, and utilizing stochastic arrival process and stochastic service process, so the stochastic latency bound has been defined at following.
+%we have the result for stochastic latency bound.
 
-%at this step, I should add the derivation process. Why the latency process will be like this.
-
-\begin{theorem}{\bfseries (Stochastic Latency Bound)}
-A system with an input process $A$. $A$ is a stochastic arrival process with stochastic arrival curve $\alpha \in \mathcal{F}$ and bounded by function $f \in \mathcal{\bar{F}}$ (i.e., $A \sim <f, \alpha>$). The system provides to the input a stochastic service process $S$. $S$ is with stochastic service curve $\beta \in \mathcal{F}$ with bounding function $g \in \mathcal{\bar{F}}$ (i.e., $S \sim <g, \beta>$). Then, for all $t\geq 0$ and $x \geq 0$, the Latency $L(t)$ is bounded by
+\begin{theorem}\label{thrm_latency}{\bfseries (Stochastic Latency Bound)}
+A system with an input process $A(t)$.
+$A(t)$ is a stochastic arrival process with stochastic arrival curve $\alpha \in \mathcal{F}$ and bounded by function $f \in \mathcal{\bar{F}}$ (i.e., $A \sim <f, \alpha>$).
+The system provides to the input a stochastic service process $S(t)$.
+$S(t)$ is with stochastic service curve $\beta \in \mathcal{F}$ with bounding function $g \in \mathcal{\bar{F}}$ (i.e., $S \sim <g, \beta>$).
+Then, for all $t\geq 0$ and $x \geq 0$, the Latency $L(t)$ is bounded by
 \begin{equation}
 P\{L(t)>h(\alpha+x, \beta)\}\leq f \otimes g(x)
 \end{equation}
 \end{theorem}
 where function $h(\alpha+x, \beta)$ denotes the maximum horizontal distance between $\alpha+x$ and $\beta$, the express $f \otimes g(x)$ represents the cumulative min-plus convolution operation of function $f$ and $g$.
 
-$Proof:$ Please see Appendix A.
-
-\begin{theorem}{\bfseries (Concatenation Property)}
-Consider a flow passing through a network of $N$ systems in tandem. If each system $n(=1,2,...,N)$ provides a stochastic service curve $S^{n}~<g^{n}, \beta^{n}>$ to its input, then the network guarantees to the flow a stochastic service curve $S~<g,\beta>$ with
+\begin{theorem}\label{thrm_concatenation}{\bfseries (Concatenation Property)}
+Considering a flow passes through a network of $N$ server nodes in tandem.
+If each server nodes $n(=1,2,...,N)$ provides a stochastic service curve $S^{n}~<g^{n}, \beta^{n}>$ to its input, then the network guarantees to the flow a stochastic service curve $S~<g,\beta>$ with
 \begin{align*}
 \beta(t)=\beta^{1}\otimes\beta^{2}\otimes\cdot\cdot\cdot\otimes\beta^{N}(t) \\
 g(x)=g^{1}\otimes g^{2}\otimes\cdot\cdot\cdot\otimes g^{N}(t)
@@ -279,15 +311,28 @@ g(x)=g^{1}\otimes g^{2}\otimes\cdot\cdot\cdot\otimes g^{N}(t)
 %here need to operation!
 
 \subsection{Model Building}
-The network character of URLLC can be described as a dynamic server by stochastic processes as introducing in above. The data sent by UE can be described as arrival process $A(t)$ and the service capacity provided by the network server node can be represented by stochastic service process $S(t)$.
+The network character of URLLC can be described as a dynamic server by stochastic processes as introducing in above.
+The data sent by UE can be described as arrival process $A(t)$ and the service capacity provided by the network server node can be represented by stochastic service process $S(t)$.
 
-As assumption the latency of URLLC in (\ref{eq_delay_composition}), We consider the URLLC network is a tandem system. So the delay of URLLC should fall in the concatenation characterization in SNC.
+As assumption the latency of URLLC in (\ref{eq_urllc_delay_composition}), we consider the URLLC network is a tandem system.
+So the delay of URLLC should fall in the concatenation characterization in SNC.
 
 %与其它的5G应用场景不同，URLLC的延时标准是有严格要求的，必须要保证在1ms以内，并且保证误码率要在1*10-5次幂以内，来保证可靠性。那么我们就应用随机网络演算理论来设定模型，假定时延通常都要保证在1ms以内，但是偶尔有大于1ms的情况出现，但这种情况出现的违背概率要小于1*10的-5 次幂。
 
-We consider that a UE's network flow passing through the gNB, CN and Cloud in tandem mode. Each network node $k(=gNB, AAU, DU, CU, CN, Cloud)$ provides a stochastic service curve $S_{k}\sim<g_k, \beta_k>$ to its flow. We first consider the gNB subsystem. The gNB includes AAU, DU and CU, so $S_{AAU}(s,t)$, $S_{DU}(s,t)$ and $S_{CU}(s,t)$ are in series. We use the same indices to denote the arrival and departure process of the respective systems. Especially the source of data is from UE. So $A_{AAU}(t)$ as arrival process denotes the input data of AAU from UE in gNB subsystem. The arrival process of DU $A_{DU}(t)$ actually equals to the departure process of AAU $D_{AAU}(t)$, where $A_{DU}(t) = D_{AAU}(t)$. By the same token, $A_{CU}(t) = D_{DU}(t)$ similarly for CU server. The departure process of CU is $D_{CU}(t)$. It is also the departure process of the gNB subsystem.
+We consider that a UE's network flow passing through the gNB, CN and Cloud in tandem mode.
+Each network node $k(=gNB, AAU, DU, CU, CN, Cloud)$ provides a stochastic service curve $S_{k}\sim<g_k, \beta_k>$ to its flow.
+We first discuss about the gNB subsystem.
+The gNB includes AAU, DU and CU, so $S_{AAU}(s,t)$, $S_{DU}(s,t)$ and $S_{CU}(s,t)$ are in series.
+We use the same indices to denote the arrival and departure process of the respective systems.
+Especially the source of data is from UE.
+So $A_{AAU}(t)$ as arrival process denotes the input data of AAU from UE in gNB subsystem.
+The arrival process of DU $A_{DU}(t)$ actually equals to the departure process of AAU $D_{AAU}(t)$, where $A_{DU}(t) = D_{AAU}(t)$.
+By the same token, $A_{CU}(t) = D_{DU}(t)$ similarly for CU server.
+The departure process of CU is $D_{CU}(t)$.
+It is also the departure process of the gNB subsystem.
 
-Consider the gNB subsystem is tandem deploy, we assume that the AAU server provides a $S_{AAU}(t)$ capacity to deal with the arrival data. Applying (\ref{eq_departure}), the departure process can be represent as
+Consider the gNB subsystem is tandem deploy, we assume that the AAU server provides a $S_{AAU}(t)$ capacity to deal with the arrival data.
+Applying (\ref{eq_departure}), the departure process can be represent as
 \begin{equation} \label{eq_departure_AAU}
 D_{AAU}(t)\geq A_{AAU}\otimes S_{AAU}(t).
 \end{equation}
@@ -306,58 +351,74 @@ D_{CU}(t) \geq ((A_{AAU}\otimes S_{AAU}) \otimes S_{DU})\otimes S_{CU}(t).
 Applying the associativity of min-plus convolution, it holds that
 \begin{align*}
 D_{CU}(t) &\geq ((A_{AAU}\otimes S_{AAU}) \otimes S_{DU})\otimes S_{CU}(t) \\
-&= A_{AAU}\otimes (S_{AAU}\otimes S_{DU} \otimes S_{CU})(t).
+&\geq A_{AAU}\otimes (S_{AAU}\otimes S_{DU} \otimes S_{CU})(t).
 \end{align*}
-From the gNB subsystem perspective to see, $A_{AAU}(t)$ is the first input and $D_{CU}(t)$ is the last output of gNB. So $A_{AAU}(t)$ equal to $A_{gNB}(t)$, and $D_{CU}(t)$ is the departure process of the gNB $D_{gNB}(t)$. Then we can get gNB subsystem
+From the gNB subsystem perspective to see, $A_{AAU}(t)$ is the first input and $D_{CU}(t)$ is the last output of gNB.
+So $A_{AAU}(t)$ equal to $A_{gNB}(t)$, and $D_{CU}(t)$ is the departure process of the gNB $D_{gNB}(t)$.
+Then we can get gNB subsystem
 \begin{equation}\label{eq_departure_gNB}
-D_{gNB} = A_{gNB}\otimes (S_{AAU}\otimes S_{DU} \otimes S_{CU})(t).
+D_{gNB} \geq A_{AAU}\otimes (S_{AAU}\otimes S_{DU} \otimes S_{CU})(t).
 \end{equation}
 Assuming first-come first-served order, we use definition.\ref{def_delay_process} and equation (\ref{eq_departure_gNB}), and let $L_{gNB}$ denotes the latency process of gNB, there holds
-\begin{equation}
-L_{gNB}(t) = \inf\{d\geqslant0: A_{gNB}(t) - D_{gNB}(t+d) \leqslant 0 \}
-\end{equation}
-
-\begin{equation}
+\begin{equation}\label{eq_latency_gNB}
 \begin{split}
-L_{gNB}(t) = &\inf\{d\geqslant0: A_{AAU}(t) - \\
-&A_{AAU}\otimes (S_{AAU}\otimes S_{DU} \otimes S_{CU})(t+d) \leqslant 0 \}
+L_{gNB}(t) &= \inf\{d\geqslant0: A_{gNB}(t) - D_{gNB}(t+d) \leqslant 0 \} \\
+ &= \inf\{d\geqslant0: A_{AAU}(t) - D_{CU}(t+d) \leqslant 0 \}  \\
+ &= \inf\{d\geqslant0: A_{AAU}(t) - \\
+ &A_{AAU}\otimes (S_{AAU}\otimes S_{DU} \otimes S_{CU})(t+d) \leqslant 0 \}
 \end{split}
 \end{equation}
 
+With Theorem.\ref{thrm_latency} and Theorem.\ref{thrm_concatenation}, the delay bound can be analysis by following corollary.
+
+\begin{corollary}\label{crl_latency}{\bfseries (Latency Bound of gNB)}
+In gNB subsystem, $A_{AAU}(t)$ is a stochastic arrival process with stochastic arrival curve $\alpha_{AAU}$, i.e. $A \sim <f_{AAU}, \alpha_{AAU}>$.
+ $\alpha_{AAU} \in \mathcal{F}$, $f_{AAU} \in \mathcal{\bar{F}}$.
+The server nodes in subsystem provide stochastic service process $S_{AAU}(t), S_{DU}(t), S_{CU}(t)$ respectively, i.e. 
+$S_{AAU} \sim <g_{AAU}, \beta_{AAU}>, S_{DU} \sim <g_{DU}, \beta_{DU}>, S_{CU} \sim <g_{CU}, \beta_{CU}>$.
+and $\beta_{AAU},\beta_{DU}, \beta_{CU} \in \mathcal{F}$,  $g_{AAU}, g_{DU}, g_{CU} \in \mathcal{\bar{F}}$.
+Then, for all $t\geq 0$ and $x \geq 0$, the Latency of gNB subsystem $L_{gNB}(t)$ is bounded by
 \begin{equation}
-P\{L_{gNB}(t) \geq d\}
+\begin{split}
+P\{L_{gNB}(t) \geq d\} &= P\{L_{gNB}(t) \geq h(\alpha_{AUU}+x, \beta_{gNB})\} \\
+ &\leqslant f_{AAU}\otimes g_{gNB}(x)
+\end{split}
 \end{equation}
+\end{corollary}
+where $\beta_{gNB}(t)=\beta_{AAU}\otimes \beta_{DU}\otimes \beta_{CU}(t)$, and $g_{gNB}=g_{AAU}\otimes g_{DU}\otimes g_{CU}(x)$.
 
-
+$Proof:$ Please see Appendix A.
 %rewrite this part.
 
 %这里不应该是根据串联特性的文献了，应该是前面提到的定理了。
+%这部分，先不弄，对于这部分的想法是，先把gNB的内容都分析完了，再扩展一下，就是整个的了，就可以加上CN和cloud了。我现在先把gNB都分析完。
+
 According to the concatenation property which mentioned in article \cite{b4}, then the network guarantees to the flow a stochastic service curve $S_{All}\sim<g_{All},\beta_{All}>$ with
-\begin{equation}\label{eq_tandem_ssc}
+\begin{equation}\label{eq_tandem_beta_top}
 \beta_{All}(t)=\beta_{gNB}\otimes\beta_{CN}\otimes\beta_{Cloud}(t)
 \end{equation}
 where
-\begin{equation}\label{eq_tandem_gNB}
+\begin{equation}\label{eq_tandem_beta_gNB}
 \beta_{gNB}(t)=\beta_{AAU}\otimes\beta_{DU}\otimes\beta_{CU}(t)
 \end{equation}
 actually
-\begin{equation}\label{eq_tandem_sscFull}
+\begin{equation}\label{eq_tandem_beta_all}
 \beta(t)_{All}=\beta_{AAU}\otimes\beta_{DU}\otimes\beta_{CU}\otimes\beta_{CN}\otimes\beta_{Cloud}(t)
 \end{equation}
 and
-\begin{equation}\label{eq_tandem_ssc_bound}
+\begin{equation}\label{eq_tandem_g_top}
 g_{All}(x)=g_{gNB}\otimes g_{CN}\otimes g_{Cloud}(x)
 \end{equation}
 where
-\begin{equation}\label{eq_tandem_gNB_bound}
+\begin{equation}\label{eq_tandem_g_gNB}
 g_{gNB}(x)=g_{AAU}\otimes g_{DU}\otimes g_{CU}(x)
 \end{equation}
 actually
-\begin{equation}\label{eq_tandem_ssc_bound}
+\begin{equation}\label{eq_tandem_g_all}
 g_{All}(x)=g_{AAU}\otimes g_{DU}\otimes g_{CU}\otimes g_{CN}\otimes g_{Cloud}(x)
 \end{equation}
 so the delay of the URLLC system can be bounded by this.
-\begin{equation}\label{eq_tandem_urllc_bound}
+\begin{equation}\label{eq_latency_urllc}
 P\{L(x)>h(\alpha+x, \beta_{All})\} < f \otimes g_{All}(x)
 \end{equation}
 
@@ -369,13 +430,13 @@ add some proof in the theory description.
 
 Consider the URLLC system traffic arrival process and service process are both independent and stationary increments. the delay can be bounded by
 \begin{equation}
-P\{L(t)>d\} \leq P\{A(t)>D(t+d)\}
+P\{L(t)>d\} \leq P\{A(t)\leqslant D(t+d)\}
 \end{equation}
 and then
 \begin{align*}
 &P\{A(t)>D(t+d)\} \\
-=&P\{\sup_{0\leq s\leq t-1}\{A(s,t)-S(s,t+x)\}>0\} \\
-=&P\{\sup_{0\leq s\leq t-1}e^{A(s,t)-S(s,t+x)}>1\} \\
+=&P\{\sup_{0\leq s\leq t-1}\{A(s,t)-S(s,t+x)\}\leqslant 0\} \\
+=&P\{\sup_{0\leq s\leq t-1}e^{A(s,t)-S(s,t+x)}\leqslant 1\} \\
 \end{align*}
 
 We suppose $C$ denote amount of UEs in URLLC system, and $n$ is the index of UEs, which $n\in[1, C]$, let us denotes $l(n)$ as the data size in transmission. Each server in tandem system has the constant service rate. The Stochastic arrival process can be write as:
@@ -402,39 +463,73 @@ The target for control plane latency should be 10ms.
 
 From the analysis and simulation results we can see that contention based grant-free transmission with resource shared by multiple users is more efficient than the grant-based or traditional transmission, and it can well meet the reliability requirement of URLLC within the latency bound.
 \subsection{Appendix A}
-$Proof:$ Since the latency process are defined as $L(t) = \inf\{d \geq 0 : A(t) \leq D(t+d)\}.$
-event ${L(t)} > d$ implies event ${A(t)>D(t+d)}$, hence
-\begin{equation}\label{eq_latency_bound1}
-P\{L(t)>d\} \leqslant P\{{A(t)>D(t+d)}\} = P\{A(t) - D(t+d)> 0\}.
+$Proof:$ Since the latency process Definition.(\ref{def_delay_process}) are defined as $L(t) = \inf\{d \geq 0 : A(t) \leq D(t+d)\}$, 
+event ${L(t)} > d$ implies event ${A(t)\leq D(t+d)}$. 
+We move $D(t+d)$ from right hand to left hand, and according to (\ref{eq_latency_gNB}), the latency bound of gNB can be hold as
+\begin{equation}\label{eq_latencybound_gNB}
+P\{L_{gNB}(t)>d\} \leqslant P\{A_{AAU}(t) - D_{CU}(t+d) \leq 0\}
 \end{equation}
-Then we focus on the $\{A(t) - D(t+d)\}$ part. We put $A\otimes \beta(t+d)$ into (\ref{eq_latency_bound1}), we can get
-\begin{align*}
-&A(t) - D(t+d) \\
-=&A(t) - A\otimes \beta(t+d) + A\otimes \beta(t+d) - D(t+d) \\
-=&A(t) - \inf_{0\leqslant s \leqslant t+d}\{A(s)+ \beta(t+d-s)\} + A\otimes \beta(t+d) - D(t+d) \\
-\leq &A(t-s) - \beta(t+d-s) + A\otimes \beta(t+d) - D(t+d) \\
-\leq&A(t-s) - \alpha(t-s) + \alpha(t-s) - \beta(t+d-s) \\
-&+A\otimes \beta(t+d) - D(t+d) \\
-\leq &\sup_{0\leqslant s \leqslant t}\{A(t-s)-\alpha(t-s)\} \\
-&+\alpha(t-s)-\beta(t+d-s) + A\otimes \beta(t+d)-D(t+d) \\
-\leq &\sup_{0\leqslant s \leqslant t}\{A(t-s)-\alpha(t-s)\} \\
-&+\{A\otimes \beta(t+d)-D(t+d)\}  \\
-&+\alpha(t-s)-\beta(t+d-s) \\
-\end{align*}
-Based on the stochastic arrival curve (\ref{eq_sac}) and stochastic service curve analysis (\ref{eq_ssc}), we use $h(\alpha+x, \beta)$ replace the $d$. where $h(\alpha+x,\beta)$ is the maximum horizontal distance between $\alpha+x$ and $\beta$ for $x \geq 0$. The $h(\alpha,\beta)$ function implies the condition
+
+Then we focus on the $\{A_{AAU}(t) - D_{CU}(t+d)\}$ part. We put right hand of \ref{eq_departure_gNB} into this part, we can get
+\begin{equation}\label{zm_1}
+\begin{split}
+ &A_{AAU}(t) - D_{CU}(t+d) \\
+=&A_{AAU}(t) - A_{AAU}\otimes (S_{AAU}\otimes S_{DU}\otimes S_{CU})(t+d)\\ 
+ &+A_{AAU}\otimes (S_{AAU}\otimes S_{DU}\otimes S_{CU})(t+d) - D_{CU}(t+d) \\
+\end{split}
+\end{equation}
+
+With the Theorem.\ref{thrm_concatenation}, utilizing the concatenation property we can obtain that
+$S_{AAU}\sim<g_{AAU},\beta_{AAU}>$, $S_{DU}\sim<g_{DU},\beta_{DU}>$, $S_{CU}\sim<g_{CU},\beta_{CU}>$.
+Stochastic service process convolution operation $(S_{AAU}\otimes S_{DU}\otimes S_{CU})$ means gNB subsystem provides maybe lower than $(\beta_{AAU}\otimes \beta_{DU} \otimes \beta_{CU})$ processing capacity, 
+but the violation probability in this case is limited by $g_{AAU}\otimes g_{DU}\otimes g_{DU}$.
+Through applying (\ref{eq_ssc}), we denote $\beta_{gNB}$ equals to $(\beta_{AAU}\otimes \beta_{DU} \otimes \beta_{CU})$, 
+$g_{gNB}$ equals to $g_{AAU}\otimes g_{DU}\otimes g_{DU}$.
+hence (\ref{zm_1}) can hold be
+\begin{equation}\label{zm_2}
+\begin{split}
+ &A_{AAU}(t) - D_{CU}(t+d) \\
+=&A_{AAU}(t) - A_{AAU}\otimes (\beta_{AAU}\otimes \beta_{DU}\otimes \beta_{CU})(t+d)\\
+ &+A_{AAU}\otimes (\beta_{AAU}\otimes \beta_{DU}\otimes \beta_{CU})(t+d) - D_{CU}(t+d) \\
+=&A_{AAU}(t) - A_{AAU}\otimes \beta_{gNB}(t+d) \\
+ &+A_{AAU}\otimes \beta_{gNB}(t+d) - D_{CU}(t+d)
+\end{split}
+\end{equation}
+According to (\ref{eq_convolution}),we replace $A_{AAU}\otimes \beta_{gNB}(t+d)$ by $\inf\{A_{AAU}(s)+\beta_{gNB}(t+d-s)\}$ in (\ref{zm_2}). 
+Consequently,
+\begin{equation}\label{zm_3}
+\begin{split}
+ &A_{AAU}(t) - D_{CU}(t+d) \\
+=&A_{AAU}(t) - A_{AAU}\otimes \beta_{gNB}(t+d) \\
+ &+A_{AAU}\otimes \beta_{gNB}(t+d) - D_{CU}(t+d) \\
+=&A_{AAU}(t) - \inf_{0\leqslant s \leqslant t+d}\{A_{AAU}(s)+ \beta_{gNB}(t+d-s)\} \\
+ &+A_{AAU}\otimes \beta_{gNB}(t+d) - D_{CU}(t+d)\\
+\leq&A_{AAU}(t) - A_{AAU}(s) - \beta_{gNB}(t+d-s)\} \\
+ &+A_{AAU}\otimes \beta_{gNB}(t+d) - D_{CU}(t+d)  \\
+\leq&A_{AAU}(s,t) - \alpha_{AAU}(t-s)\\
+ &+\alpha_{AAU}(s,t)-\beta_{gNB}(t+d-s)\\
+ &+A_{AAU}\otimes \beta_{gNB}(t+d) - D_{CU}(t+d)  \\
+\end{split}
+\end{equation}
+
+We add $\alpha_{AAU}$ at step 4 in (\ref{zm_3}) to build stochastic arrival curve.
+Based on the stochastic arrival curve (\ref{eq_sac}),$A_{AAU}(s,t) - \alpha_{AAU}(s,t)$ is less than or equal to $f_{AAU}$.
+Applying stochastic service curve (\ref{eq_ssc}), $A_{AAU}\otimes \beta_{gNB}(t+d) - D_{CU}(t+d)$ is less than or equal to $g_{gNB}$.
+We use $h(\alpha+x, \beta)$ replace the $d$. where $h(\alpha+x,\beta)$ is the maximum horizontal distance between $\alpha+x$ and $\beta$ for $x \geq 0$. The $h(\alpha,\beta)$ function implies the condition
 \begin{equation}\label{condition}
 \lim_{t\rightarrow\infty}[\alpha(t)-\beta(t)]\leq 0.
 \end{equation}
 we can obtain
 \begin{align*}
-&P\{L(t)>h(\alpha+x, \beta)\} \\
-&\leqslant P\{\{A(t) - D(t+h(\alpha+x, \beta))\} > 0\}  \\
-&\leqslant P\{\sup_{0\leqslant s \leqslant t}\{A(t-s)-\alpha(t-s)\}  \\
-&+\sup_{0\leqslant s \leqslant t+h(\alpha+x, \beta)}\{A\otimes \beta(s)-D(s)\} \} \\
-&\leqslant f(t)+g(x) \\
-&\leqslant \inf\{f(t)+g(x-t)\} \\
-&\leqslant f\otimes g(x)
+&P\{L(t)>h(\alpha_{AAU}+x, \beta_{gNB})\} \\
+&\leqslant P\{\{A_{AAU}(t) - D_{CU}(t+h(\alpha+x, \beta))\} > 0\}  \\
+&\leqslant P\{\sup_{0\leqslant s \leqslant t}\{A_{AAU}(s,t)-\alpha_{AAU}(t-s)\}  \\
+&+\sup_{0\leqslant s \leqslant t+h(\alpha_{AAU}+x, \beta_{gNB})}\{A_{AAU}\otimes \beta_{gNB}(s)-D_{CU}(s)\} \} \\
+&\leqslant f_{AAU}(t)+g_{gNB}(x) \\
+&\leqslant \inf\{f_{AAU}(t)+g_{gNB}(x-t)\} \\
+&\leqslant f_{AAU}\otimes g_{gNB}(x)
 \end{align*}
+Therefore, Corollary.\ref{crl_latency} is proved.
 
 \section*{Acknowledgment}
 
