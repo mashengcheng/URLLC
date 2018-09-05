@@ -515,14 +515,14 @@ Consequently,
 We add $\alpha_{AAU}$ at step 4 in (\ref{zm_3}) to build stochastic arrival curve.
 Based on the stochastic arrival curve (\ref{eq_sac}),$A_{AAU}(s,t) - \alpha_{AAU}(s,t)$ is less than or equal to $f_{AAU}$.
 Applying stochastic service curve (\ref{eq_ssc}), $A_{AAU}\otimes \beta_{gNB}(t+d) - D_{CU}(t+d)$ is less than or equal to $g_{gNB}$.
-We use $h(\alpha+x, \beta)$ replace the $d$. where $h(\alpha+x,\beta)$ is the maximum horizontal distance between $\alpha+x$ and $\beta$ for $x \geq 0$. The $h(\alpha,\beta)$ function implies the condition
+With Theorum.\ref{thrm_latency}, we use $h(\alpha+x, \beta)$ replace the $d$. where $h(\alpha+x,\beta)$ is the maximum horizontal distance between $\alpha+x$ and $\beta$ for $x \geq 0$. The $h(\alpha,\beta)$ function implies the condition
 \begin{equation}\label{condition}
 \lim_{t\rightarrow\infty}[\alpha(t)-\beta(t)]\leq 0.
 \end{equation}
 we can obtain
 \begin{align*}
 &P\{L(t)>h(\alpha_{AAU}+x, \beta_{gNB})\} \\
-&\leqslant P\{\{A_{AAU}(t) - D_{CU}(t+h(\alpha+x, \beta))\} > 0\}  \\
+&= P\{\{A_{AAU}(t) - D_{CU}(t+h(\alpha+x, \beta))\} > 0\}  \\
 &\leqslant P\{\sup_{0\leqslant s \leqslant t}\{A_{AAU}(s,t)-\alpha_{AAU}(t-s)\}  \\
 &+\sup_{0\leqslant s \leqslant t+h(\alpha_{AAU}+x, \beta_{gNB})}\{A_{AAU}\otimes \beta_{gNB}(s)-D_{CU}(s)\} \} \\
 &\leqslant f_{AAU}(t)+g_{gNB}(x) \\
