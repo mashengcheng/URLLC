@@ -78,10 +78,10 @@ In the end, numerical analyses are conducted to discuss the relationship between
 The 5G era is getting closer to us. 5G communication technology appeared for the first time with the 2018 Pyeongchang Winter Olympics where in South Korea. It helps audiences watch the live broadcast continuously and smoothly.
 According to International Telecommunication Union announced the 5G standard timetable, 5G will start commercially in 2020 \cite{b1}.
 
-The services with regard to next generation of mobile communication are in varied forms. 
+The services with regard to next generation of mobile communication are in varied forms.
 These services have different requirements for the 5G networks.
-A typical example is industry automation. 
-It requires low delay and high reliability while the data rate is not high. 
+A typical example is industry automation.
+It requires low delay and high reliability while the data rate is not high.
 High definition video does not require ultra reliable and low latency, yet need super high data rate.
 Some massive Internet of things ask for neither high speed nor low latency, whereas they need to support very high connection density simultaneously.
 
@@ -92,10 +92,10 @@ URLLC is widely used in self-driving, mission critical application and some time
 
 So stringent delay requirement need new 5G NR technology to bridge the gap. Though the existing LTE networks can reach the reliability target, but the cost is some dozens of milliseconds time delay. That is far away from the criteria of URLLC. So the delay became the chock point and it need to be solved. Many academies and companies have proposed some engineering solutions to minimize the delay, like the HARQ retransmission or grant-free technology and so on. Whereas, how to analyze the generation of time-delay from a theoretical perspective and propose a group of tactics to reduce the delay effectively is an important research subject.
 
-Stochastic network calculus (SNC) theory is very good at delay performance analysis. 
-The SNC is a continuous development method to analysis network traffic characteristic and evaluate performance. 
-The fundamental theory of SNC is network calculus, it was presented in the early 1990s. 
-Network Stochastic has divided into two branches, deterministic network calculus and stochastic network calculus\cite{b4}. 
+Stochastic network calculus (SNC) theory is very good at delay performance analysis.
+The SNC is a continuous development method to analysis network traffic characteristic and evaluate performance.
+The fundamental theory of SNC is network calculus, it was presented in the early 1990s.
+Network Stochastic has divided into two branches, deterministic network calculus and stochastic network calculus\cite{b4}.
 The deterministic network calculus system can provide minimize service guarantees by service curves\cite{b5}. But the deterministic model has the weakness that it can not utilize the statistical feature of traffic flow. To deal with random service and statistical guarantee, the SNC theory comes into being with a large number of stochastic processes and traffic models. Because of permitting some packets violates the desired performance, SNC can better take advantage of statistical multiplexing gains. Under a suitable traffic model and a chosen server model, The SNC theory can easily address delay, backlog and other service guarantee analysis of communication network. So we capitalize on the SNC method to build a model to simulate the 5G URLLC uplink and downlink transmission in this paper.
 
 We use traffic-amount-centric stochastic arrival curve to describe the process that user equipment (UE) data sends to gNodeB (gNB) side. It can be deduced the rest stages of data transmission from gNB to cloud server according to the 5G network topology architecture. Every stage of stochastic arrival curve characterizes the delay property, the whole delay of URLLC system is comprised by delays which generated from UE to cloud server.
@@ -398,9 +398,8 @@ where service rate $\beta_{gNB}(t)=\beta_{AAU}\otimes \beta_{DU}\otimes \beta_{C
 
 $Proof:$ Please see Appendix A.
 
-
 For mobile edge computing (MEC) deployment, CU can be the end of the transmission. That because the computing resource and storage resource are located at CU.
-The Corollary.\ref{crl_latency} is good enough to analysis the delay of communication from UE to CU. 
+The Corollary.\ref{crl_latency} is good enough to analysis the delay of communication from UE to CU.
 However, in order to comprehensively discuss the delay of URLLC system, we need to convert the destination from CU to Cloud.
 By extending Corollary.\ref{crl_latency}, we can draw the whole URLLC system latency bound.
 \begin{corollary}\label{crl_latency_urllc}{\bfseries (Latency Bound of URLLC)}
@@ -419,7 +418,6 @@ P\{L_{All}(t) \geq d\} &= P\{L_{All}(t) \geq h(\alpha_{AUU}+x, \beta_{All})\} \\
 where $\beta_{All}(t)=\beta_{gNB}\otimes \beta_{NGC}\otimes \beta_{Cloud}(t)$, and $g_{All}=g_{gNB}\otimes g_{NGC}\otimes g_{Cloud}(x)$.
 
 $Proof:$ Please see Appendix B.
-%上面的部分是两外一个推论，可以解决urllc全部的拓扑问题。
 
 \section{Numerical and Performance Evaluation}
 
@@ -530,7 +528,7 @@ we can obtain
 Therefore, Corollary.\ref{crl_latency} is proved.
 
 \subsection{Appendix B}
-Proof : In the Corollary.\ref{crl_latency}, the gNB subsystem are constituted by AAU, DU and CU. In addition to gNB, the whole 5G URLLC system also include NGC and Cloud. 
+Proof : In the Corollary.\ref{crl_latency}, the gNB subsystem are constituted by AAU, DU and CU. In addition to gNB, the whole 5G URLLC system also include NGC and Cloud.
 %只需要在这里加入一些适当的话，就可以了。
 According to the concatenation property which mentioned in Theorem.\ref{thrm_concatenation}, then the network guarantees to the flow a stochastic service curve $S_{All}\sim<g_{All},\beta_{All}>$ with
 \begin{equation}\label{eq_tandem_beta_top}
@@ -556,6 +554,32 @@ actually
 \begin{equation}\label{eq_tandem_g_all}
 g_{All}(x)=g_{AAU}\otimes g_{DU}\otimes g_{CU}\otimes g_{CN}\otimes g_{Cloud}(x)
 \end{equation}
+Based on latency process Definition.(3), the 5G URLLC system latency process can be defined as
+\begin{equation}
+L(t) = \inf\{d \geqslant 0: A_{AAU}(t) \leq D_{Cloud}(t+d)\}
+\end{equation}
+Latency bound of 5G URLLC is defined as
+\begin{equation}
+P\{L(t)\geq d\} = P\{A_{AAU}(t)-D_{Cloud}(t+d)\leq 0\}
+\end{equation}
+which $D_{Cloud}\geqslant A_{AAU}\otimes S_{AAU}\otimes S_{DU}\otimes S_{CU}\otimes S_{NGC}\otimes S_{Cloud}$. We have
+\begin{equation}
+\begin{split}
+&A_{AAU}(t)-D_{Cloud}(t+d)\\
+=&A_{AAU}(t)-A_{AAU}\otimes S_{AAU}\otimes S_{DU}\otimes S_{CU}\\
+&\otimes S_{NGC}\otimes S_{Cloud}(t+d)\\
+&+A_{AAU}\otimes S_{AAU}\otimes S_{DU}\otimes S_{CU}\\
+&\otimes S_{NGC}\otimes S_{Cloud} -D_{Cloud}(t+d)\\
+=&A_{AAU}(t)-A_{AAU}\otimes S_{gNB}\otimes S_{NGC}\otimes S_{Cloud}(t+d)\\
+&+A_{AAU}\otimes S_{gNB}\otimes S_{NGC}\otimes S_{Cloud} -D_{Cloud}(t+d)\\
+=&A_{AAU}(t)-A_{AAU}(s)-\beta_{gNB}\otimes\beta_{NGC}\otimes\beta_{Cloud}\\
+&+A_{AAU}\otimes S_{gNB}\otimes S_{NGC}\otimes S_{Cloud} -D_{Cloud}(t+d)\\
+=&A_{AAU}(s,t)-\alpha(t-s)\\
+&+\alpha(t-s)-\beta_{all}(t+d-s)\\
+&+A_{AAU}\otimes \beta_{all}(t+d) -D_{Cloud}(t+d)
+\end{split}
+\end{equation}
+
 so the delay of the URLLC system can be bounded by this.
 \begin{equation}\label{eq_latency_urllc}
 P\{L(x)>h(\alpha+x, \beta_{All})\} < f \otimes g_{All}(x)
