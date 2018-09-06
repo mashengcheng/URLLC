@@ -466,7 +466,7 @@ We move $D(t+d)$ from right hand to left hand, and according to (\ref{eq_latency
 P\{L_{gNB}(t)>d\} \leqslant P\{A_{AAU}(t) - D_{CU}(t+d) \leq 0\}
 \end{equation}
 
-Then we focus on the $\{A_{AAU}(t) - D_{CU}(t+d)\}$ part. We put right hand of \ref{eq_departure_gNB} into this part, we can get
+Then we focus on the $\{A_{AAU}(t) - D_{CU}(t+d)\}$ part. We put right hand of (\ref{eq_departure_gNB}) into this part, we can get
 \begin{equation}\label{zm_1}
 \begin{split}
  &A_{AAU}(t) - D_{CU}(t+d) \\
@@ -540,7 +540,7 @@ where
 \end{equation}
 actually
 \begin{equation}\label{eq_tandem_beta_all}
-\beta(t)_{All}=\beta_{AAU}\otimes\beta_{DU}\otimes\beta_{CU}\otimes\beta_{CN}\otimes\beta_{Cloud}(t)
+\beta_{All}(t)=\beta_{AAU}\otimes\beta_{DU}\otimes\beta_{CU}\otimes\beta_{CN}\otimes\beta_{Cloud}(t)
 \end{equation}
 and
 \begin{equation}\label{eq_tandem_g_top}
@@ -562,9 +562,9 @@ Latency bound of 5G URLLC is defined as
 \begin{equation}
 P\{L(t)\geq d\} = P\{A_{AAU}(t)-D_{Cloud}(t+d)\leq 0\}
 \end{equation}
-which $D_{Cloud}\geqslant A_{AAU}\otimes S_{AAU}\otimes S_{DU}\otimes S_{CU}\otimes S_{NGC}\otimes S_{Cloud}$. We have
-\begin{equation}
-\begin{split}
+We also focus on $A_{AAU}(t)-D_{Cloud}(t+d)$ part.
+where $D_{Cloud}\geqslant A_{AAU}\otimes S_{AAU}\otimes S_{DU}\otimes S_{CU}\otimes S_{NGC}\otimes S_{Cloud}$. Then we have
+\begin{align*}
 &A_{AAU}(t)-D_{Cloud}(t+d)\\
 =&A_{AAU}(t)-A_{AAU}\otimes S_{AAU}\otimes S_{DU}\otimes S_{CU}\\
 &\otimes S_{NGC}\otimes S_{Cloud}(t+d)\\
@@ -572,19 +572,21 @@ which $D_{Cloud}\geqslant A_{AAU}\otimes S_{AAU}\otimes S_{DU}\otimes S_{CU}\oti
 &\otimes S_{NGC}\otimes S_{Cloud} -D_{Cloud}(t+d)\\
 =&A_{AAU}(t)-A_{AAU}\otimes S_{gNB}\otimes S_{NGC}\otimes S_{Cloud}(t+d)\\
 &+A_{AAU}\otimes S_{gNB}\otimes S_{NGC}\otimes S_{Cloud} -D_{Cloud}(t+d)\\
-=&A_{AAU}(t)-A_{AAU}(s)-\beta_{gNB}\otimes\beta_{NGC}\otimes\beta_{Cloud}\\
+\leq&A_{AAU}(t)-A_{AAU}(s)\\
+&-\beta_{gNB}\otimes\beta_{NGC}\otimes\beta_{Cloud}(t+d-s))\\
 &+A_{AAU}\otimes S_{gNB}\otimes S_{NGC}\otimes S_{Cloud} -D_{Cloud}(t+d)\\
-=&A_{AAU}(s,t)-\alpha(t-s)\\
-&+\alpha(t-s)-\beta_{all}(t+d-s)\\
-&+A_{AAU}\otimes \beta_{all}(t+d) -D_{Cloud}(t+d)
-\end{split}
-\end{equation}
-
-so the delay of the URLLC system can be bounded by this.
+\leq&A_{AAU}(s,t)-\alpha_{AAU}(t-s)\\
+&+\alpha_{AAU}(t-s)-\beta_{all}(t+d-s)\\
+&+A_{AAU}\otimes \beta_{all}(t+d)-D_{Cloud}(t+d)
+\end{align*}
+With stochastic arrival curve (\ref{def_SAC}), $A_{AAU}(s,t)-\alpha(t-s)$ is bounded by $f_{AAU}(x)$.
+According to stochastic service curve (\ref{def_SSC}), $A_{AAU}\otimes \beta_{All}(t+d)-D_{Cloud}(t+d)$ is limited by $g_{All}$.
+For a long time running, if $t\rightarrow\infty$, $\alpha_{AAU}(t-s)-\beta_{All}(t+d-s)$ approximate to zero because of $\alpha_{AAU},\beta_{All}\in\mathcal{F}$.
+Finally, with Theorem.\ref{thrm_latency}, the delay of the URLLC system can be bounded by this
 \begin{equation}\label{eq_latency_urllc}
-P\{L(x)>h(\alpha+x, \beta_{All})\} < f \otimes g_{All}(x)
+P\{L(x)>h(\alpha_{AAU}+x, \beta_{All})\} < f_{AUU} \otimes g_{All}(x)
 \end{equation}
-
+Therefore, Corollary.2 is proved.
 
 \section*{Acknowledgment}
 
