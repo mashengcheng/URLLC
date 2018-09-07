@@ -1,0 +1,6 @@
+Link level evaluation with deployment scenario specific operating point and system level simulation are to be performed for the evaluations of Indoor Hotspot, Urban Macro, Highway, and Urban grid for connected car.
+For URLLC, the target for user plane latency should be 0.5ms for UL, and 0.5ms for DL
+The target for control plane latency should be 10ms.
+
+From the analysis and simulation results we can see that contention based grant-free transmission with resource shared by multiple users is more efficient than the grant-based or traditional transmission, and it can well meet the reliability requirement of URLLC within the latency bound.
+

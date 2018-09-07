@@ -217,7 +217,7 @@ Compared with UP latency, the C-Plane delay is tiny and can be ignored.
 
 \subsection{Problem Description}
 The data transport from UEs and go through every nodes to cloud at the end.
-According to the requirement of URLLC, the reliability and latency can be described as Formula.\ref{eq_urllc_delay_problem}:
+According to the requirement of URLLC, the reliability and random latency \cite{MF_Random} can be described as Formula.\ref{eq_urllc_delay_problem}:
 
 \begin{equation}\label{eq_urllc_delay_problem}
 P\{delay > \delta \} < \epsilon
@@ -311,13 +311,12 @@ where function $h(\alpha+x, \beta)$ denotes the maximum horizontal distance betw
 
 \begin{theorem}\label{thrm_concatenation}{\bfseries (Concatenation Property)}
 Considering a flow passes through a network of $N$ server nodes in tandem.
-If each server nodes $n(=1,2,...,N)$ provides a stochastic service curve $S^{n}~<g^{n}, \beta^{n}>$ to its input, then the network guarantees to the flow a stochastic service curve $S~<g,\beta>$ with
+If each server nodes $n(=1,2,...,N)$ provides a stochastic service curve $S^{n}\sim<g^{n}, \beta^{n}>$ to its input, then the network guarantees to the flow a stochastic service curve $S\sim<g,\beta>$ with
 \begin{align*}
 \beta(t)=\beta^{1}\otimes\beta^{2}\otimes\cdot\cdot\cdot\otimes\beta^{N}(t) \\
 g(x)=g^{1}\otimes g^{2}\otimes\cdot\cdot\cdot\otimes g^{N}(t)
 \end{align*}
 \end{theorem}
-%here need to operation!
 
 \subsection{Model Building}
 The network character of URLLC can be described as a dynamic server by stochastic processes as introducing in above.
@@ -325,7 +324,6 @@ The data sent by UE can be described as arrival process $A(t)$ and the service c
 
 As assumption the latency of URLLC in (\ref{eq_urllc_delay_composition}), we consider the URLLC network is a tandem system.
 So the delay of URLLC should fall in the concatenation characterization in SNC.
-
 %与其它的5G应用场景不同，URLLC的延时标准是有严格要求的，必须要保证在1ms以内，并且保证误码率要在1*10-5次幂以内，来保证可靠性。那么我们就应用随机网络演算理论来设定模型，假定时延通常都要保证在1ms以内，但是偶尔有大于1ms的情况出现，但这种情况出现的违背概率要小于1*10的-5 次幂。
 
 We consider that a UE's network flow passing through the gNB, CN and Cloud in tandem mode.
@@ -419,6 +417,7 @@ where $\beta_{All}(t)=\beta_{gNB}\otimes \beta_{NGC}\otimes \beta_{Cloud}(t)$, a
 
 $Proof:$ Please see Appendix B.
 
+%from here, I need to find out how to resolve the bound function.
 \section{Numerical and Performance Evaluation}
 
 bounds are the target.
@@ -453,12 +452,7 @@ The target for mobility interruption time should be 0ms.
 An Important Thing is that I should add the reference to the definition. To prove the definition's validity.
 
 \section{Appendix}
-Link level evaluation with deployment scenario specific operating point and system level simulation are to be performed for the evaluations of Indoor Hotspot, Urban Macro, Highway, and Urban grid for connected car.
-For URLLC, the target for user plane latency should be 0.5ms for UL, and 0.5ms for DL
-The target for control plane latency should be 10ms.
-
-From the analysis and simulation results we can see that contention based grant-free transmission with resource shared by multiple users is more efficient than the grant-based or traditional transmission, and it can well meet the reliability requirement of URLLC within the latency bound.
-\subsection{Appendix A}
+\subsection{Proof of Corollary.1}
 $Proof:$ Since the latency process Definition.(\ref{def_delay_process}) are defined as $L(t) = \inf\{d \geq 0 : A(t) \leq D(t+d)\}$,
 event ${L(t)} > d$ implies event ${A(t)\leq D(t+d)}$.
 We move $D(t+d)$ from right hand to left hand, and according to (\ref{eq_latency_gNB}), the latency bound of gNB can be hold as
@@ -527,7 +521,7 @@ we can obtain
 \end{align*}
 Therefore, Corollary.\ref{crl_latency} is proved.
 
-\subsection{Appendix B}
+\subsection{Proof of Corollary.2}
 Proof : In the Corollary.\ref{crl_latency}, the gNB subsystem are constituted by AAU, DU and CU. In addition to gNB, the whole 5G URLLC system also include NGC and Cloud.
 %只需要在这里加入一些适当的话，就可以了。
 According to the concatenation property which mentioned in Theorem.\ref{thrm_concatenation}, then the network guarantees to the flow a stochastic service curve $S_{All}\sim<g_{All},\beta_{All}>$ with
@@ -579,9 +573,9 @@ where $D_{Cloud}\geqslant A_{AAU}\otimes S_{AAU}\otimes S_{DU}\otimes S_{CU}\oti
 &+\alpha_{AAU}(t-s)-\beta_{all}(t+d-s)\\
 &+A_{AAU}\otimes \beta_{all}(t+d)-D_{Cloud}(t+d)
 \end{align*}
-With stochastic arrival curve (\ref{def_SAC}), $A_{AAU}(s,t)-\alpha(t-s)$ is bounded by $f_{AAU}(x)$.
-According to stochastic service curve (\ref{def_SSC}), $A_{AAU}\otimes \beta_{All}(t+d)-D_{Cloud}(t+d)$ is limited by $g_{All}$.
-For a long time running, if $t\rightarrow\infty$, $\alpha_{AAU}(t-s)-\beta_{All}(t+d-s)$ approximate to zero because of $\alpha_{AAU},\beta_{All}\in\mathcal{F}$.
+With stochastic arrival curve (\ref{eq_sac}), $A_{AAU}(s,t)-\alpha(t-s)$ is bounded by $f_{AAU}(x)$.
+According to stochastic service curve (\ref{eq_ssc}), $A_{AAU}\otimes \beta_{All}(t+d)-D_{Cloud}(t+d)$ is limited by $g_{All}$.
+For long-term running, if $t\rightarrow\infty$, $\alpha_{AAU}(t-s)-\beta_{All}(t+d-s)$ approximate to zero because of $\alpha_{AAU},\beta_{All}\in\mathcal{F}$.
 Finally, with Theorem.\ref{thrm_latency}, the delay of the URLLC system can be bounded by this
 \begin{equation}\label{eq_latency_urllc}
 P\{L(x)>h(\alpha_{AAU}+x, \beta_{All})\} < f_{AUU} \otimes g_{All}(x)
@@ -616,7 +610,7 @@ Beijing Municipal Program for Excellent Teacher Promotion
 \bibitem{b2} 3GPP TR 38.913, “Study on Scenarios and Requirements for Next Generation Access Technologies,” June 2017.
 \bibitem{b3} Soldani D, Guo Y J, Barani B, et al, “5G for Ultra-Reliable Low-Latency Communications,” IEEE Network, 2018, vol.32, no.2, pp.6-7.
 \bibitem{b4} Jiang Y, Liu Y. “Stochastic Network Calculus,” Springer London, 2009.
-\bibitem{b5} M. Fidler and A. Rizk, "A Guide to the Stochastic Network Calculus," in IEEE Communications Surveys \& Tutorials, vol. 17, no. 1, pp. 92-105, Firstquarter 2015. pp.92-105.
+\bibitem{b5} M. Fidler and A. Rizk, “A Guide to the Stochastic Network Calculus,” in IEEE Communications Surveys \& Tutorials, vol. 17, no. 1, pp. 92-105, Firstquarter 2015. pp.92-105.
 \bibitem{interface} J. J. Nielsen, R. Liu and P. Popovski, “Ultra-Reliable Low Latency Communication Using Interface Diversity,” IEEE Transactions on Communications, vol.66, no.3, pp.1322-1334, March 2018
 \bibitem{multiconnectivity} Delgado R A, Lau K, Middleton R H, et al. “Networked Delay Control for 5G Wireless Machine-Type Communications Using Multiconnectivity,” IEEE Transactions on Control Systems Technology, vol.99, pp.1-16, 2018.
 \bibitem{PD} Rao J, Vrzic S, “Packet Duplication for URLLC in 5G: Architectural Enhancements and Performance Analysis,” IEEE Network, vol.32, no.2, pp.32-40, 2018.
