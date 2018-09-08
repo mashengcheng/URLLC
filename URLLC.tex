@@ -457,7 +457,7 @@ $Proof:$ Since the latency process Definition.(\ref{def_delay_process}) are defi
 event ${L(t)} > d$ implies event ${A(t)\leq D(t+d)}$.
 We move $D(t+d)$ from right hand to left hand, and according to (\ref{eq_latency_gNB}), the latency bound of gNB can be hold as
 \begin{equation}\label{eq_latencybound_gNB}
-P\{L_{gNB}(t)>d\} \leqslant P\{A_{AAU}(t) - D_{CU}(t+d) \leq 0\}
+P\{L_{gNB}(t)>d\} \leqslant P\{A_{AAU}(t) - D_{CU}(t+d) \geq 0\}
 \end{equation}
 
 Then we focus on the $\{A_{AAU}(t) - D_{CU}(t+d)\}$ part. We put right hand of (\ref{eq_departure_gNB}) into this part, we can get
@@ -554,7 +554,7 @@ L(t) = \inf\{d \geqslant 0: A_{AAU}(t) \leq D_{Cloud}(t+d)\}
 \end{equation}
 Latency bound of 5G URLLC is defined as
 \begin{equation}
-P\{L(t)\geq d\} = P\{A_{AAU}(t)-D_{Cloud}(t+d)\leq 0\}
+P\{L(t)\geq d\} = P\{A_{AAU}(t)-D_{Cloud}(t+d)\geq 0\}
 \end{equation}
 We also focus on $A_{AAU}(t)-D_{Cloud}(t+d)$ part.
 where $D_{Cloud}\geqslant A_{AAU}\otimes S_{AAU}\otimes S_{DU}\otimes S_{CU}\otimes S_{NGC}\otimes S_{Cloud}$. Then we have

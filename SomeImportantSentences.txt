@@ -4,3 +4,5 @@ The target for control plane latency should be 10ms.
 
 From the analysis and simulation results we can see that contention based grant-free transmission with resource shared by multiple users is more efficient than the grant-based or traditional transmission, and it can well meet the reliability requirement of URLLC within the latency bound.
 
+Taking advantage of Chernoff¡¯s theorem [1], we can turn the violation probability
+when the observed performance exceeds upper bounds into the MGFs of random processes as follows: where X is random variable, x is upper bound, is violation probability
