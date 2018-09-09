@@ -417,6 +417,22 @@ where $\beta_{All}(t)=\beta_{gNB}\otimes \beta_{NGC}\otimes \beta_{Cloud}(t)$, a
 
 $Proof:$ Please see Appendix B.
 
+We have build a model to represent the latency of 5G MEC (UE to gNB) and URLLC (the full path from UE to Cloud). 
+Next we intend to calculate the delay boundary of the model.
+
+We suppose $C$ denote amount of UEs in URLLC system, and $n$ is the index of UEs, which $n\in[1, C]$, let us denotes $l(n)$ as the data size in transmission. Each server in tandem system has the constant service rate. The Stochastic arrival process can be write as:
+\begin{equation}
+A(t)=\sum^{C}_{n=1}l(n)
+\end{equation}
+
+In order to simplify the problem, we generalize service rate of server nodes and assume that each node provides data processing capacity as $\beta(t)=Ct$ with bounding function $g(x)=ae^{-bx}$. 
+\begin{equation}
+\begin{split}
+&P\{L_{All}(t) \geq h(\alpha_{AUU}+x, \beta_{All})\} \\
+&\leqslant f_{AAU}\otimes g_{AAU}\otimes g_{DU}\otimes g_{CU}\otimes g_{NGC}\otimes g_{Cloud}(x)
+\end{split}
+\end{equation}
+
 %from here, I need to find out how to resolve the bound function.
 \section{Numerical and Performance Evaluation}
 
@@ -434,10 +450,7 @@ and then
 =&P\{\sup_{0\leq s\leq t-1}e^{A(s,t)-S(s,t+x)}\leqslant 1\} \\
 \end{align*}
 
-We suppose $C$ denote amount of UEs in URLLC system, and $n$ is the index of UEs, which $n\in[1, C]$, let us denotes $l(n)$ as the data size in transmission. Each server in tandem system has the constant service rate. The Stochastic arrival process can be write as:
-\begin{equation}
-A(t)=\sum^{C}_{n=1}l(n)
-\end{equation}
+
 
 
 \subsection{Experimental Environment}
