@@ -417,15 +417,24 @@ where $\beta_{All}(t)=\beta_{gNB}\otimes \beta_{NGC}\otimes \beta_{Cloud}(t)$, a
 
 $Proof:$ Please see Appendix B.
 
-We have build a model to represent the latency of 5G MEC (UE to gNB) and URLLC (the full path from UE to Cloud). 
+We have build a model to represent the latency of 5G MEC (UE to gNB) and URLLC (the full path from UE to Cloud).
 Next we intend to calculate the delay boundary of the model.
+With Corollary.\ref{crl_latency_urllc}, we know that 4 key variance need to be determined. These are stochastic arrival process $\alpha_{AAU}$, $f_{AAU}$, and stochastic service process $\beta_{All}$, $g_{All}$. 
+Especially, we can also decompose $\beta_{All}$ and $g_{All}$ to obtain more detailed result. 
 
-We suppose $C$ denote amount of UEs in URLLC system, and $n$ is the index of UEs, which $n\in[1, C]$, let us denotes $l(n)$ as the data size in transmission. Each server in tandem system has the constant service rate. The Stochastic arrival process can be write as:
-\begin{equation}
-A(t)=\sum^{C}_{n=1}l(n)
+In URLLC scenario, the data is usually fixed unit packet size, the data size sometimes very tiny while applying millimeter-wave technology.
+We assume that UE data arrive will approximate to a Poisson distribution with mean rate $\lambda$.
+So arrive curve $\alpha_{AAU}=\lambda t$ and bound function will be
+\begin{equation}\label{eq_f_1}
+f_{AAU}(x)=\sum_{k=x+\lambda t}^{\infty} \frac{e^{\lambda t}\cdot (\lambda t)^{k}}{k!}
 \end{equation}
+With MGF of right hand in (\ref{eq_f_1}) and Chernoff bound, $f_{AAU}$ can be tighten by
+\begin{equation}\label{eq_f_2}
+f_{AAU}(x)=e^{x-(\lambda t+x)ln\frac{\lambda t+x}{\lambda t}}
+\end{equation}
+We suppose $C$ denote amount of UEs in URLLC system, and $n$ is the index of UEs, which $n\in[1, C]$, let us denotes $l(n)$ as the data size in transmission. Each server in tandem system has the constant service rate. The Stochastic arrival process can be write as:
 
-In order to simplify the problem, we generalize service rate of server nodes and assume that each node provides data processing capacity as $\beta(t)=Ct$ with bounding function $g(x)=ae^{-bx}$. 
+In order to simplify the problem, we generalize service rate of server nodes and assume that each node provides data processing capacity as $\beta(t)=Ct$ with bounding function $g(x)=ae^{-bx}$.
 \begin{equation}
 \begin{split}
 &P\{L_{All}(t) \geq h(\alpha_{AUU}+x, \beta_{All})\} \\
@@ -435,7 +444,8 @@ In order to simplify the problem, we generalize service rate of server nodes and
 
 %from here, I need to find out how to resolve the bound function.
 \section{Numerical and Performance Evaluation}
-
+%考虑4G和5G的时延对比？通过参数来体现？
+%服务曲线，要带有5G网络的特性的
 bounds are the target.
 add some proof in the theory description.
 
@@ -470,7 +480,7 @@ $Proof:$ Since the latency process Definition.(\ref{def_delay_process}) are defi
 event ${L(t)} > d$ implies event ${A(t)\leq D(t+d)}$.
 We move $D(t+d)$ from right hand to left hand, and according to (\ref{eq_latency_gNB}), the latency bound of gNB can be hold as
 \begin{equation}\label{eq_latencybound_gNB}
-P\{L_{gNB}(t)>d\} \leqslant P\{A_{AAU}(t) - D_{CU}(t+d) \geq 0\}
+P\{L_{gNB}(t)>d\} \leqslant P\{A_{AAU}(t) - D_{CU}(t+d) \leq 0\}
 \end{equation}
 
 Then we focus on the $\{A_{AAU}(t) - D_{CU}(t+d)\}$ part. We put right hand of (\ref{eq_departure_gNB}) into this part, we can get
@@ -567,7 +577,7 @@ L(t) = \inf\{d \geqslant 0: A_{AAU}(t) \leq D_{Cloud}(t+d)\}
 \end{equation}
 Latency bound of 5G URLLC is defined as
 \begin{equation}
-P\{L(t)\geq d\} = P\{A_{AAU}(t)-D_{Cloud}(t+d)\geq 0\}
+P\{L(t)\geq d\} = P\{A_{AAU}(t)-D_{Cloud}(t+d)\leq 0\}
 \end{equation}
 We also focus on $A_{AAU}(t)-D_{Cloud}(t+d)$ part.
 where $D_{Cloud}\geqslant A_{AAU}\otimes S_{AAU}\otimes S_{DU}\otimes S_{CU}\otimes S_{NGC}\otimes S_{Cloud}$. Then we have

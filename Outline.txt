@@ -197,6 +197,11 @@ On the model transform in stochastic network calculus 有用：对于泊松的表达式，可
 模型已经建立完毕，有四个参数需要确立，分别是达到曲线的alpha和f，服务曲线的beta和g
 到达曲线我打算采用possion过程来表达，服务曲线就用impact的那篇论文结合jiang的论文来完成。
 
+Performance analysis for MISO wireless communication systems using stochastic network calculus 数字分析写的很好。就是我可以解决，引入实际的5G的一些数据来实验。
+Performance evaluation for SDN deployment an approach based on stochastic network calculus这篇文章采用的参数和我的是一样的。
+
+
+
 
 所有的时间变量都用tau来表示 The min-plus convolution is denoted by $\otimes$. 卷积的描述
 
