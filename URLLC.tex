@@ -432,8 +432,8 @@ With MGF of right hand in (\ref{eq_f_1}) and Chernoff bound, $f_{AAU}$ can be ti
 \begin{equation}\label{eq_f_2}
 f_{AAU}(x)=e^{x-(\lambda t+x)ln\frac{\lambda t+x}{\lambda t}}
 \end{equation}
-The proof of this part can be found in \cite{jiang_On}. 
-Two variances in stochastic arrival process have been solved. 
+The proof of this part can be found in \cite{jiang_On}.
+Two variances in stochastic arrival process have been solved.
 We begin to determine $\beta_{All}$, $g_{All}$ for the stochastic service process.
 
 In order to simplify the problem, we generalize service rate of server nodes and assume that each node provides data processing capacity as $\beta(t)=Ct$ with bounding function $g(x)=ae^{-bx}$.
@@ -441,38 +441,26 @@ According to Corollary.\ref{crl_latency_urllc}, we can get
 \begin{equation}
 g_{All}(x)=g_{AAU}\otimes g_{DU}\otimes g_{CU}\otimes g_{NGC}\otimes g_{Cloud}(x)
 \end{equation}
-Therefore, 
+Therefore,
 \begin{equation}
 \begin{split}
 g_{All}(x)&=g_{AAU}\otimes g_{DU}\otimes g_{CU}\otimes g_{NGC}\otimes g_{Cloud}(x)  \\
-&=\inf_{x_{1}+x_{2}+x_{3}+x_{4}+x_{5}=x}\sum_{k=1}^{5}ae^{-bx_{k}}  
+&=\inf_{x_{1}+x_{2}+x_{3}+x_{4}+x_{5}=x}\sum_{k=1}^{5}a_{k}e^{-b_{k}x_{k}}
 \end{split}
 \end{equation}
 Applying with the conclusion in \cite{jiang_Wireless}, we can hold
 \begin{equation}
 \begin{split}
-\inf_{x_{1}+x_{2}+x_{3}+x_{4}+x_{5}=x}\sum_{k=1}^{5}ae^{-bx_{k}} \\
-=e^{\frac{-x}{w}}
+\inf_{x_{1}+x_{2}+x_{3}+x_{4}+x_{5}=x}\sum_{k=1}^{5}a_{k}e^{-b_{k}x_{k}} \\
+=e^{\frac{-x}{w}}\prod_{k=1}^{5}(a_{k}b_{k}w)^{\frac{1}{b_{k}w}}
 \end{split}
 \end{equation}
-
+where $w=\sum_{k=1}^{5}\frac{1}{b_{k}}$, and service bound functions respectively are $g_{AAU}(x)=a_{1}e^{-b_{1}x_{1}}$, $g_{DU}(x)=a_{2}e^{-b_{2}x_{2}}$, $g_{CU}(x)=a_{3}e^{-b_{3}x_{3}}$, $g_{NGC}(x)=a_{4}e^{-b_{4}x_{4}}$, $g_{Cloud}(x)=a_{5}e^{-b_{5}x_{5}}$.
 
 %from here, I need to find out how to resolve the bound function.
 \section{Numerical and Performance Evaluation}
 %考虑4G和5G的时延对比？通过参数来体现？
 %服务曲线，要带有5G网络的特性的
-bounds are the target.
-add some proof in the theory description.
-Consider the URLLC system traffic arrival process and service process are both independent and stationary increments. the delay can be bounded by
-\begin{equation}
-P\{L(t)>d\} \leq P\{A(t)\leqslant D(t+d)\}
-\end{equation}
-and then
-\begin{align*}
-&P\{A(t)>D(t+d)\} \\
-=&P\{\sup_{0\leq s\leq t-1}\{A(s,t)-S(s,t+x)\}\leqslant 0\} \\
-=&P\{\sup_{0\leq s\leq t-1}e^{A(s,t)-S(s,t+x)}\leqslant 1\} \\
-\end{align*}
 \subsection{Experimental Environment}
 A general URLLC reliability requirement for one transmission of a packet is $1*-10^{-5}$ for 32 bytes with a user plane latency of 1ms.
 Reliability = $1*-10^{-5}$, and user plane latency = $3^{-10}$ msec, for direct communication via sidelink and communication range of (e.g., a few meters)
