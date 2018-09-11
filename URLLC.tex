@@ -158,7 +158,7 @@ Team     & Research Types    & Research field \\
 \center
 \end{table}
 
-Yuming Jiang's research field is relatively extensive, including theory and application \cite{jiang_power}\cite{jiang_Delay}\cite{jiang_theory}\cite{jiang_Wireless}.
+Yuming Jiang's research field is relatively extensive, including theory and application \cite{jiang_power}\cite{jiang_On}\cite{jiang_theory}\cite{jiang_Wireless}.
 The research direction of Fidler M is more theoretical
 \cite{MF_cross} \cite{MF_Service} \cite{MF_Estimation} \cite{MF_Random}.
 BUPT and BISTU mostly adopt SNC to analyze performance criteria and quality of service in real networks.
@@ -419,8 +419,8 @@ $Proof:$ Please see Appendix B.
 
 We have build a model to represent the latency of 5G MEC (UE to gNB) and URLLC (the full path from UE to Cloud).
 Next we intend to calculate the delay boundary of the model.
-With Corollary.\ref{crl_latency_urllc}, we know that 4 key variance need to be determined. These are stochastic arrival process $\alpha_{AAU}$, $f_{AAU}$, and stochastic service process $\beta_{All}$, $g_{All}$. 
-Especially, we can also decompose $\beta_{All}$ and $g_{All}$ to obtain more detailed result. 
+With Corollary.\ref{crl_latency_urllc}, we know that 4 key variance need to be determined. These are stochastic arrival process $\alpha_{AAU}$, $f_{AAU}$, and stochastic service process $\beta_{All}$, $g_{All}$.
+Especially, we can also decompose $\beta_{All}$ and $g_{All}$ to obtain more detailed result.
 
 In URLLC scenario, the data is usually fixed unit packet size, the data size sometimes very tiny while applying millimeter-wave technology.
 We assume that UE data arrive will approximate to a Poisson distribution with mean rate $\lambda$.
@@ -432,15 +432,30 @@ With MGF of right hand in (\ref{eq_f_1}) and Chernoff bound, $f_{AAU}$ can be ti
 \begin{equation}\label{eq_f_2}
 f_{AAU}(x)=e^{x-(\lambda t+x)ln\frac{\lambda t+x}{\lambda t}}
 \end{equation}
-We suppose $C$ denote amount of UEs in URLLC system, and $n$ is the index of UEs, which $n\in[1, C]$, let us denotes $l(n)$ as the data size in transmission. Each server in tandem system has the constant service rate. The Stochastic arrival process can be write as:
+The proof of this part can be found in \cite{jiang_On}. 
+Two variances in stochastic arrival process have been solved. 
+We begin to determine $\beta_{All}$, $g_{All}$ for the stochastic service process.
 
 In order to simplify the problem, we generalize service rate of server nodes and assume that each node provides data processing capacity as $\beta(t)=Ct$ with bounding function $g(x)=ae^{-bx}$.
+According to Corollary.\ref{crl_latency_urllc}, we can get
+\begin{equation}
+g_{All}(x)=g_{AAU}\otimes g_{DU}\otimes g_{CU}\otimes g_{NGC}\otimes g_{Cloud}(x)
+\end{equation}
+Therefore, 
 \begin{equation}
 \begin{split}
-&P\{L_{All}(t) \geq h(\alpha_{AUU}+x, \beta_{All})\} \\
-&\leqslant f_{AAU}\otimes g_{AAU}\otimes g_{DU}\otimes g_{CU}\otimes g_{NGC}\otimes g_{Cloud}(x)
+g_{All}(x)&=g_{AAU}\otimes g_{DU}\otimes g_{CU}\otimes g_{NGC}\otimes g_{Cloud}(x)  \\
+&=\inf_{x_{1}+x_{2}+x_{3}+x_{4}+x_{5}=x}\sum_{k=1}^{5}ae^{-bx_{k}}  
 \end{split}
 \end{equation}
+Applying with the conclusion in \cite{jiang_Wireless}, we can hold
+\begin{equation}
+\begin{split}
+\inf_{x_{1}+x_{2}+x_{3}+x_{4}+x_{5}=x}\sum_{k=1}^{5}ae^{-bx_{k}} \\
+=e^{\frac{-x}{w}}
+\end{split}
+\end{equation}
+
 
 %from here, I need to find out how to resolve the bound function.
 \section{Numerical and Performance Evaluation}
@@ -448,7 +463,6 @@ In order to simplify the problem, we generalize service rate of server nodes and
 %服务曲线，要带有5G网络的特性的
 bounds are the target.
 add some proof in the theory description.
-
 Consider the URLLC system traffic arrival process and service process are both independent and stationary increments. the delay can be bounded by
 \begin{equation}
 P\{L(t)>d\} \leq P\{A(t)\leqslant D(t+d)\}
@@ -459,21 +473,14 @@ and then
 =&P\{\sup_{0\leq s\leq t-1}\{A(s,t)-S(s,t+x)\}\leqslant 0\} \\
 =&P\{\sup_{0\leq s\leq t-1}e^{A(s,t)-S(s,t+x)}\leqslant 1\} \\
 \end{align*}
-
-
-
-
 \subsection{Experimental Environment}
 A general URLLC reliability requirement for one transmission of a packet is $1*-10^{-5}$ for 32 bytes with a user plane latency of 1ms.
 Reliability = $1*-10^{-5}$, and user plane latency = $3^{-10}$ msec, for direct communication via sidelink and communication range of (e.g., a few meters)
 Reliability = $1-10^{-5}$, and user plane latency = $3^{-10}$ msec, when the packet is relayed via BS.
-
 \subsection{Performance Evaluation}
 The target for mobility interruption time should be 0ms.
 \section{Conclusions}
-
 An Important Thing is that I should add the reference to the definition. To prove the definition's validity.
-
 \section{Appendix}
 \subsection{Proof of Corollary.1}
 $Proof:$ Since the latency process Definition.(\ref{def_delay_process}) are defined as $L(t) = \inf\{d \geq 0 : A(t) \leq D(t+d)\}$,
@@ -651,7 +658,7 @@ Beijing Municipal Program for Excellent Teacher Promotion
 \bibitem{jiang_power} Z. Li, Y. Jiang, Y. Gao, P. Li, L. Sang and D. Yang, "Delay and Delay-Constrained Throughput Performance of a Wireless-Powered Communication System," in IEEE Access, vol. 5, pp. 21620-21631, 2017.
 \bibitem{jiang_Wireless} Sun F, Li L, Jiang Y. Impact of duty cycle on end-to-end performance in a Wireless Sensor Network[C]// Wireless Communications and NETWORKING Conference. IEEE, 2015:1906-1911.
 \bibitem{jiang_theory} Jiang Y. Network calculus and queueing theory: two sides of one coin: invited paper[C]// International ICST Conference on PERFORMANCE Evaluation Methodologies \& TOOLS. 2014.
-\bibitem{jiang_Delay} Mahmood K, Vehkaper M, Jiang Y. Delay constrained throughput analysis of SISO[C]// IEEE International Conference on Network Infrastructure and Digital Content. IEEE, 2013:116-121.
+\bibitem{jiang_On} Wu K, Jiang Y, Li J. On the model transform in stochastic network calculus[C]// International Workshop on Quality of Service. IEEE, 2010:1-9.
 
 %M Fidler
 \bibitem{MF_cross} S. Akin and M. Fidler, "A Method for Cross-Layer Analysis of Transmit Buffer Delays in Message Index Domain," in IEEE Transactions on Vehicular Technology, vol. 67, no. 3, pp. 2698-2712, March 2018.
