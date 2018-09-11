@@ -451,11 +451,19 @@ g_{All}(x)&=g_{AAU}\otimes g_{DU}\otimes g_{CU}\otimes g_{NGC}\otimes g_{Cloud}(
 Applying with the conclusion in \cite{jiang_Wireless}, we can hold
 \begin{equation}
 \begin{split}
-\inf_{x_{1}+x_{2}+x_{3}+x_{4}+x_{5}=x}\sum_{k=1}^{5}a_{k}e^{-b_{k}x_{k}} \\
-=e^{\frac{-x}{w}}\prod_{k=1}^{5}(a_{k}b_{k}w)^{\frac{1}{b_{k}w}}
+g_{All}(x)&=\inf_{x_{1}+x_{2}+x_{3}+x_{4}+x_{5}=x}\sum_{k=1}^{5}a_{k}e^{-b_{k}x_{k}} \\
+&=e^{\frac{-x}{w}}\prod_{k=1}^{5}(a_{k}b_{k}w)^{\frac{1}{b_{k}w}}
 \end{split}
 \end{equation}
 where $w=\sum_{k=1}^{5}\frac{1}{b_{k}}$, and service bound functions respectively are $g_{AAU}(x)=a_{1}e^{-b_{1}x_{1}}$, $g_{DU}(x)=a_{2}e^{-b_{2}x_{2}}$, $g_{CU}(x)=a_{3}e^{-b_{3}x_{3}}$, $g_{NGC}(x)=a_{4}e^{-b_{4}x_{4}}$, $g_{Cloud}(x)=a_{5}e^{-b_{5}x_{5}}$.
+with all the information we discuss above,  and applying the lemma which proved in \cite{jiang_Wireless}, we can get
+\begin{equation}
+\begin{split}
+&P\{L(t)>h(\alpha_{AAU}+x, \beta)\} \\
+&= P\{L(t)>\frac{x}{C-\lambda}\} \\
+&\leq\inf\{e^{x-(\lambda t+x)ln\frac{\lambda t+x}{\lambda t}}+ e^{\frac{-xb}{n+1}}(5(n+1))\}
+\end{split}
+\end{equation}
 
 %from here, I need to find out how to resolve the bound function.
 \section{Numerical and Performance Evaluation}
