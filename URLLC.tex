@@ -151,14 +151,14 @@ Team     & Research Types    & Research field \\
  \midrule
  Jiang   &Theory\&Application& Delay Evaluation\&Wireless \\
  Fidler M&   Theory          & Service Curve\&Estimation  \\
- BUPT    &   Application     &    Wireless communication  \\
- BISTU   &   Application     &    LTE\&Femtocells \\
+ Li\&Lei &   Application     &    Wireless communication  \\
+ Chen   &   Application     &    LTE\&Femtocells \\
  \bottomrule
 \end{tabular}
 \center
 \end{table}
 
-Yuming Jiang's research field is relatively extensive, including theory and application \cite{jiang_power}\cite{jiang_On}\cite{jiang_theory}\cite{jiang_Wireless}.
+Yuming Jiang's research field is relatively extensive, including theory and application \cite{jiang_power}\cite{jiang_theory}\cite{jiang_Wireless}\cite{jiang_On}.
 The research direction of Fidler M is more theoretical
 \cite{MF_cross} \cite{MF_Service} \cite{MF_Estimation} \cite{MF_Random}.
 BUPT and BISTU mostly adopt SNC to analyze performance criteria and quality of service in real networks.
@@ -220,10 +220,10 @@ The data transport from UEs and go through every nodes to cloud at the end.
 According to the requirement of URLLC, the reliability and random latency \cite{MF_Random} can be described as Formula.\ref{eq_urllc_delay_problem}:
 
 \begin{equation}\label{eq_urllc_delay_problem}
-P\{delay > \delta \} < \epsilon
+P\{delay > d \} < \epsilon
 \end{equation}
 
-The delay should be within 1ms, so the $\delta < 1$, the unit is millisecond(ms).
+The delay should be within 1ms, so the $d < 1$, the unit is millisecond(ms).
 Where $\epsilon$ is defined as a very small probability.
 Meanwhile the block error rate(BLER) must be 99.999\%.
 It means that the value of $\epsilon$ must be less than $1*10^{-5}$, (i.e. $1 - 1*10^{-5} = 0.99999$, It equals to BLER $99.999\%$).
@@ -406,7 +406,7 @@ The server nodes in URLLC system provide stochastic service process $S_{gNB}(t)$
 $S_{gNB}\sim<g_{gNB},\beta_{gNB}>$, $S_{NGC}\sim<g_{NGC},\beta_{NGC}>$, and $S_{Cloud}\sim<g_{Cloud},\beta_{Cloud}>$.
 Service rate $\beta_{gNB},\beta_{NGC},\beta_{Cloud}\in\mathcal{F}$, $g_{gNB}, g_{NGC}, g_{Cloud}\in\mathcal{\bar{F}}$.
 Then, for all $t\geq 0$ and $x \geq 0$, the Latency of URLLC system $L_{All}(t)$ is bounded by
-\begin{equation}
+\begin{equation}\label{eq_in_crl_2}
 \begin{split}
 P\{L_{All}(t) \geq d\} &= P\{L_{All}(t) \geq h(\alpha_{AUU}+x, \beta_{All})\} \\
  &\leqslant f_{AAU}\otimes g_{All}(x)
@@ -451,19 +451,29 @@ g_{All}(x)&=g_{AAU}\otimes g_{DU}\otimes g_{CU}\otimes g_{NGC}\otimes g_{Cloud}(
 Applying with the conclusion in \cite{jiang_Wireless}, we can hold
 \begin{equation}
 \begin{split}
-g_{All}(x)&=\inf_{x_{1}+x_{2}+x_{3}+x_{4}+x_{5}=x}\sum_{k=1}^{5}a_{k}e^{-b_{k}x_{k}} \\
+&\inf_{x_{1}+x_{2}+x_{3}+x_{4}+x_{5}=x}\sum_{k=1}^{5}a_{k}e^{-b_{k}x_{k}} \\
 &=e^{\frac{-x}{w}}\prod_{k=1}^{5}(a_{k}b_{k}w)^{\frac{1}{b_{k}w}}
 \end{split}
 \end{equation}
 where $w=\sum_{k=1}^{5}\frac{1}{b_{k}}$, and service bound functions respectively are $g_{AAU}(x)=a_{1}e^{-b_{1}x_{1}}$, $g_{DU}(x)=a_{2}e^{-b_{2}x_{2}}$, $g_{CU}(x)=a_{3}e^{-b_{3}x_{3}}$, $g_{NGC}(x)=a_{4}e^{-b_{4}x_{4}}$, $g_{Cloud}(x)=a_{5}e^{-b_{5}x_{5}}$.
 with all the information we discuss above,  and applying the lemma which proved in \cite{jiang_Wireless}, we can get
-\begin{equation}
+\begin{equation}\label{eq_g_all}
+g_{All}(x) = e^{\frac{-xb}{n+1}}(a(n+1))
+\end{equation}
+We put (\ref{eq_f_2}), (\ref{eq_g_all}) into (\ref{eq_in_crl_2}) and apply the Theorem.3 proved in \cite{Michael}, it can be derived that
+\begin{equation}\label{eq_latency_f_g}
 \begin{split}
 &P\{L(t)>h(\alpha_{AAU}+x, \beta)\} \\
 &= P\{L(t)>\frac{x}{C-\lambda}\} \\
-&\leq\inf\{e^{x-(\lambda t+x)ln\frac{\lambda t+x}{\lambda t}}+ e^{\frac{-xb}{n+1}}(5(n+1))\}
+&\leq e^{x-(\lambda t+x)ln\frac{\lambda t+x}{\lambda t}}\cdot e^{\frac{-xb}{n+1}}(a(n+1))
 \end{split}
 \end{equation}
+Then we hold the latency bound as (\ref{eq_urllc_delay_problem}).
+Let $d=\frac{x}{C-\lambda}$ and set the right side of (\ref{eq_latency_f_g}) equal to $\epsilon$. The $\epsilon$ is a small latency bound violation probability. We can obtain a relationship between $d$ and $\epsilon$.
+\begin{equation}
+d = \frac{1}{C-\lambda}\cdot\frac{n+1}{b}\cdot ln{\frac{a(n+1)}{\epsilon}}
+\end{equation}
+The calculation process can be found in Appendix C.
 
 %from here, I need to find out how to resolve the bound function.
 \section{Numerical and Performance Evaluation}
@@ -608,6 +618,32 @@ P\{L(x)>h(\alpha_{AAU}+x, \beta_{All})\} < f_{AUU} \otimes g_{All}(x)
 \end{equation}
 Therefore, Corollary.2 is proved.
 
+\subsection{Calculation of Delay}
+We first set right side of (\ref{eq_latency_f_g}) equals to $\epsilon$, and we logarithm on both sides then hold
+\begin{equation}\label{eq_appendixC_1}
+\begin{split}
+&e^{x-(\lambda t+x)ln\frac{\lambda t+x}{\lambda t}}\cdot e^{\frac{-xb}{n+1}}(a(n+1)) = \epsilon \\
+&e^{x-(\lambda t+x)ln\frac{\lambda t+x}{\lambda t}}\cdot e^{\frac{-xb}{n+1}} = \frac{\epsilon}{a(n+1)}
+\end{split}
+\end{equation}
+for a long-term running situation, $t\rightarrow\infty$, then
+\begin{equation}
+\lim_{t\rightarrow\infty}(\lambda t+x)ln\frac{\lambda t+x}{\lambda t} = x
+\end{equation}
+then the (\ref{eq_appendixC_1}) equal to
+\begin{equation}\label{eq_appendixC_2}
+\begin{split}
+e^{\frac{-xb}{n+1}} = \frac{\epsilon}{(a(n+1))} \\
+\frac{-xb}{n+1} = ln{\frac{\epsilon}{(a(n+1))}} \\
+x = \frac{n+1}{b}\cdot ln{\frac{a(n+1)}{\epsilon}}
+\end{split}
+\end{equation}
+we put $x = d(C-\lambda)$ into (\ref{eq_appendixC_2}) and get
+\begin{equation}
+d = \frac{1}{C-\lambda}\cdot\frac{n+1}{b}\cdot ln{\frac{a(n+1)}{\epsilon}}
+\end{equation}
+Therefore $d$ is solved.
+
 \section*{Acknowledgment}
 
 %毫米波，MIMO，网络切片，边缘计算，这些都算是能够提升网络速率降低实验的方法，怎么提升可靠性呢？这个也好好好考虑与一下。
@@ -646,37 +682,37 @@ Beijing Municipal Program for Excellent Teacher Promotion
 \bibitem{Huawei} Wang C, Chen Y, Wu Y, et al. “Performance Evaluation of Grant-Free Transmission for Uplink URLLC Services,” IEEE, Vehicular Technology Conference: Vtc2017-Spring. IEEE, 2017:1-6.
 
 \bibitem{Achieving} Pocovi G, Shariatmadari H, Berardinelli G, et al. “Achieving Ultra-Reliable Low-Latency Communications: Challenges and Envisioned System Enhancements,” IEEE Network, vol.32, no.2, pp.8-15, 2018.
-\bibitem{Wireless} Popovski P, Nielsen J J, Stefanovic C, et al. Wireless Access for Ultra-Reliable Low-Latency Communication: Principles and Building Blocks[J]. IEEE Network, 2018, 32(2):16-23.
-\bibitem{Introduction} Ji H, Park S, Yeo J, et al. Introduction to Ultra Reliable and Low Latency Communications in 5G[J]. 2017.
-\bibitem{Physical} Ji H, Park S, Yeo J, et al. Ultra Reliable and Low Latency Communications in 5G Downlink: Physical Layer Aspects[J]. 2018.
+\bibitem{Wireless} Popovski P, Nielsen J J, Stefanovic C, et al. “Wireless Access for Ultra-Reliable Low-Latency Communication: Principles and Building Blocks,” IEEE Network, vol.32, no.2, pp.16-23, 2018.
+\bibitem{Introduction} Ji H, Park S, Yeo J, et al. “Introduction to Ultra Reliable and Low Latency Communications in 5G,” 2017.
+\bibitem{Physical} Ji H, Park S, Yeo J, et al. “Ultra Reliable and Low Latency Communications in 5G Downlink: Physical Layer Aspects,” 2018.
 
 %jiang
-\bibitem{jiang_power} Z. Li, Y. Jiang, Y. Gao, P. Li, L. Sang and D. Yang, "Delay and Delay-Constrained Throughput Performance of a Wireless-Powered Communication System," in IEEE Access, vol. 5, pp. 21620-21631, 2017.
-\bibitem{jiang_Wireless} Sun F, Li L, Jiang Y. Impact of duty cycle on end-to-end performance in a Wireless Sensor Network[C]// Wireless Communications and NETWORKING Conference. IEEE, 2015:1906-1911.
-\bibitem{jiang_theory} Jiang Y. Network calculus and queueing theory: two sides of one coin: invited paper[C]// International ICST Conference on PERFORMANCE Evaluation Methodologies \& TOOLS. 2014.
-\bibitem{jiang_On} Wu K, Jiang Y, Li J. On the model transform in stochastic network calculus[C]// International Workshop on Quality of Service. IEEE, 2010:1-9.
+\bibitem{jiang_power} Z. Li, Y. Jiang, Y. Gao, P. Li, L. Sang and D. Yang, “Delay and Delay-Constrained Throughput Performance of a Wireless-Powered Communication System,” IEEE Access, vol.5, pp.21620-21631, 2017.
+\bibitem{jiang_Wireless} Sun F, Li L, Jiang Y. “Impact of duty cycle on end-to-end performance in a Wireless Sensor Network,” Wireless Communications and NETWORKING Conference IEEE, pp.1906-1911, 2015.
+\bibitem{jiang_theory} Jiang Y. “Network calculus and queueing theory: two sides of one coin: invited paper,” International ICST Conference on PERFORMANCE Evaluation Methodologies \& TOOLS, 2014.
+\bibitem{jiang_On} Wu K, Jiang Y, Li J. “On the model transform in stochastic network calculus,” International Workshop on Quality of Service IEEE, pp.1-9, 2010.
 
 %M Fidler
-\bibitem{MF_cross} S. Akin and M. Fidler, "A Method for Cross-Layer Analysis of Transmit Buffer Delays in Message Index Domain," in IEEE Transactions on Vehicular Technology, vol. 67, no. 3, pp. 2698-2712, March 2018.
-\bibitem{MF_Service} R. Lübben and M. Fidler, "Service Curve Estimation-Based Characterization and Evaluation of Closed-Loop Flow Control," in IEEE Transactions on Network and Service Management, vol. 14, no. 1, pp. 161-175, March 2017.
-\bibitem{MF_Estimation} R. Lübben and M. Fidler, "Estimation method for the delay performance of closed-loop flow control with application to TCP," IEEE INFOCOM 2016 - The 35th Annual IEEE International Conference on Computer Communications, San Francisco, CA, 2016, pp. 1-9.
-\bibitem{MF_Random} R. Lübben, M. Fidler and J. Liebeherr, "Stochastic Bandwidth Estimation in Networks With Random Service," in IEEE/ACM Transactions on Networking, vol. 22, no. 2, pp. 484-497, April 2014.
+\bibitem{MF_cross} S. Akin and M. Fidler, “A Method for Cross-Layer Analysis of Transmit Buffer Delays in Message Index Domain,” IEEE Transactions on Vehicular Technology, vol.67, no.3, pp.2698-2712, March 2018.
+\bibitem{MF_Service} R. Lübben and M. Fidler, “Service Curve Estimation-Based Characterization and Evaluation of Closed-Loop Flow Control,” IEEE Transactions on Network and Service Management, vol.14, no.1, pp.161-175, March 2017.
+\bibitem{MF_Estimation} R. Lübben and M. Fidler, “Estimation method for the delay performance of closed-loop flow control with application to TCP,” IEEE INFOCOM 2016 - The 35th Annual IEEE International Conference on Computer Communications, San Francisco, CA, pp.1-9, 2016.
+\bibitem{MF_Random} R. Lübben, M. Fidler and J. Liebeherr, “Stochastic Bandwidth Estimation in Networks With Random Service,” IEEE/ACM Transactions on Networking, vol.22, no.2, pp.484-497, April 2014.
 
 %BUPT
-\bibitem{beiyou_1} Z. Li, Y. Jiang, Y. Gao, P. Li, L. Sang and D. Yang, "Delay and Delay-Constrained Throughput Performance of a Wireless-Powered Communication System," in IEEE Access, vol. 5, pp. 21620-21631, 2017.
-\bibitem{beiyou_2} Z. Li, Y. Gao, B. A. Salihu, et al, “Network Calculus Delay Bounds in Multi-Server Queueing Networks with Stochastic Arrivals and Stochastic Services”, IEEE Global Communications Conference. IEEE, 2015:1-7.
-\bibitem{beiyou_lei1} K. Zheng, F. Liu, L. Lei, C. Lin and Y. Jiang, "Stochastic Performance Analysis of a Wireless Finite-State Markov Channel," in IEEE Transactions on Wireless Communications, vol. 12, no. 2, pp. 782-793, February 2013.
-\bibitem{beiyou_lei2} Y. Li, L. Lei, Z. Zhong and S. Lin, "Performance analysis for high-speed railway communication network using stochastic network calculus," 5th IET International Conference on Wireless, Mobile and Multimedia Networks (ICWMMN 2013), Beijing, 2013, pp. 100-105.
+\bibitem{beiyou_1} Z. Li, Y. Jiang, Y. Gao, P. Li, L. Sang and D. Yang, “Delay and Delay-Constrained Throughput Performance of a Wireless-Powered Communication System,” IEEE Access, vol.5, pp.21620-21631, 2017.
+\bibitem{beiyou_2} Z. Li, Y. Gao, B. A. Salihu, et al, “Network Calculus Delay Bounds in Multi-Server Queueing Networks with Stochastic Arrivals and Stochastic Services”, IEEE Global Communications Conference, pp.1-7, 2015.
+\bibitem{beiyou_lei1} K. Zheng, F. Liu, L. Lei, C. Lin and Y. Jiang, “Stochastic Performance Analysis of a Wireless Finite-State Markov Channel,” in IEEE Transactions on Wireless Communications, vol.12, no.2, pp.782-793, February 2013.
+\bibitem{beiyou_lei2} Y. Li, L. Lei, Z. Zhong and S. Lin, “Performance analysis for high-speed railway communication network using stochastic network calculus,” 5th IET International Conference on Wireless, Mobile and Multimedia Networks (ICWMMN 2013), Beijing, pp.100-105, 2013.
 
 %BISTU
-\bibitem{si_yuan} Chen, Xin, Y. Si, and X. Xiang. Delay-bounded resource allocation for femtocells exploiting the statistical multiplexing gain. Kluwer Academic Publishers, 2015.
-\bibitem{xiang_xd} X. Chen, Y. Si and X. Xiang, "Delay-bounded priority-driven resource allocation for two-tier macrocell/femtocell downlink," The 2014 5th International Conference on Game Theory for Networks, Beijing, 2014, pp. 1-6.
-\bibitem{xu_tong} Tong Xu, Xin Chen, Xudong Xiang and Jianxiong Wan, "Delay analysis for cognitive radio networks with parallel Markov modulated on-off channels," ISWPC 2012 proceedings, Dalian, 2012, pp. 1-5.
-\bibitem{zhang_lei} Lei Zhang, Xin Chen, Xudong Xiang and Jianxiong Wan, "A stochastic network calculus approach for the end-to-end delay analysis of LTE networks," 2011 International Conference on Selected Topics in Mobile and Wireless Networking (iCOST), Shanghai, 2011, pp. 30-35.
+\bibitem{si_yuan} Chen, Xin, Y. Si, and X. Xiang. “Delay-bounded resource allocation for femtocells exploiting the statistical multiplexing gain,” Kluwer Academic Publishers, 2015.
+\bibitem{xiang_xd} X. Chen, Y. Si and X. Xiang, “Delay-bounded priority-driven resource allocation for two-tier macrocell/femtocell downlink,” The 2014 5th International Conference on Game Theory for Networks, Beijing, pp.1-6, 2014.
+\bibitem{xu_tong} Tong Xu, Xin Chen, Xudong Xiang and Jianxiong Wan, “Delay analysis for cognitive radio networks with parallel Markov modulated on-off channels,” ISWPC 2012 proceedings, Dalian, 2012, pp. 1-5.
+\bibitem{zhang_lei} Lei Zhang, Xin Chen, Xudong Xiang and Jianxiong Wan, “A stochastic network calculus approach for the end-to-end delay analysis of LTE networks,” 2011 International Conference on Selected Topics in Mobile and Wireless Networking (iCOST), Shanghai, pp.30-35, 2011.
 
 %cooperation
-\bibitem{MF_jiang} M. Fidler, B. Walker and Y. Jiang, "Non-Asymptotic Delay Bounds for Multi-Server Systems with Synchronization Constraints," in IEEE Transactions on Parallel and Distributed Systems, vol. 29, no. 7, pp. 1545-1559, July 1 2018.
-
+\bibitem{MF_jiang} M. Fidler, B. Walker and Y. Jiang, “Non-Asymptotic Delay Bounds for Multi-Server Systems with Synchronization Constraints,” in IEEE Transactions on Parallel and Distributed Systems, vol.29, no.7, pp.1545-1559, July 1 2018.
+\bibitem{Michael} Beck M. “Towards the analysis of transient phases with stochastic network calculus,” Telecommunications Network Strategy and Planning Symposium IEEE, pp.164-169, 2016.
 
 \end{thebibliography}
 
