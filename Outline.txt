@@ -208,6 +208,7 @@ Performance evaluation for SDN deployment an approach based on stochastic networ
 
 第四章：结合之前的图表对于URLLC的时间指标，开始套用上一章第三部分的公式，得出一些数据结果
 然后画一些图表；
+现在准备画一个三维的图表，并标识出可以采用的部分。这只是个设想，还要看具体图表的效果。
 
 第五章：总结一下自己的这些图表的作用，自己推的这些公式的作用；
 

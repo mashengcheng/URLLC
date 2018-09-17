@@ -479,12 +479,63 @@ The calculation process can be found in Appendix C.
 \section{Numerical and Performance Evaluation}
 %考虑4G和5G的时延对比？通过参数来体现？
 %服务曲线，要带有5G网络的特性的
-\subsection{Experimental Environment}
-A general URLLC reliability requirement for one transmission of a packet is $1*-10^{-5}$ for 32 bytes with a user plane latency of 1ms.
-Reliability = $1*-10^{-5}$, and user plane latency = $3^{-10}$ msec, for direct communication via sidelink and communication range of (e.g., a few meters)
-Reliability = $1-10^{-5}$, and user plane latency = $3^{-10}$ msec, when the packet is relayed via BS.
-\subsection{Performance Evaluation}
-The target for mobility interruption time should be 0ms.
+
+In this section, we shall discuss what factors are the main cause of latency in URLLC. 
+Although the deployment details of the URLLC standard are not yet released, we can still apply SNC theory for quantitative analysis.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.4\textwidth]{delay_no_tandem.png}
+  \caption{Service Rate Influence}
+  \label{fig2}
+\end{figure}
+
+We assume that the 5G URLLC networks are standalone deployment. 
+The packet arrival rate is constant and arrival process satisfies Poisson distribution. 
+A general URLLC reliability requirement for one transmission of a packet is $1*10^{-5}$ for 32 bytes with a user plane latency of 1ms.
+So we set the violation probability value around $1*10^{-5}$.
+More simulation parameters can be found in Table.\ref{tab_2}.
+
+
+
+\begin{table}[H]
+  \caption{evaluation parameters}\label{tab_2}
+  \center
+  \begin{tabular}{cc}
+    \toprule
+    Parameter & Value \\
+    \midrule
+    Network deployment & Standalone   \\
+    Traffic mode & Constant transmission, Poisson arrival \\
+    Carrier frequency & 4 (GHz)  \\
+    Arrival rate $\lambda$ & 20 (Gbit/s)    \\
+    Service rate C & 40,45,50,55 (Gbit/s)    \\
+    Service bound a & 1 \\
+    Service bound b & 3 \\
+    Number of tandem servers n & 5    \\
+    Violation probability & $1*10^{-5}$ \\
+    Latency bound & 1 (ms)  \\
+    \bottomrule
+  \end{tabular}
+  \center
+\end{table}
+
+
+%在这个边界概率前提下，为了使得延迟时间在1ms以内，我们通过应用我们上一节已经得出的结论，来仿真系统延迟和服务率的关系。
+
+Taking this boundary probability as the precondition, we simulate the relationship between system latency and service rate by applying the conclusions we have drawn in the previous section.
+Fig.\ref{fig2} provide the evaluated URLLC delay with different service rate under violation probability $1*10^{-5}$. 
+The violation probability represent the BLER. 
+The value of BLER is from $5*10^{-6}$ to $15*10^{-6}$. 
+We arrange the value scope to include the demand value $1*10^{-5}$ to observe the effect of this value on delay.
+We adopt 4 service rates in model and all the curves are slow down by BLER value. From this we can conduct that BLER is not the main factor to influence the latency. 
+In order to make the delay less than 1 ms, we set service rate from 45Gbit/s to 48Gbit/s based on arrival rate is 20Gbit/s.
+We can procure that delay approximates 1ms when service rate is 47Gbit/s at violation probability $1*10^{-5}$.
+As the service rate increases, the delay of the system will decrease. 
+When service rate is 48Gbit/s, system latency can approach 1ms with lower violation probability. 
+That means system can guarantee the low latency communication in a stable state.
+
+
 \section{Conclusions}
 An Important Thing is that I should add the reference to the definition. To prove the definition's validity.
 \section{Appendix}
