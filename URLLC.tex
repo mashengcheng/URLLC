@@ -520,7 +520,6 @@ More simulation parameters can be found in Table.\ref{tab_2}.
   \center
 \end{table}
 
-
 %在这个边界概率前提下，为了使得延迟时间在1ms以内，我们通过应用我们上一节已经得出的结论，来仿真系统延迟和服务率的关系。
 
 Taking this boundary probability as the precondition, we simulate the relationship between system latency and service rate by applying the conclusions we have drawn in the previous section.
@@ -535,6 +534,20 @@ As the service rate increases, the delay of the system will decrease.
 When service rate is 48Gbit/s, system latency can approach 1ms with lower violation probability. 
 That means system can guarantee the low latency communication in a stable state.
 
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.4\textwidth]{delay_servers.png}
+  \caption{Number of Servers Influence}
+  \label{fig3}
+\end{figure}
+
+Fig.\ref{fig3} presents the relationship among latency, number of servers and service rate.
+The arrival rate is constant and speed is 20Gbit/s. The violation probability is maintained at $1*10^{-5}$.
+Based on the above setting, we can derived that the delay is sensitive on number of servers in tandem.  
+From Fig.\ref{fig3}, we can see the slope of latency cause by number of server in tandem is larger than the service rate.
+We draw a delay equals 1ms flat plane to cut the curve surface.
+The part below the plane is the scope of deployment parameters which satisfying the delay condition. 
+From the Fig.\ref{fig3}, we can also see that in order to ensure low latency of communication, it is necessary to reduce the levels of system deployment as much as possible and increase the service rate of each server layer.
 
 \section{Conclusions}
 An Important Thing is that I should add the reference to the definition. To prove the definition's validity.
