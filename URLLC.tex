@@ -183,6 +183,7 @@ CU provides the service convergence function in the access side. It focuses on t
 DU mainly provides data access function to the terminal, including radio frequency and partial signal processing. DU concentrate on the high real-time capabilities of the transport requirements and suit for a distributed deployment method.
 The NGC(Next Generation Core Network) as Core Network in 5G replace the EPC. 5G NGC is based on SDN/NFV technology and designed to better fit the cloud platform.
 The architecture is depicted as Fig.\ref{fig_architecture}.
+ 
 
 \subsection{Delay of URLLC Network}
 UE devices firstly access to AAU. The AAU is actually a part of base station. This part of the communication belongs to RAN.
@@ -480,7 +481,7 @@ The calculation process can be found in Appendix C.
 %考虑4G和5G的时延对比？通过参数来体现？
 %服务曲线，要带有5G网络的特性的
 
-In this section, we shall discuss what factors are the main cause of latency in URLLC. 
+In this section, we shall discuss what factors are the main cause of latency in URLLC.
 Although the deployment details of the URLLC standard are not yet released, we can still apply SNC theory for quantitative analysis.
 
 \begin{figure}[htbp]
@@ -490,8 +491,8 @@ Although the deployment details of the URLLC standard are not yet released, we c
   \label{fig2}
 \end{figure}
 
-We assume that the 5G URLLC networks are standalone deployment. 
-The packet arrival rate is constant and arrival process satisfies Poisson distribution. 
+We assume that the 5G URLLC networks are standalone deployment.
+The packet arrival rate is constant and arrival process satisfies Poisson distribution.
 A general URLLC reliability requirement for one transmission of a packet is $1*10^{-5}$ for 32 bytes with a user plane latency of 1ms.
 So we set the violation probability value around $1*10^{-5}$.
 More simulation parameters can be found in Table.\ref{tab_2}.
@@ -523,15 +524,15 @@ More simulation parameters can be found in Table.\ref{tab_2}.
 %在这个边界概率前提下，为了使得延迟时间在1ms以内，我们通过应用我们上一节已经得出的结论，来仿真系统延迟和服务率的关系。
 
 Taking this boundary probability as the precondition, we simulate the relationship between system latency and service rate by applying the conclusions we have drawn in the previous section.
-Fig.\ref{fig2} provide the evaluated URLLC delay with different service rate under violation probability $1*10^{-5}$. 
-The violation probability represent the BLER. 
-The value of BLER is from $5*10^{-6}$ to $15*10^{-6}$. 
+Fig.\ref{fig2} provide the evaluated URLLC delay with different service rate under violation probability $1*10^{-5}$.
+The violation probability represent the BLER.
+The value of BLER is from $5*10^{-6}$ to $15*10^{-6}$.
 We arrange the value scope to include the demand value $1*10^{-5}$ to observe the effect of this value on delay.
-We adopt 4 service rates in model and all the curves are slow down by BLER value. From this we can conduct that BLER is not the main factor to influence the latency. 
+We adopt 4 service rates in model and all the curves are slow down by BLER value. From this we can conduct that BLER is not the main factor to influence the latency.
 In order to make the delay less than 1 ms, we set service rate from 45Gbit/s to 48Gbit/s based on arrival rate is 20Gbit/s.
 We can procure that delay approximates 1ms when service rate is 47Gbit/s at violation probability $1*10^{-5}$.
-As the service rate increases, the delay of the system will decrease. 
-When service rate is 48Gbit/s, system latency can approach 1ms with lower violation probability. 
+As the service rate increases, the delay of the system will decrease.
+When service rate is 48Gbit/s, system latency can approach 1ms with lower violation probability.
 That means system can guarantee the low latency communication in a stable state.
 
 \begin{figure}[htbp]
@@ -543,14 +544,26 @@ That means system can guarantee the low latency communication in a stable state.
 
 Fig.\ref{fig3} presents the relationship among latency, number of servers and service rate.
 The arrival rate is constant and speed is 20Gbit/s. The violation probability is maintained at $1*10^{-5}$.
-Based on the above setting, we can derived that the delay is sensitive on number of servers in tandem.  
+Based on the above setting, we can derived that the delay is sensitive on number of servers in tandem.
 From Fig.\ref{fig3}, we can see the slope of latency cause by number of server in tandem is larger than the service rate.
 We draw a delay equals 1ms flat plane to cut the curve surface.
-The part below the plane is the scope of deployment parameters which satisfying the delay condition. 
-From the Fig.\ref{fig3}, we can also see that in order to ensure low latency of communication, it is necessary to reduce the levels of system deployment as much as possible and increase the service rate of each server layer.
+The part below the plane is the scope of deployment parameters which satisfying the delay condition.
+We can also see that in order to ensure low latency of communication, it is necessary to reduce the levels of system deployment as much as possible and increase the service rate of each server layer.
 
 \section{Conclusions}
-An Important Thing is that I should add the reference to the definition. To prove the definition's validity.
+In this paper, the architecture of 5G URLLC network researched.
+According to the architecture characteristics, the URLLC network is modeled as a tandem system which demonstrate the communication rom UE to Cloud.
+Applying stochastic network theory and combining the features of URLLC network, performance analysis has been conducted.
+We have investigated the relationship among: the delay constraint, the service rate, violation probability and the number of deployment servers levels in URLLC networks.
+The 3GPP standard is taken into account when we set the simulation parameters.
+Numerical results are demonstrate that the main factor which can impact on latency is number of server deployment levels.
+That also means Edge Computing will be the trend in URLLC application deployment.
+The service rate of the server is also a factor affecting the delay. With the increase of service rate, delay can be reduced.
+The results derived from evaluation which provide valuable guidelines for the early design of URLLC deployment.
+With the further development of the researches, we would consider to include handover access in URLLC communication.
+
+
+
 \section{Appendix}
 \subsection{Proof of Corollary.1}
 $Proof:$ Since the latency process Definition.(\ref{def_delay_process}) are defined as $L(t) = \inf\{d \geq 0 : A(t) \leq D(t+d)\}$,

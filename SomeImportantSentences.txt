@@ -8,3 +8,20 @@ Taking advantage of Chernoff’s theorem [1], we can turn the violation probabili
 when the observed performance exceeds upper bounds into the MGFs of random processes as follows: where X is random variable, x is upper bound, is violation probability
 
 这里目前没有需要的句子。
+
+Fig.\ref{fig_architecture} illustrates the architecture of 5G URLLC networks.
+
+All the simulation parameter are refer to
+
+%这里应该说一下模型的具体技术细节
+%还应该说一下这些分析的结果，有什么意义
+%要提出一些建议
+the 
+To extend this work, we would further consider the  in highspeed moving communication in URLLC network. 
+
+The influence of the violation probability is weak and can be omitted.
+
+In this paper, we research the architecture of 5G URLLC network system.
+According to the architecture feature, the network is modeled as a tandem system which demonstrate the communication from UE to Cloud.
+
+we research on the feature in architecture of 
