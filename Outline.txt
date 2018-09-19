@@ -1,0 +1,224 @@
+5G 论文
+
+标题： 5G+URLLC+SNC+DELAY
+
+====================================================
+摘要： 就是按照这4块内容开始扩写
+
+	1，先写5G的发展快速；
+	2，写5G的三大应用场景；5G网络被设计用来满足多样性的
+	2，写URLLC的内容，突出性能要求
+	3，提出问题，如何满足，从理论方法上来限制时延的边界
+	4，介绍随机网络演算
+	5，本文用SNC，干了什么，意义是什么
+	6，数据分析，证明了什么
+
+========================================================
+INTRODUCTION
+first paragraph:
+	how 5G development, what is the urllc and how it will be applicated. 
+	Thanks to the SDN/NFV technology application, In the 5G era, a single network infrastructure can 		meet diversified service requirements. Provides logically independent network slicing on a single 	network infrastructure to meet diversified service requirements  
+	So the classic application scenarios has been provided. the eMBB, mMTC and URLLC
+
+	5G wireless networks are expected to support new applications demanding ultra high reliability and 		ultra low latency, such as self-driving cars, industrial control, and real-time gaming second 	paragraph
+	the stochastic network calculas is a theory, what I will do to use this method.
+	对5G的介绍部分，要增加snc为什么擅长delay的分析；
+
+contribution:
+	1, we build a model to simulate the network architecture of 5G communication.
+	2, we use stochastic network calculas to analysis the delay bound
+	3, the delay bound is valuable for design the solution of URLLC application.
+
+MBMS sidelink 
+
+而通信技术从1G发展到4G，通信资源从文本到语音、从图像到视频到富媒体，传播媒介越来越丰富。随着5G的发展和完善，触觉、味觉、嗅觉等更多元素将加入通信之中，使大脑产生人类自然感官体验，为用户实现身临其境的自然通讯体验，更加自然、直接、高效地与他人及社会交互。
+互联汽车及自动驾驶车辆（CAVs）需要可靠的超快速无线网络，实现车间通信（V2V）、车间对基础设施通信（V2I）及与车载设备的通信。若自动驾驶车辆传输的关键信息出现延迟或迟滞，或许会造成非常危险的事故。
+目前尚无法确定4G蜂窝网络的后继者——5G网络是否能够驱动自动驾驶行业。
+网状网络，mesh networking
+
+
+备用语句；
+The vision of 5G wireless systems is to provide connectivity for a wide range of applications. (Introduction)
+Thanks to the new networking architecture technology (like SDN/NFV and network slicing),
+together with enhanced mobile broadband (eMBB) and massive machine type communications (mMTC).
+So we need to focus this.
+5G wireless systems are faced by different challenges for supporting URLLC. Some of the challenges, particularly in the downlink direction, are related to the reliability requirements for both data and control channels.
+We need to do some discussion about the delay analysis of URLLC , to do a theoretical guide to architecture building.
+snc is a very powerful tools to do the performance evaluation , in this paper we use snc to do discuss about the delay of urllc.
+Typical examples including the information exchanging between self-drive cars, user-specific 3D video rendering and augmented reality, wireless automation of production facilities, etc. In order to accomplish the requirements by URLLC applications, how to guarantee the boundary of network delay a vital issue.
+Write something about the stochastic network calculus. 
+How I build the model to simulate the URLLC data transimission. Which classic model will be used to compute the delay of current URLLC network architecture.
+
+
+===============================================
+相关工作： 两块内容，URLLC内容，随机网络演算时延分析内容
+
+先把小陈老师的那个表格找到；放到U盘里，没事就看一下；
+先找URLLC的内容，找那几篇special issue的文章，然后看一下；
+对于URLLC，可以说，其他人都做了什么，如果delay分析较少，倒可以说，在这个领域，继续研究
+对于SNC，可以列举大量的前人工作，列出表格，然后逐个说明，最后总结一下；看看其他人都是怎么总结的；
+
+开头：
+	一：由于URLLC的标准还没有制定出来，对于URLLC的设计，很多研究者提出了不同的方案。
+	二：关于如何实现URLLC，怎样设计能满足URLLC的性能要求，有很多研究
+urllc
+性能评价方面：
+由于URLLC对于时延和可靠性方面有很严格的要求，所以，对URLLC的性能评价变得十分有意义。
+
+Performance Evaluation of Grant-Free Transmission for Uplink URLLC Services
+
+5G Radio Network Design for Ultra-Reliable Low-Latency Communication
+
+工业设计方面：
+Networked Delay Control for 5G Wireless Machine-Type Communications Using Multiconnectivity
+
+Ultra-Reliable Low Latency Communication Using Interface Diversity
+
+Packet Duplication for URLLC in 5G: Architectural Enhancements and Performance Analysis
+
+效率优化方面：
+在资源分配及能耗效率方面，对于URLLC的研究，也有很多
+Resource Allocation and HARQ Optimization for URLLC Traffic in 5G Wireless Networks
+在研究这个
+
+Energy Efficiency and Delay in 5G Ultra-Reliable Low-Latency Communications System Architectures
+提到了on-off switching mode这个东西，就靠这个来说明做的事情；
+
+综合性文章：写四点，分两类；
+5G for Ultra-Reliable Low-Latency Communications
+这篇论文是Special Issue的
+Achieving Ultra-Reliable Low-Latency Communications: Challenges and Envisioned System Enhancements
+Wireless Access for Ultra-Reliable Low-Latency Communication: Principles and Building Blocks
+Introduction to Ultra Reliable and Low Latency Communications in 5G
+Ultra Reliable and Low Latency Communications in 5G Downlink: Physical Layer Aspects
+提到的技术有MIMO使用，保证高可靠和低延时；
+
+
+snc
+
+蒋玉明的
+A Network Calculus Approach to Delay Evaluation of IEEE 802.11 DCF
+Delay Constrained Throughput Analysis of SISO
+Fundamental calculus on generalized stochastically bounded bursty traffic for communication networks
+Network Calculus and Queueing Theory ：two sides of one coin
+Performance bounds for a cognitive radio network with stochastic network calculus
+Stochastic Network Calculus for Performance Analysis of Internet Networks – An Overview and Outlook
+
+
+Fidler.M的
+A Guide to the Stochastic Network Calculus
+Stochastic Bandwidth Estimation in Networks with Random Service
+A Survey of Deterministic and Stochastic Service Curve Models in the Network Calculus
+
+============================
+【1】M F
+A Method for Cross-layer Analysis of Transmit Buffer Delays in Message Index Domain
+
+S. Akin and M. Fidler, "A Method for Cross-Layer Analysis of Transmit Buffer Delays in Message Index Domain," in IEEE Transactions on Vehicular Technology, vol. 67, no. 3, pp. 2698-2712, March 2018.
+https://ieeexplore.ieee.org/document/8242695/
+------------------------------------------------
+Service Curve Estimation-Based Characterization and Evaluation of Closed-Loop Flow Control
+R. Lübben and M. Fidler, "Service Curve Estimation-Based Characterization and Evaluation of Closed-Loop Flow Control," in IEEE Transactions on Network and Service Management, vol. 14, no. 1, pp. 161-175, March 2017.
+-----------------------------------------------
+Estimation method for the delay performance of closed-loop flow control with application to TCP
+R. Lübben and M. Fidler, "Estimation method for the delay performance of closed-loop flow control with application to TCP," IEEE INFOCOM 2016 - The 35th Annual IEEE International Conference on Computer Communications, San Francisco, CA, 2016, pp. 1-9.
+-------------------------------------------------
+
+Yuming Jiang 的最新文档
+Revenue-Maximizing Radio Access Technology Selection with Net Neutrality Compliance in Heterogeneous Wireless Networks
+Khloussy E, Jiang Y. Revenue-Maximizing Radio Access Technology Selection with Net Neutrality Compliance in Heterogeneous Wireless Networks[J]. Wireless Communications & Mobile Computing, 2018, 2018:1-9.
+这是最新的文章，但是并没有使用SNC，所以还是不能用的；
+
+
+A Bounded Model of the Communication Delay for System Integrity Protection Schemes
+Huang C, Li F, Ding T, et al. A Bounded Model of the Communication Delay for System Integrity Protection Schemes[J]. IEEE Transactions on Power Delivery, 2016, 31(4):1921-1933.
+
+Non-Asymptotic Delay Bounds for Multi-Server Systems with Synchronization Constraints
+这篇文章是M F和蒋一起合作的一篇文章
+
+
+本团队的
+基于随机网络演算的LTE网络端到端时延分析
+Delay-bounded resource allocation for femtocells exploiting the statistical multiplexing gain
+Chen, Xin, Y. Si, and X. Xiang. Delay-bounded resource allocation for femtocells exploiting the statistical multiplexing gain. Kluwer Academic Publishers, 2015.
+-----------------------------------------------------------
+Delay-bounded priority-driven resource allocation for two-tier macrocell/femtocell downlink
+X. Chen, Y. Si and X. Xiang, "Delay-bounded priority-driven resource allocation for two-tier macrocell/femtocell downlink," The 2014 5th International Conference on Game Theory for Networks, Beijing, 2014, pp. 1-6.
+------------------------------------------------------------
+A stochastic Network Calculus Approach for the end-to-end delay analysis of LTE networks
+Lei Zhang, Xin Chen, Xudong Xiang and Jianxiong Wan, "A stochastic network calculus approach for the end-to-end delay analysis of LTE networks," 2011 International Conference on Selected Topics in Mobile and Wireless Networking (iCOST), Shanghai, 2011, pp. 30-35.
+------------------------------------------------------------
+Delay Analysis for Cognitive Radio Networks with Parallel Markov Modulated On-off Channels
+Tong Xu, Xin Chen, Xudong Xiang and Jianxiong Wan, "Delay analysis for cognitive radio networks with parallel Markov modulated on-off channels," ISWPC 2012 proceedings, Dalian, 2012, pp. 1-5.
+------------------------------------------------------------
+
+增加一个北邮团队的，然后设计一个图标，先看一下陈莹老师的图标
+A Network Calculus Approach to Throughput Analysis of Stochastic Multi-channel Networks 【用了】
+Analysis on the Energy Consumption in Stochastic Wireless Networks【用了】
+Network Calculus Delay Bounds in Multi-Server Queueing Networks with Stochastic Arrivals and Stochastic services
+Packet Delay Analysis in Wireless multi-channel Networks : A network calculus perspective
+
+
+Delay and Delay-Constrained Throughput Performance of a Wireless-Powered Communication System
+Z. Li, Y. Jiang, Y. Gao, P. Li, L. Sang and D. Yang, "Delay and Delay-Constrained Throughput Performance of a Wireless-Powered Communication System," in IEEE Access, vol. 5, pp. 21620-21631, 2017.
+这篇文章是和北邮一起合作的；【用了】
+
+
+===================================
+第三章开始写系统模型了
+第三章第一部分：先描述一下5G的网络架构；这里还没有体现出URLLC的网络切片的特点就是5G的，不是专门URLLC的
+第三章第二部分：开始计算时延的所有构成。还有就是那个问题描述，可以说一下里面要说一下用户层和控制层
+第三章第三部分：就是开始存SNC的描述，这部分可以先完成蓝色的纸条，针对第二部分的时延说明，开始进行性能边界的说明
+在描述SNC的时候，不用提URLLC，先是单纯的描述，定义，曲线，等，然后开始结合URLLC进行建模，提出一个确定的模型，然后根据URLLC的网络结构特点，开始建立理论分析模型。
+ of a URLLC network system
+
+先说一下思路
+3.1 说的是URLLC的网络架构
+3.2 说的是根据网络结构推论出的网络时延
+3.3 说的是网络实验对于概率的描述
+=+3.4 说的SNC的基本定义
+ | an lower boundary
+现在要说串联的事情，定理；串联的事情说完以后，就按URLLC的形式组装模型了；带入专门的东西，而不是纯理论范范的东西了。
+
+套路出来了，在基础理论中，不能出现证明，这都是人家的东西，
+那么在应用了URLLC里的特定系统中的引理我可以用的。
+
+3.5 应该说根据SNC的基本定义，来对URLLC来进行时延的建模了；
+对，我现在要用SNC+URLLC开始建模了；
+模型现在就算是已经建完了。
+需要对模型进行求解了，这里需要的的一些
+要用到的论文：
+Delay constrained throughput analysis of SISO
+Impact of duty cycle on end-to-end performance in a Wireless Sensor Network
+Modeling and analysis of Rayleigh fading channels using stochastic network calculus可以看看仿真
+Network Calculus and Queueing Theory_ Two Sides of One Coin 有用；
+Network calculus based QoS analysis of network coding in Cluster-tree wireless sensor network有用；这篇文章对于beta的公式表达有意思；
+On the model transform in stochastic network calculus 有用：对于泊松的表达式，可以用来做f的表达式。
+模型已经建立完毕，有四个参数需要确立，分别是达到曲线的alpha和f，服务曲线的beta和g
+到达曲线我打算采用possion过程来表达，服务曲线就用impact的那篇论文结合jiang的论文来完成。
+
+Performance analysis for MISO wireless communication systems using stochastic network calculus 数字分析写的很好。就是我可以解决，引入实际的5G的一些数据来实验。
+Performance evaluation for SDN deployment an approach based on stochastic network calculus这篇文章采用的参数和我的是一样的。
+
+
+
+
+所有的时间变量都用tau来表示 The min-plus convolution is denoted by $\otimes$. 卷积的描述
+
+
+第四章：结合之前的图表对于URLLC的时间指标，开始套用上一章第三部分的公式，得出一些数据结果
+然后画一些图表；
+现在准备画一个三维的图表，并标识出可以采用的部分。这只是个设想，还要看具体图表的效果。
+
+第五章：总结一下自己的这些图表的作用，自己推的这些公式的作用；
+
+问题：是否加入中传的概念，是否把分片和网络架构联系在一起。
+
+
+
+
+
+
+
+
+
