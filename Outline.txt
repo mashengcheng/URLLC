@@ -200,9 +200,6 @@ On the model transform in stochastic network calculus 有用：对于泊松的表达式，可
 Performance analysis for MISO wireless communication systems using stochastic network calculus 数字分析写的很好。就是我可以解决，引入实际的5G的一些数据来实验。
 Performance evaluation for SDN deployment an approach based on stochastic network calculus这篇文章采用的参数和我的是一样的。
 
-
-
-
 所有的时间变量都用tau来表示 The min-plus convolution is denoted by $\otimes$. 卷积的描述
 
 
@@ -211,6 +208,9 @@ Performance evaluation for SDN deployment an approach based on stochastic networ
 现在准备画一个三维的图表，并标识出可以采用的部分。这只是个设想，还要看具体图表的效果。
 
 第五章：总结一下自己的这些图表的作用，自己推的这些公式的作用；
+怎么写这个总结，
+
+
 
 问题：是否加入中传的概念，是否把分片和网络架构联系在一起。
 
