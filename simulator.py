@@ -83,6 +83,9 @@ label_top.config(font='Helvetica -15 bold')
 label_top.place(anchor='center' )
 label_top.pack()
 
+#frame_label1 = Frame(window)
+#frame_label1.pack(side=LEFT)
+
 frame_input = Frame(window)
 #frame_input.place(x=20, y=30)
 frame_input.pack(side=LEFT)
@@ -90,6 +93,10 @@ frame_input.pack(side=LEFT)
 frame_pic = Frame(window)
 #frame_pic.place(x=400,y=30)
 frame_pic.pack(side=RIGHT)
+
+
+l_input = Label(frame_input, text='参数输入')
+l_input.grid(row=0, column=0)
 
 #arrival rate
 l_lambda = Label(frame_input, text='Arrival Rate')
@@ -181,7 +188,7 @@ e_scope1 = Entry(frame_input, textvariable=scope_1)
 e_scope1.grid(row=9, column = 1)
 
 
-
+#画图的按钮
 def draw_line():
     '''
     x = np.linspace(0,2,100)
@@ -191,8 +198,7 @@ def draw_line():
     var_a = float(str_a.get())
     var_b = float(str_b.get())
     var_epsilon = float(str_epsilon.get())       
-    '''    
-    f.clf() 
+    '''         
     pic = f.add_subplot(111)
     #pic = f.subplot(111) 
     var_lambda = float(str_lambda.get())
@@ -212,6 +218,7 @@ def draw_line():
         delay = 1/(var_service - var_lambda) * ((var_num_server+1)/var_b) *\
     np.log(var_a*(var_num_server+1)/var_epsilon)
         pic.plot(var_lambda, delay, label='linear')    
+        pic.set_xlabel('Arrival Rate (Gbit/s)', fontsize=10)       
         
     elif var_comb1.get().startswith("Service"):
         scope = scope_1.get().split(':')
@@ -220,6 +227,7 @@ def draw_line():
         delay = 1/(var_service - var_lambda) * ((var_num_server+1)/var_b) *\
     np.log(var_a*(var_num_server+1)/var_epsilon)
         pic.plot(var_service, delay, label='linear')  
+        
     elif var_comb1.get().startswith("Number"):
         scope = scope_1.get().split(':')
         var_num_server= np.linspace(float(scope[0]),float(scope[1]),int(scope[2]))
@@ -233,10 +241,23 @@ def draw_line():
         delay = 1/(var_service - var_lambda) * ((var_num_server+1)/var_b) *\
     np.log(var_a*(var_num_server+1)/var_epsilon)
         pic.plot(var_epsilon, delay, label='linear') 
+    
+    pic.set_ylabel('Delay (ms)', fontsize=10)   
+    pic.grid(True)
     canvas.draw()
 
 b_draw_line = Button(frame_input, text='Draw Line', command = draw_line)
 b_draw_line.grid(row=10, column=0)
+
+
+#清除图像的按钮
+def clear_pic():
+    f.clf()
+    canvas.draw()    
+    
+b_clear = Button(frame_input, text='Clear Figure', command = clear_pic)
+b_clear.grid(row=10,column=1)
+
 
 f = Figure(figsize=(5,4), dpi=100)
 canvas = FigureCanvasTkAgg(f, master=frame_pic)
