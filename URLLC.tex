@@ -74,13 +74,15 @@
 The fifth generation (5G) wireless networks are upcoming to our life.
 The higher performance requirements are raised to satisfy the needs in modern communication.
 Ultra-reliable low latency communications (URLLC) is one of the most important scenarios in 5G.
-URLLC with strict requirements, especially in terms of latency and reliability, is widely used in some delay-sensitive applications such as self-driving.
+URLLC with strict latency and reliability requirements is widely used in some delay-sensitive applications such as self-driving.
 As the 3GPP claimed, the URLLC is amenable to 99.999\% transmission correctness and within 1ms delay bound.
-How to meet the reliability and latency requirement is still an open issue.
-Some academic studies and companies proposed various methods to design URLLC standard, but little effort has been made on applying a theoretical method to limit the delay bound.
+How to meet the requirements of reliability and latency is still an open issue.
+Some academic studies and companies proposed various methods to design URLLC standard, but little effort has been made on applying a theoretical method to analyze the delay bound.
 Stochastic network calculus is an elegant way to obtain the delay bound based on traffic models and service guarantees.
-In this paper, we use the stochastic network calculus to analysis the delay constraint in URLLC, which provide valuable guidelines for the early design of URLLC architecture.
-Finally, numerical analyses are conducted to discuss the relationship between delay and the violation probability and other factors.
+In this paper, we take the character of 5G architecture into account and use the stochastic network calculus to analyze the delay in URLLC. 
+Some factors which can influence on the delay are obtained.
+Utilizing the relationship between the factors and delay can provide valuable guidelines for the early design of URLLC architecture.
+Finally, numerical results are presented to verify the correctness of the delay analysis.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -92,29 +94,29 @@ The 5G era is getting closer to us.
 5G communication technology appeared for the first time with the 2018 Pyeongchang Winter Olympics in South Korea.
 It helps audiences watch the live broadcast continuously and smoothly.
 According to International Telecommunication Union announced the 5G standard timetable, 5G will start commercially in 2020 \cite{b1}.
-5G wireless networks are designed to support diverse and complicated scenarios which mentioned above.
+5G wireless networks are designed to support diverse and complicated scenarios.
 The third generation partnership project (3GPP) classify these different scenarios into three big categories: enhanced mobile broadband (eMBB), massive machine type communications (mMTC), and ultra-reliable low-latency communications (URLLC) \cite{b2}.
 
 URLLC is widely used in self-driving, mission critical application and some delay sensitive systems.
 It has stringent requirements in terms of delay and reliability in the 5G New Radio (NR) systems.
-The key requirements of URLLC as claimed by the 3GPP are to ensure the latency of user plane data less than 1ms for downlink and uplink, meanwhile to keep very high packet reception reliability, about 99.999 percent.\cite{b3}
-The stringent delay requirement needs new 5G NR technology to bridge the gap. 
-Though the existing LTE networks can reach the reliability target, but the cost is some dozens of milliseconds time delay. 
-That is far away from the criteria of URLLC. 
-So the delay became the chock point and it needs to be solved. 
+The key requirements of URLLC as claimed by the 3GPP are to ensure the latency of user plane data less than 1ms for downlink and uplink, meanwhile to keep very high packet reception reliability about 99.999 percent.\cite{b3}
+The stringent delay requirement needs new 5G NR technology to bridge the gap.
+Though the existing LTE networks can reach the reliability target, but the cost is some dozens of milliseconds time delay.
+That is far away from the criteria of URLLC.
+So the delay becomes the chock point and it needs to be solved.
 Many academies and companies have proposed some engineering solutions to minimize the delay.
-Such as the HARQ retransmission or grant-free technology. 
+Such as the HARQ retransmission or grant-free technology.
 However, how to analyze the generation of time-delay from a theoretical perspective and propose a group of tactics to reduce the delay effectively is an important research subject.
 
 Stochastic network calculus (SNC) theory is very good at delay performance analysis.
 The SNC is a continuous development method to analysis network traffic characteristic and evaluate performance\cite{b4}.
-Different from queuing theory, the SNC permits some packets violate the desired performance. 
+Different from queuing theory, the SNC permits some packets violate the desired performance.
 This feature can better take advantage of statistical multiplexing gains\cite{b5}.
 To deal with random service and statistical guarantee, the SNC theory comes into being with a large number of stochastic processes and traffic models. Under a suitable traffic model and a chosen server model, The SNC theory can easily process delay, backlog and other service guarantee analysis of communication network.
 So we capitalize on the SNC method to build a model to simulate the 5G URLLC uplink and downlink transmission in this paper.
 
-We use stochastic arrival curve to describe the process that user equipment (UE) data sends to gNodeB (gNB) side. 
-It can be deduced the rest stages of data transmission from gNB to cloud server according to the 5G network topology architecture. 
+We use stochastic arrival curve to describe the process that user equipment (UE) data sends to gNodeB (gNB) side.
+It can be deduced the rest stages of data transmission from gNB to cloud server according to the 5G network topology architecture.
 Every stage of stochastic arrival curve characterizes the delay property, the whole delay of URLLC system is comprised by delays which generated from UE to cloud server.
 
 Our main contributions of this paper can be summarized as follows:
@@ -759,6 +761,7 @@ Therefore $d$ is solved.
 %如果在DU和CU之间加入IPSEC加密传输，可以提高安全性，但这样会带来时延的问题。
 %D2D的形式，比MEC还要节省传输路径，如果是小规模数据的话，这样还是很节省时间的。
 %可以结合5G的3GPP里面设想的几个场景，来做实验分析，因为里面有实际的数据，关于性能的指标要求。
+%那次和李老师一起上去讨论买设备的时候，周金和老师说的分片，其实就是云资源的再分配，这里可以是大数据的概念，怎么分配才能满足性能的需要，同时还能保证资源消耗最小。分配可以是预测的，这里就可以用到ML的方法。同时保证资源消耗最小，这里可以是优化问题。
 
 This work was supported by these programs:
 
