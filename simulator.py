@@ -17,9 +17,11 @@ from tkinter import ttk
 
 #from __future__ import division 
 import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
-import matplotlib.pyplot as plt
+
 import numpy as np
 import math
 
@@ -35,6 +37,7 @@ var_b = 2
 var_epsilon = 0.01
 var_delay = 1
 
+pic_label = ""
 
 def test_var():
     #print(var_lambda, var_service)
@@ -72,7 +75,7 @@ def calculate_delay():
     #e_delay.config(text=str(delay))
     #print(delay)
     
-matplotlib.use('TkAgg') 
+ 
 window = Tk()
 window.geometry("900x450+10+10")
 window.title("SNC Tool")
@@ -123,7 +126,7 @@ l_C_unit = Label(frame_input, text='Gbit/s')
 l_C_unit.grid(row=2, column=2)
 
 #number of servers
-l_number = Label(frame_input, text='Server count')
+l_number = Label(frame_input, text='Number of Servers')
 l_number.grid(row=3, column=0)
 
 str_num_server=StringVar()
@@ -150,7 +153,7 @@ e_b.grid(row=5, column=1)
 e_b.insert(0,'3')
 
 #var epsilon
-l_epsilon = Label(frame_input, text='violation probability')
+l_epsilon = Label(frame_input, text='Violation Probability')
 l_epsilon.grid(row=6, column=0)
 
 str_epsilon=StringVar()
@@ -187,18 +190,50 @@ scope_1 = StringVar()
 e_scope1 = Entry(frame_input, textvariable=scope_1)
 e_scope1.grid(row=9, column = 1)
 
+l_compare = Label(frame_input, text='变更参数')
+l_compare.grid(row=10, column = 0)
+
+compare_label = StringVar()
+comb2 = ttk.Combobox(frame_input,textvariable=compare_label)
+comb2['values']=('Arrival Rate','Service Rate','Number of Server',\
+          'a','b','Violation Probability','Latency (ms)')
+comb2.grid(row=10, column=1)
+#comb2.current(0)
+
+def highlight_compare(*args):    
+    l_lambda.config(text='Arrival Rate')
+    l_C.config(text='Service Rate')
+    l_number.config(text='Number of Servers')
+    l_a.config(text='a')
+    l_b.config(text='b')
+    l_epsilon.config(text='Violation')
+    global pic_label
+    if compare_label.get().startswith("Arrival"):
+        l_lambda.config(text='Arrival Rate -->>>>')        
+        pic_label = "Arrival Rate:"
+        #在这里就知道改的是哪个了！
+    elif compare_label.get().startswith("Service"):
+        l_C.config(text='Service Rate -->>>>')
+        pic_label = "Service Rate:"
+    elif compare_label.get().startswith("Number"):
+        l_number.config(text='Number of Servers -->>>>')
+        pic_label = "Number of Servers: "
+    elif compare_label.get().startswith("a"):
+        l_a.config(text='a -->>>>')
+        pic_label = "a"
+    elif compare_label.get().startswith("b"):
+        l_b.config(text='b -->>>>')
+        pic_label = "b"
+    elif compare_label.get().startswith("Violation"):
+        l_epsilon.config(text='Violation -->>>>')
+        pic_label = "Violation Probability"
+    #messagebox.showinfo('Parameters', 'label: %s '%(pic_label))
+    
+
+comb2.bind("<<ComboboxSelected>>", highlight_compare)
 
 #画图的按钮
 def draw_line():
-    '''
-    x = np.linspace(0,2,100)
-    var_lambda = float(str_lambda.get())
-    var_service = float(str_service.get())
-    var_num_server = float(str_num_server.get())
-    var_a = float(str_a.get())
-    var_b = float(str_b.get())
-    var_epsilon = float(str_epsilon.get())       
-    '''         
     pic = f.add_subplot(111)
     #pic = f.subplot(111) 
     var_lambda = float(str_lambda.get())
@@ -207,17 +242,34 @@ def draw_line():
     var_a = float(str_a.get())
     var_b = float(str_b.get())
     var_epsilon = float(str_epsilon.get())
+    cur_var = ""
+    global pic_label
+    if pic_label.startswith("Arrival"):
+        cur_var = str_lambda.get() + "Gbit/s"
+    elif pic_label.startswith("Servic"):
+        cur_var = str_service.get() + "Gbit/s"
+    elif pic_label.startswith("Number"):
+        cur_var = str_num_server.get()
+    elif pic_label.startswith("a"):
+        cur_var = str_a.get()
+    elif pic_label.startswith("b"):
+        cur_var = str_b.get()
+    elif pic_label.startswith("Violation"):
+        cur_var = str_epsilon.get()   
     
+    #messagebox.showinfo('Parameters', 'label: %s '%(pic_label))
     if scope_1.get() == "":
         messagebox.showerror("INPUT","Empty blank!")
         return
         
+    pic_label_cur = "%s %s" %(pic_label,cur_var)
+    
     if var_comb1.get().startswith("Arrival"):
         scope = scope_1.get().split(':')
         var_lambda = np.linspace(float(scope[0]),float(scope[1]),int(scope[2]))
         delay = 1/(var_service - var_lambda) * ((var_num_server+1)/var_b) *\
-    np.log(var_a*(var_num_server+1)/var_epsilon)
-        pic.plot(var_lambda, delay, label='linear')    
+    np.log(var_a*(var_num_server+1)/var_epsilon)        
+        pic.plot(var_lambda, delay, label=pic_label_cur)    
         pic.set_xlabel('Arrival Rate (Gbit/s)', fontsize=10)       
         
     elif var_comb1.get().startswith("Service"):
@@ -225,50 +277,52 @@ def draw_line():
         var_service = np.linspace(float(scope[0]),float(scope[1]),int(scope[2]))  
         print(var_service)
         delay = 1/(var_service - var_lambda) * ((var_num_server+1)/var_b) *\
-    np.log(var_a*(var_num_server+1)/var_epsilon)
-        pic.plot(var_service, delay, label='linear')  
+    np.log(var_a*(var_num_server+1)/var_epsilon)        
+        pic.plot(var_service, delay, label=pic_label_cur)  
+        pic.set_xlabel('Service Rate (Gbit/s)', fontsize=10)  
         
     elif var_comb1.get().startswith("Number"):
         scope = scope_1.get().split(':')
         var_num_server= np.linspace(float(scope[0]),float(scope[1]),int(scope[2]))
         delay = 1/(var_service - var_lambda) * ((var_num_server+1)/var_b) *\
     np.log(var_a*(var_num_server+1)/var_epsilon)
-        pic.plot(var_num_server, delay, label='linear')  
+        #pic_label_cur = "%s %s" %(pic_label,cur_var)
+        pic.plot(var_num_server, delay, label=pic_label_cur)  
+        pic.set_xlabel('Number of Servers', fontsize=10)  
         
     elif var_comb1.get().startswith("Violation"):
         scope = scope_1.get().split(':')
         var_epsilon = np.linspace(float(scope[0]),float(scope[1]),int(scope[2]))
         delay = 1/(var_service - var_lambda) * ((var_num_server+1)/var_b) *\
-    np.log(var_a*(var_num_server+1)/var_epsilon)
-        pic.plot(var_epsilon, delay, label='linear') 
+    np.log(var_a*(var_num_server+1)/var_epsilon)                
+        pic.plot(var_epsilon, delay, label=pic_label_cur)         
+        pic.set_xlabel('Violation Probability', fontsize=10)  
     
     pic.set_ylabel('Delay (ms)', fontsize=10)   
     pic.grid(True)
+    
+    if pic_label != "":
+        pic.legend()
     canvas.draw()
 
 b_draw_line = Button(frame_input, text='Draw Line', command = draw_line)
-b_draw_line.grid(row=10, column=0)
+b_draw_line.grid(row=11, column=0)
 
 
 #清除图像的按钮
 def clear_pic():
     f.clf()
+    pic_label = ""
     canvas.draw()    
     
 b_clear = Button(frame_input, text='Clear Figure', command = clear_pic)
-b_clear.grid(row=10,column=1)
+b_clear.grid(row=11,column=1)
 
 
 f = Figure(figsize=(5,4), dpi=100)
 canvas = FigureCanvasTkAgg(f, master=frame_pic)
 canvas.show() 
 canvas.get_tk_widget().grid(row=0, columnspan=3) 
-
-#canvas = Canvas(frame_pic,width=400, height=500)
-#canvas.create_image(0,0, image=photo)
-#canvas.grid(row=0,column=0)
-#img_label = Label(frame_pic, image=photo)
-#img_label.grid(row=0,column=0)
 
 
 window.mainloop()
