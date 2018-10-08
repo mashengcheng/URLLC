@@ -321,7 +321,7 @@ b_clear.grid(row=11,column=1)
 
 f = Figure(figsize=(5,4), dpi=100)
 canvas = FigureCanvasTkAgg(f, master=frame_pic)
-canvas.show() 
+canvas.draw() 
 canvas.get_tk_widget().grid(row=0, columnspan=3) 
 
 
