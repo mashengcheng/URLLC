@@ -80,7 +80,8 @@ Some academic studies and companies proposed various methods to design URLLC sta
 Stochastic network calculus is an elegant way to obtain the delay bound based on traffic models and service guarantees.
 In this paper, we take the character of 5G architecture into account and use the stochastic network calculus to analyze the delay in URLLC.
 Some factors which can influence on the delay are obtained.
-Utilizing the relationship between the factors and delay can provide valuable guidelines for the early design of URLLC architecture.
+%Utilizing the relationship between the factors and delay can provide valuable guidelines for the early design of URLLC architecture.
+Optimizing these factors to reduce the delay will provide valuable guidelines for the early design of URLLC architecture.
 Finally, numerical results are presented to verify the correctness of the delay analysis.
 \end{abstract}
 
@@ -111,11 +112,11 @@ Stochastic network calculus (SNC) theory is very good at delay performance analy
 The SNC is a continuous development method to analyze network traffic characteristic and evaluate performance\cite{b4}.
 Different from queuing theory, the SNC permits some packets violate the desired performance.
 This feature can better take advantage of statistical multiplexing gains\cite{b5}.
-To deal with random service and statistical guarantee, the SNC theory comes into being with a large number of stochastic processes and network traffic models. 
+To deal with random service and statistical guarantee, the SNC theory comes into being with a large number of stochastic processes and network traffic models.
 Under a suitable traffic model and a chosen server model, the SNC theory can process service guarantee analysis of communication network like delay and backlog.
 So we capitalize on the SNC method to analyze the delay of the 5G URLLC transmission in this paper.
-%build a model to simulate 
-
+%build a model to simulate
+%here
 We use stochastic arrival curve to describe the process that user equipment (UE) data sends to gNodeB (gNB) side.
 According to the 5G network topology architecture, we can deduce the rest stages of data transmission from gNB to cloud server.
 Every stage of stochastic arrival curve characterizes the delay property, therefore the whole delay of URLLC system is comprised by delays which generated from UE to cloud server.
@@ -128,15 +129,15 @@ Our main contributions of this paper can be summarized as follows:
 
 3) Delay analysis and tactics for reducing latency have valuable theoretical guidance for the design of URLLC deployment. In order to meet stringent delay requirements, it provides guidelines for how to allocate resources.
 
-The rest of this paper is organized as follows. 
-Section II summarizes related work of URLLC technology and stochastic network calculus. 
-We present a tandem network model to describe URLLC in Section III. 
+The rest of this paper is organized as follows.
+Section II summarizes related work of URLLC technology and stochastic network calculus.
+We present a tandem network model to describe URLLC in Section III.
 In particular, we illustrate the architecture of this system and analyze the causes of the delay in this section.
-%and obtain the relationship between delay and some key factors. 
+%and obtain the relationship between delay and some key factors.
 In section IV, we introduce the experimental environment and analyze the relationship between latency and main factors.
-%conduct the performance evaluation. 
+%conduct the performance evaluation.
 %The main factors that affect the delay are be derived.
-We conclude this paper in Section V. 
+We conclude this paper in Section V.
 Some theoretical proofs are given in appendix.
 
 \section{Related Work}
@@ -153,7 +154,8 @@ Because the standard of URLLC has not been worked out, many researchers have put
 Dozens of researches are focus on how to design and implement URLLC to meet the performance requirements.
 %A way to offer URLLC without intervention in the baseband/PHY layer design is to use interface diversity and integrate multiple communication interfaces
 A design without intervention in the baseband/PHY layer for URLLC is to use interface diversity and integrate multiple communication interfaces.
-Jimmy and his colleagues propose an analysis framework that combines traditional reliability models with technology-specific latency probability distributions\cite{interface}. In this way, they can estimate the performance in terms of latency and reliability of such an integrated communication system.
+Jimmy and his colleagues propose an analysis framework that combines traditional reliability models with technology-specific latency probability distributions\cite{interface}. 
+In this way, they can estimate the performance in terms of latency and reliability in such an integrated communication system.
 To guarantee a low end-to-end delay with low jitter over combined internet and wireless interfaces, the article \cite{multiconnectivity} presents a new multiple-input multiple-output(MIMO) networked round trip time (RTT) skew control algorithm. This RRT skew controller's advantage is that the controller solves the data flow split problem at the controlling node, since the inner loop control signals are the downlink data rates that fully define the data flow split.
 Jaya Rao and Sophie Vrzic have propose an approach to adopt packet duplication (PD) method to satisfy the latency and reliability requirements\cite{PD}. PD technology generates multiple instances and sends them simultaneously in multiple unrelated channels. The receiver selects the best packets according to the channel condition to achieve better transmission reliability. This PD technique can provide a cost-effective solution without increasing the complexity in the radio access network (RAN).
 
