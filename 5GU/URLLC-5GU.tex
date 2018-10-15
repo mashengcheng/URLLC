@@ -22,8 +22,8 @@ Beijing Municipal Program for Excellent Teacher Promotion. (No.PXM2017\_014224.0
 % an abbreviated paper title here
 %
 \author{Shengcheng Ma\inst{1}\orcidID{0000-0003-1060-1208} \and
-Xin Chen\inst{1}\orcidID{1111-2222-3333-4444} \and
-Zhuo Li\inst{1}\orcidID{2222--3333-4444-5555}}
+Xin Chen\inst{1}\orcidID{0000-0002-5250-7909} \and
+Zhuo Li\inst{1}\orcidID{0000-0003-1444-9469} \and Ying Chen\inst{1}\orcidID{}}
 %
 \authorrunning{Sc Ma et al.}
 % First names are abbreviated in the running head.
@@ -35,13 +35,14 @@ Zhuo Li\inst{1}\orcidID{2222--3333-4444-5555}}
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-The fifth generation (5G) wireless networks are upcoming to our life.
-The higher performance requirements are raised to satisfy the needs in modern communication.
+%The fifth generation (5G) wireless networks are upcoming to our life.
+%The higher performance requirements are raised to satisfy the needs in modern communication.
 Ultra-reliable low latency communications (URLLC) is one of the most important scenarios in 5G.
 URLLC with strict latency and reliability requirements is widely used in some delay-sensitive applications such as self-driving.
 As the 3GPP claimed, the URLLC is amenable to 99.999\% transmission correctness and within 1ms delay bound.
 How to meet the requirements of reliability and latency is still an open issue.
-Some academic studies and companies proposed various methods to design URLLC standard, but little effort has been made on applying a theoretical method to analyze the delay bound.
+%Some academic studies and companies proposed various methods to design URLLC standard, but 
+Little efforts has been made on applying a theoretical method to analyze the delay bound.
 Stochastic network calculus is an elegant way to obtain the delay bound based on traffic models and service guarantees.
 In this paper, we take the character of 5G architecture into account and use the stochastic network calculus to analyze the delay in URLLC.
 Some factors which can influence on the delay are obtained.
@@ -67,7 +68,7 @@ The key requirements of URLLC as claimed by the 3GPP are to ensure the latency o
 The stringent delay requirement needs new 5G NR technology to bridge the gap.
 Though the existing LTE networks can reach the reliability target, but the cost is some dozens of milliseconds time delay.
 That is far away from the criteria of URLLC.
-So the delay becomes the chock point and it needs to be solved.
+So the delay becomes the choke point and it needs to be solved.
 Many academies and companies have proposed some engineering solutions to minimize the delay.
 Such as the HARQ retransmission or grant-free technology.
 However, how to analyze the generation of time-delay from a theoretical perspective and propose a strategy to reduce the delay effectively is an important research subject.
@@ -88,9 +89,10 @@ Our main contributions of this paper can be summarized as follows:
 
 1) We build a tandem model to simulate 5G network architecture. In this model, we can analog the data transmission in uplink or downlink from UE to cloud server. We use stochastic service process and concatenation property to analysis the latency.
 
-2) Our analysis results represent which parameters are the key factors affecting the delay. By adjusting the key factors, we give a group of tactics to reduced the delay effectively.
+2) Our analysis results represent which parameters are the key factors affecting the delay. By adjusting the key factors, we give some strategies to reduced the delay effectively.
 
-3) Delay analysis and tactics for reducing latency have valuable theoretical guidance for the design of URLLC deployment. In order to meet stringent delay requirements, it provides guidelines for how to allocate resources.
+3) Delay analysis and strategy for reducing latency have valuable theoretical guidance for the design of URLLC deployment. 
+In order to meet stringent delay requirements, it provides guidelines for how to allocate resources.
 
 The rest of this paper is organized as follows.
 Section II summarizes related work of URLLC technology and stochastic network calculus.
@@ -143,17 +145,17 @@ That because low latency and high reliability are contradictory.
 This requires more flexible frequency and time division.
 
 Stochastic network calculus is a very practical tool, and it has a good practical effect in performance analysis and theoretical boundary calculation.
-Li and Jiang \cite{article_jiang_power} analyzed the throughput performance on the wireless-powered communication system. 
-They considered the delay as a constrained condition. 
+Li and Jiang \cite{article_jiang_power} analyzed the throughput performance on the wireless-powered communication system.
+They considered the delay as a constrained condition.
 The stochastic traffic arrival was adopted to derive the cumulative data transmission capacity.
 M. Fidler and his partner \cite{proc_MF_Estimation} used stochastic service process to analyze the end-to-end delay performance of TCP.
 The estimation method of closed-loop flow was implemented by random service process in this paper.
-They considered both backlog and delay by using stochastic network calculus. 
-In article \cite{article_beiyou_lei1}, the performance of wireless finite-state Markov channel was analyzed. 
+They considered both backlog and delay by using stochastic network calculus.
+In article \cite{article_beiyou_lei1}, the performance of wireless finite-state Markov channel was analyzed.
 The delay boundary was derived based on the moment generating functions (MGF).
-Xin Chen's team was focused on LTE network and researched the resource allocation to guarantee the delay performance \cite{article_si_yuan}. 
+Xin Chen's team was focused on LTE network and researched the resource allocation to guarantee the delay performance \cite{article_si_yuan}.
 The delay was constrained by the difference value between stochastic arrival curve and stochastic service curve.
-The article \cite{article_MF_jiang} is an article of cooperation between Fidler M and Jiang. 
+The article \cite{article_MF_jiang} is an article of cooperation between Fidler M and Jiang.
 It mainly applies SNC theory to analyze the delay boundary of multi-server systems.
 
 \section{System Model}
@@ -186,7 +188,7 @@ The data leave CU and continue upward to the NGC. This part of the communication
 NGC will process the data and it will take some time.
 Finally, NGC sends the data to Cloud servers. The unidirectional transmission is finished.
 
-So the whole delay or latency in 5G system is contribute by the time processing of RAN, fronthual, backhaul, Core Network and Cloud server. It can be expressed as Formula.\ref{eq_urllc_delay_composition}.
+So the whole delay or latency in 5G system is contribute by the time processing of RAN, fronthual, backhaul, Core Network and Cloud server. It can be expressed as (\ref{eq_urllc_delay_composition}).
 \begin{equation}\label{eq_urllc_delay_composition}
 T_{Total} = T_{RAN} + T_{Fronthaul} + T_{Backhaul} + T_{NGC} + T_{Cloud}
 \end{equation}
@@ -206,7 +208,7 @@ Whereas, the C-Plane latency is the time spend on radio resource allocating and 
 Compared with UP latency, the C-Plane delay is tiny and can be ignored.
 \subsection{Problem Description}
 The data is transferred from UE, through each nodes, and finally to the cloud.
-According to the requirement of URLLC, the reliability and random latency \cite{article_MF_Random} can be described as Formula.\ref{eq_urllc_delay_problem}:
+According to the requirement of URLLC, the reliability and random latency \cite{article_MF_Random} can be described as (\ref{eq_urllc_delay_problem}):
 
 \begin{equation}\label{eq_urllc_delay_problem}
 P\{delay > d \} < \epsilon
@@ -313,7 +315,7 @@ g(x)=g^{1}\otimes g^{2}\otimes\cdot\cdot\cdot\otimes g^{N}(t)
 
 \subsection{Model Building}
 The network character of URLLC can be described as a dynamic server by stochastic processes as introducing in above.
-The data sent by UE can be represented by the arrival process $A(t)$. 
+The data sent by UE can be represented by the arrival process $A(t)$.
 The service capacity provided by the network server node can be depicted as the stochastic service process $S(t)$.
 
 As assumption the latency of URLLC in Formula.\ref{eq_urllc_delay_composition}, we consider the URLLC network is a tandem system.
@@ -366,8 +368,8 @@ Assuming first-come first-served order, we use definition.\ref{def_delay_process
 \begin{split}
 L_{gNB}(t) &= \inf\{d\geqslant0: A_{gNB}(t) - D_{gNB}(t+d) \leqslant 0 \} \\
  &= \inf\{d\geqslant0: A_{AAU}(t) - D_{CU}(t+d) \leqslant 0 \}  \\
- &= \inf\{d\geqslant0: A_{AAU}(t) - \\
- &A_{AAU}\otimes (S_{AAU}\otimes S_{DU} \otimes S_{CU})(t+d) \leqslant 0 \}
+ &= \inf\{d\geqslant0: A_{AAU}(t) \\
+ &- A_{AAU}\otimes (S_{AAU}\otimes S_{DU} \otimes S_{CU})(t+d) \leqslant 0 \}
 \end{split}
 \end{equation}
 
@@ -445,8 +447,7 @@ g_{All}(x)&=g_{AAU}\otimes g_{DU}\otimes g_{CU}\otimes g_{NGC}\otimes g_{Cloud}(
 Applying with the conclusion in \cite{proc_jiang_Wireless}, we can hold
 \begin{equation}
 \begin{split}
-&\inf_{x_{1}+x_{2}+x_{3}+x_{4}+x_{5}=x}\sum_{k=1}^{5}a_{k}e^{-b_{k}x_{k}} \\
-&=e^{\frac{-x}{w}}\prod_{k=1}^{5}(a_{k}b_{k}w)^{\frac{1}{b_{k}w}}
+&\inf_{x_{1}+x_{2}+x_{3}+x_{4}+x_{5}=x}\sum_{k=1}^{5}a_{k}e^{-b_{k}x_{k}} = e^{\frac{-x}{w}}\prod_{k=1}^{5}(a_{k}b_{k}w)^{\frac{1}{b_{k}w}}
 \end{split}
 \end{equation}
 where $w=\sum_{k=1}^{5}\frac{1}{b_{k}}$, and service bound functions respectively are $g_{AAU}(x)=a_{1}e^{-b_{1}x_{1}}$, $g_{DU}(x)=a_{2}e^{-b_{2}x_{2}}$, $g_{CU}(x)=a_{3}e^{-b_{3}x_{3}}$, $g_{NGC}(x)=a_{4}e^{-b_{4}x_{4}}$, $g_{Cloud}(x)=a_{5}e^{-b_{5}x_{5}}$.
@@ -469,24 +470,9 @@ d = \frac{1}{C-\lambda}\cdot\frac{n+1}{b}\cdot ln{\frac{a(n+1)}{\epsilon}}
 \end{equation}
 The calculation process can be found in Appendix C.
 
-\section{Numerical Validation and Performance Evaluation}
-In this section, we will validate the analysis result and discuss what factors are the main cause of latency in URLLC.
-
-According to the delay requirement of URLLC, we write a simulator to validate our analysis result.
-We implement the simulator in Python 3.6. It can calculate the delay value in accordance with the input network parameters.
-
-To validate the correctness of analysis, we set the violation probability from $1\times10^{-6}$ to $1\times10^{-4}$. 
-We compare the analysis with the simulator, and the Figure.\ref{validation} shows the result.
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=.5\textwidth]{validation.png}
-  \caption{Comparison between Simulator and Analysis}
-  \label{validation}
-\end{figure}
-Figure.\ref{validation} shows a good match between the analytical data and the corresponding simulation result. 
-Especially, the analytical result is also the boundary of the simulation data. 
-The boundary is slightly loose when the value of violation probability is large, while it is more tighter when value is little. 
-This fully illustrates the correctness of the analysis results.
+\section{Numerical Results and Performance Evaluation}
+%In this section, we will validate the analysis result and discuss what factors are the main cause of latency in URLLC.
+In this section, we will discuss what factors are the main cause of latency in URLLC.
 
 Although the deployment details of the URLLC standard are not yet released, we can still apply SNC theory for quantitative analysis.
 We assume that the 5G URLLC networks are standalone deployment.
@@ -497,7 +483,7 @@ More simulation parameters can be found in Table.\ref{tab_2}.
 
 \begin{table}
   \caption{evaluation parameters}\label{tab_2}
-  \center  
+  \center
   \begin{tabular}{|l|l|}
     \hline
     Parameter & Value \\
@@ -513,7 +499,7 @@ More simulation parameters can be found in Table.\ref{tab_2}.
     Violation probability & $1*10^{-5}$ \\
     Latency bound & 1 (ms)  \\
     \hline
-  \end{tabular}  
+  \end{tabular}
   \center
 \end{table}
 Taking this boundary probability as the precondition, we simulate the relationship between system latency and service rate by applying the conclusions we have drawn in the previous section.
@@ -533,10 +519,10 @@ As the service rate increases, the delay of the system will decrease.
 When service rate is 48Gbit/s, system latency can approach 1ms with lower violation probability.
 That means system can guarantee the low latency communication in a stable state.
 
-Fig.\ref{fig3} presents the relationship among latency, number of servers and service rate.
+Fig.\ref{fig3} presents the relationship among latency, number of server levels and service rate.
 The arrival rate is constant and speed is 20Gbit/s. The violation probability is maintained at $1*10^{-5}$.
-Based on the above setting, we can derived that the delay is sensitive on number of servers in tandem.
-From Fig.\ref{fig3}, we can see the slope of latency cause by number of server in tandem is larger than the service rate.
+Based on the above setting, we can derived that the delay is sensitive on number of server levels.
+From Fig.\ref{fig3}, we can see the slope of latency cause by number of server levels in tandem is larger than the service rate.
 We draw a delay equals 1ms flat plane to cut the curve surface.
 The part below the plane is the scope of deployment parameters which satisfying the delay condition.
 In order to ensure low latency of communication, it is necessary to reduce the levels of system deployment as much as possible and increase the service rate of each server layer.
@@ -544,7 +530,7 @@ In order to ensure low latency of communication, it is necessary to reduce the l
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=.5\textwidth]{delay_servers.png}
-  \caption{Number of Servers Influence}
+  \caption{Number of Server Levels Influence}
   \label{fig3}
 \end{figure}
 
@@ -765,21 +751,21 @@ Ji H, Park S, Yeo J, et al.: Introduction to Ultra Reliable and Low Latency Comm
 Ji H, Park S, Yeo J, et al.: Ultra Reliable and Low Latency Communications in 5G Downlink: Physical Layer Aspects. (2018)
 \bibitem{article_jiang_power}
 Z. Li, Y. Jiang, Y. Gao, P. Li, L. Sang and D. Yang.: Delay and Delay-Constrained Throughput Performance of a Wireless-Powered Communication System. IEEE Access \textbf{5}, 21620--21631 (2017)
-\bibitem{proc_MF_Estimation} 
+\bibitem{proc_MF_Estimation}
 R. L¨¹bben and M. Fidler.: Estimation method for the delay performance of closed-loop flow control with application to TCP. In: IEEE INFOCOM 2016-The 35th Annual IEEE International Conference on Computer Communications, pp.1--9. San Francisco, CA, (2016)
 \bibitem{article_beiyou_lei1}
 K. Zheng, F. Liu, L. Lei, C. Lin and Y. Jiang.: Stochastic Performance Analysis of a Wireless Finite-State Markov Channel. IEEE Transactions on Wireless Communications \textbf{12}(2), 782--793 (2013)
-\bibitem{article_si_yuan} 
+\bibitem{article_si_yuan}
 Chen, Xin, Y. Si, and X. Xiang.: Delay-bounded resource allocation for femtocells exploiting the statistical multiplexing gain.  vol. 71, pp. 3217--3236. Kluwer Academic Publishers (2015). \doi(10.1007/s11227-015-1494-9)
-\bibitem{article_MF_jiang} 
+\bibitem{article_MF_jiang}
 M. Fidler, B. Walker and Y. Jiang.: Non-Asymptotic Delay Bounds for Multi-Server Systems with Synchronization Constraints. IEEE Transactions on Parallel and Distributed Systems \textbf{29}(7), 1545--1559 (2018)
 \bibitem{article_MF_Random}
 R. L¨¹bben, M. Fidler and J. Liebeherr.: Stochastic Bandwidth Estimation in Networks With Random Service. IEEE/ACM Transactions on Networking \textbf{22}(2), 484--497 (2014)
-\bibitem{proc_jiang_On} 
+\bibitem{proc_jiang_On}
 Wu K, Jiang Y, Li J.: On the model transform in stochastic network calculus. In: International Workshop on Quality of Service IEEE, pp. 1--9. (2010)
-\bibitem{proc_jiang_Wireless} 
+\bibitem{proc_jiang_Wireless}
 Sun F, Li L, Jiang Y.: Impact of duty cycle on end-to-end performance in a Wireless Sensor Network. In: Wireless Communications and NETWORKING Conference IEEE, pp. 1906--1911. (2015)
-\bibitem{proc_Michael} 
+\bibitem{proc_Michael}
 Beck M.: Towards the analysis of transient phases with stochastic network calculus. In: Telecommunications Network Strategy and Planning Symposium IEEE, pp. 164--169. (2016)
 
 \end{thebibliography}

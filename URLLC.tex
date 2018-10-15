@@ -154,7 +154,7 @@ Because the standard of URLLC has not been worked out, many researchers have put
 Dozens of researches are focus on how to design and implement URLLC to meet the performance requirements.
 %A way to offer URLLC without intervention in the baseband/PHY layer design is to use interface diversity and integrate multiple communication interfaces
 A design without intervention in the baseband/PHY layer for URLLC is to use interface diversity and integrate multiple communication interfaces.
-Jimmy and his colleagues propose an analysis framework that combines traditional reliability models with technology-specific latency probability distributions\cite{interface}. 
+Jimmy and his colleagues propose an analysis framework that combines traditional reliability models with technology-specific latency probability distributions\cite{interface}.
 In this way, they can estimate the performance in terms of latency and reliability in such an integrated communication system.
 To guarantee a low end-to-end delay with low jitter over combined internet and wireless interfaces, the article \cite{multiconnectivity} presents a new multiple-input multiple-output(MIMO) networked round trip time (RTT) skew control algorithm. This RRT skew controller's advantage is that the controller solves the data flow split problem at the controlling node, since the inner loop control signals are the downlink data rates that fully define the data flow split.
 Jaya Rao and Sophie Vrzic have propose an approach to adopt packet duplication (PD) method to satisfy the latency and reliability requirements\cite{PD}. PD technology generates multiple instances and sends them simultaneously in multiple unrelated channels. The receiver selects the best packets according to the channel condition to achieve better transmission reliability. This PD technique can provide a cost-effective solution without increasing the complexity in the radio access network (RAN).
@@ -525,11 +525,28 @@ d = \frac{1}{C-\lambda}\cdot\frac{n+1}{b}\cdot ln{\frac{a(n+1)}{\epsilon}}
 The calculation process can be found in Appendix C.
 
 %from here, I need to find out how to resolve the bound function.
-\section{Numerical and Performance Evaluation}
+\section{Numerical Result and Performance Evaluation}
 %考虑4G和5G的时延对比？通过参数来体现？
 %服务曲线，要带有5G网络的特性的
 
 In this section, we shall discuss what factors are the main cause of latency in URLLC.
+
+According to the delay requirement of URLLC, we write a simulator to validate our analysis result.
+We implement the simulator in Python 3.6. It can calculate the delay value in accordance with the input network parameters.
+
+To validate the correctness of analysis, we set the violation probability from $1\times10^{-6}$ to $1\times10^{-4}$.
+We compare the analysis with the simulator, and the Figure.\ref{validation} shows the result.
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.5\textwidth]{validation.png}
+  \caption{Comparison between Simulator and Analysis}
+  \label{validation}
+\end{figure}
+Figure.\ref{validation} shows a good match between the analytical data and the corresponding simulation result.
+Especially, the analytical result is also the boundary of the simulation data.
+The boundary is slightly loose when the value of violation probability is large, while it is more tighter when value is little.
+This fully illustrates the correctness of the analysis results.
+
 Although the deployment details of the URLLC standard are not yet released, we can still apply SNC theory for quantitative analysis.
 
 \begin{figure}[htbp]
