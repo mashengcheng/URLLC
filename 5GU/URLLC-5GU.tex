@@ -21,9 +21,11 @@ Beijing Municipal Program for Excellent Teacher Promotion. (No.PXM2017\_014224.0
 % If the paper title is too long for the running head, you can set
 % an abbreviated paper title here
 %
-\author{Shengcheng Ma\inst{1}\orcidID{0000-0003-1060-1208} \and
+\author{
+Shengcheng Ma\inst{1}\orcidID{0000-0003-1060-1208} \and
 Xin Chen\inst{1}\orcidID{0000-0002-5250-7909} \and
-Zhuo Li\inst{1}\orcidID{0000-0003-1444-9469} \and Ying Chen\inst{1}\orcidID{}}
+Zhuo Li\inst{1}\orcidID{0000-0003-1444-9469} \and 
+Ying Chen\inst{1}\orcidID{0000-0002-0844-0882}}
 %
 \authorrunning{Sc Ma et al.}
 % First names are abbreviated in the running head.
@@ -91,7 +93,7 @@ Our main contributions of this paper can be summarized as follows:
 
 2) Our analysis results represent which parameters are the key factors affecting the delay. By adjusting the key factors, we give some strategies to reduced the delay effectively.
 
-3) Delay analysis and strategy for reducing latency have valuable theoretical guidance for the design of URLLC deployment. 
+3) Delay analysis and strategies for reducing latency have valuable theoretical guidance for the design of URLLC deployment. 
 In order to meet stringent delay requirements, it provides guidelines for how to allocate resources.
 
 The rest of this paper is organized as follows.
@@ -238,8 +240,7 @@ A flow is said to have a stochastic arrival curve $\alpha\in\mathcal{F}$ with bo
 P\Bigl\{\sup_{0\leq s \leq t}\{A(s,t) - \alpha(t-s)\} > x \Bigr\} \leq f(x).
 \end{equation}
 \end{definition}
-
-where $\alpha(\tau)$ is the stochastic arrival curve, and it denotes the maximum of flow $A(\tau)$.
+Where $\alpha(\tau)$ is the stochastic arrival curve, and it denotes the maximum of flow $A(\tau)$.
 Function $f(x)$ denotes the violation probability.
 It assumes that the stochastic arrival curve $\alpha(\tau)$ may be exceeded by arrival process $A(\tau)$ in sometimes, but the probability of being exceeded is constrained by the boundary function $f(x)$.
 
@@ -264,7 +265,7 @@ Similarly as in (\ref{eq_ssc}), the departure process relates to the arrival and
 \begin{equation}\label{eq_departure}
 D(t) \geq \inf_{0\leq s \leq t}\{A(s)+ S(s,t)\} =  A \otimes S(t).
 \end{equation}
-where for all $s,t \geq 0$ and $s \leq t$.
+Where for all $s,t \geq 0$ and $s \leq t$.
 That is also the concept of a dynamic server which mentioned in \cite{article1}.
 From the (\ref{eq_departure}), we can better understand the relationship among arrival process, departure process and service process.
 With these basic processes and curves, we can discuss the definition of the delay boundary.
@@ -278,7 +279,7 @@ L(t) = \inf\{d \geq 0 : A(t) \leq D(t+d)\}.
 \end{equation}
 \end{definition}
 
-The Formula.\ref{eq_delay_define} express that latency $L(t)$ is the least value of $d$, and the $d$ must meet the condition which the amount of arrival data at time $t$ is less than or equal to the departure data at time $t+d$.
+The (\ref{eq_delay_define}) express that latency $L(t)$ is the least value of $d$, and the $d$ must meet the condition which the amount of arrival data at time $t$ is less than or equal to the departure data at time $t+d$.
 It also means that the data do not leave the server immediately.
 The duration of the data in server is the delay time.
 In Formula.\ref{eq_delay_define}, the arrival process $A(t)$ is little than or equal to the departure process $D(t+d)$.
@@ -300,7 +301,7 @@ Then, for all $t\geq 0$ and $x \geq 0$, the Latency $L(t)$ is bounded by
 P\{L(t)>h(\alpha+x, \beta)\}\leq f \otimes g(x)
 \end{equation}
 \end{theorem}
-where function $h(\alpha+x, \beta)$ denotes the maximum horizontal distance between $\alpha+x$ and $\beta$, the express $f \otimes g(x)$ represents the cumulative min-plus convolution operation of function $f$ and $g$.
+Where function $h(\alpha+x, \beta)$ denotes the maximum horizontal distance between $\alpha+x$ and $\beta$, the express $f \otimes g(x)$ represents the cumulative min-plus convolution operation of function $f$ and $g$.
 
 \begin{theorem}\label{thrm_concatenation}{\bfseries (Concatenation Property)}
 Considering a flow passes through a network of $N$ server nodes in tandem.
@@ -363,13 +364,13 @@ Then we can get gNB subsystem
 \begin{equation}\label{eq_departure_gNB}
 D_{gNB} \geq A_{AAU}\otimes (S_{AAU}\otimes S_{DU} \otimes S_{CU})(t).
 \end{equation}
-Assuming first-come first-served order, we use definition.\ref{def_delay_process} and equation (\ref{eq_departure_gNB}), and let $L_{gNB}$ denotes the latency process of gNB, there holds
+Assuming first-come first-served order, we use Definition.\ref{def_delay_process} and equation (\ref{eq_departure_gNB}), and let $L_{gNB}$ denotes the latency process of gNB, there holds
 \begin{equation}\label{eq_latency_gNB}
 \begin{split}
 L_{gNB}(t) &= \inf\{d\geqslant0: A_{gNB}(t) - D_{gNB}(t+d) \leqslant 0 \} \\
  &= \inf\{d\geqslant0: A_{AAU}(t) - D_{CU}(t+d) \leqslant 0 \}  \\
  &= \inf\{d\geqslant0: A_{AAU}(t) \\
- &- A_{AAU}\otimes (S_{AAU}\otimes S_{DU} \otimes S_{CU})(t+d) \leqslant 0 \}
+ &  - A_{AAU}\otimes (S_{AAU}\otimes S_{DU} \otimes S_{CU})(t+d) \leqslant 0 \}
 \end{split}
 \end{equation}
 
@@ -379,8 +380,8 @@ With Theorem.\ref{thrm_latency} and Theorem.\ref{thrm_concatenation}, the delay 
 In gNB subsystem, $A_{AAU}(t)$ is a stochastic arrival process with stochastic arrival curve $\alpha_{AAU}$, i.e. $A \sim <f_{AAU}, \alpha_{AAU}>$.
  $\alpha_{AAU} \in \mathcal{F}$, $f_{AAU} \in \mathcal{\bar{F}}$.
 The server nodes in subsystem provide stochastic service process $S_{AAU}(t), S_{DU}(t), S_{CU}(t)$ respectively, i.e.
-$S_{AAU} \sim <g_{AAU}, \beta_{AAU}>, S_{DU} \sim <g_{DU}, \beta_{DU}>, S_{CU} \sim <g_{CU}, \beta_{CU}>$.
-And $\beta_{AAU},\beta_{DU}, \beta_{CU} \in \mathcal{F}$,  $g_{AAU}, g_{DU}, g_{CU} \in \mathcal{\bar{F}}$.
+$S_{AAU} \sim <g_{AAU},\beta_{AAU}>, S_{DU}\sim <g_{DU},\beta_{DU}>, S_{CU}\sim <g_{CU}, \beta_{CU}>$.
+And $\beta_{AAU},\beta_{DU},\beta_{CU} \in \mathcal{F}$, $g_{AAU}, g_{DU}, g_{CU} \in \mathcal{\bar{F}}$.
 Then, for all $t\geq 0$ and $x \geq 0$, the Latency of gNB subsystem $L_{gNB}(t)$ is bounded by
 \begin{equation}
 \begin{split}
@@ -394,7 +395,7 @@ where service rate $\beta_{gNB}(t)=\beta_{AAU}\otimes \beta_{DU}\otimes \beta_{C
 $Proof:$ Please see Appendix A.
 
 For mobile edge computing (MEC) deployment, CU can be the end of the transmission. That because the computing resource and storage resource are located at CU.
-The Corollary.\ref{crl_latency} is good enough to analysis the delay of communication from UE to CU.
+The Corollary.\ref{crl_latency} is suitable for analysis the delay of communication from UE to CU.
 However, in order to comprehensively discuss the delay of URLLC system, we need to convert the destination from CU to Cloud.
 By extending Corollary.\ref{crl_latency}, we can draw the whole URLLC system latency bound.
 \begin{corollary}\label{crl_latency_urllc}{\bfseries (Latency Bound of URLLC)}
@@ -490,7 +491,6 @@ More simulation parameters can be found in Table.\ref{tab_2}.
     \hline
     Network deployment & Standalone   \\
     Traffic mode & Constant transmission, Poisson arrival \\
-    Carrier frequency & 4 (GHz)  \\
     Arrival rate $\lambda$ & 20 (Gbit/s)    \\
     Service rate C & 40,45,50,55 (Gbit/s)    \\
     Service bound a & 1 \\
