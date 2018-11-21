@@ -48,7 +48,7 @@ Little efforts have been made on applying a theoretical method to analyze the de
 %Little efforts has been made on applying a theoretical method to analyze the delay bound.
 Stochastic network calculus is an elegant way to obtain the delay bound based on traffic models and service guarantees.
 In this paper, we take the character of 5G architecture into account and use the stochastic network calculus to analyze the delay in URLLC.
-A tandem model is built to simulate the generation of delay in 5G network. 
+A tandem model is built to simulate the generation of delay in 5G network.
 Some factors which can influence on the delay are obtained.
 Optimizing these factors to reduce the delay will provide valuable guidelines for the early design of URLLC architecture.
 Finally, numerical results are presented to verify the correctness of the delay analysis.
@@ -171,9 +171,17 @@ It mainly applies SNC theory to analyze the delay boundary of multi-server syste
 
 \section{System Model}
 \subsection{URLLC Network Architecture}
-We consider URLLC network as a concatenate system from UE to Cloud. We only consider the 5G standalone network situation.
-The 4G LTE network is composed by UE, RRU (Radio Remote Unit), BBU (Building Baseband Unit), the EPC (Evolved Packet Core) which is the LTE's core network, and end by cloud servers.
+%We only consider the 5G standalone network situation.
+%Generally speaking, 5G Standalone networking (SA) is the establishment of whole new 5G network, while Non-standalone networking (NSA) is the combination of 5G and 4G LTE.
+%Although 5G network includes NSA mode and SA mode, in order to simplify the system model, we only consider the case of 5G standalone network.
 
+Generally speaking, 5G network includes 5G Standalone networking (SA) and Non-standalone networking (NSA).
+The SA mode is the establishment of whole new 5G network, while the NSA mode is the combination of 5G and 4G LTE.
+According to the implementation technology of core network, the NSA mode can continue to be divided.  
+In order to simplify the system model, we only discuss the case of 5G standalone network.
+
+We consider URLLC network as a concatenate system from UE to Cloud.
+The 4G LTE network is composed by UE, RRU (Radio Remote Unit), BBU (Building Baseband Unit), the EPC (Evolved Packet Core) which is the LTE's core network, and end by cloud servers.
 Different from 4G LTE, 5G networks are composed by UE, gNB, NGC and Cloud.
 The gNB contains three parts that are AAU (Active Antenna Unit), DU (Distributed Unit) and CU (Centralized Unit).
 AAU takes the place of the original RRU and combines some physical layer processing functions of BBU.
@@ -267,7 +275,7 @@ Which
 A\otimes\beta(t) = \inf_{0 \leq s \leq t}\{A(s)+\beta(s,t)\}
 \end{equation}
 $\beta(t)$ is the stochastic service curve which means the worst service capability provided by the server.
-Similar to the stochastic arrival curve, the data that already have been served are probably to be more than the data left.
+Similar to the stochastic arrival curve, the data that already have been processed are probably more than the data departed.
 The probability of producing exceeding data can be constrained by the boundary function $g(x)$.
 
 Similarly as in (\ref{eq_ssc}), the departure process relates to the arrival and service process and it is described as
@@ -343,7 +351,7 @@ By the same token, $A_{CU}(t) = D_{DU}(t)$ similarly for CU server.
 The departure process of CU is $D_{CU}(t)$.
 It is also the departure process of the gNB subsystem.
 
-Consider the gNB subsystem is tandem deploy, we assume that the AAU server provides a $S_{AAU}(t)$ capacity to deal with the arrival data.
+Considering that the gNB subsystem is tandem deployed, we assume that the AAU server provides a $S_{AAU}(t)$ capacity to deal with the arrival data.
 Applying (\ref{eq_departure}), the departure process can be represent as
 \begin{equation} \label{eq_departure_AAU}
 D_{AAU}(t)\geq A_{AAU}\otimes S_{AAU}(t).
@@ -530,16 +538,16 @@ That means system can guarantee the low latency communication in a stable state.
 
 Fig.\ref{fig3} presents the relationship among latency, number of server levels and service rate.
 The arrival rate is constant and the speed is 20Gbit/s. The violation probability is maintained at $1*10^{-5}$.
-Based on the above setting, we can derived that the delay is sensitive on number of server levels.
-From Fig.\ref{fig3}, we can see the slope of latency caused by number of server levels in tandem is larger than the service rate.
+Based on the above setting, we can derived that the delay is sensitive on number of tandem servers.
+From Fig.\ref{fig3}, we can see the slope of latency caused by number of tandem servers is larger than the service rate.
 We draw a delay equals 1ms flat plane to cut the curved surface.
 The part below the plane is the scope of deployment parameters which satisfying the delay condition.
-In order to ensure low latency of communication, it is necessary to reduce the levels of system deployment as much as possible and increase the service rate of each server layer.
+In order to ensure low latency of communication, it is necessary to reduce the number of tandem servers deployment as much as possible and increase the service rate of each server layer.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=.5\textwidth]{delay_servers.png}
-  \caption{Number of Server Levels Influence}
+  \caption{Number of Tandem Servers Influence}
   \label{fig3}
 \end{figure}
 
