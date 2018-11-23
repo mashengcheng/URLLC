@@ -613,41 +613,44 @@ P\{L(x)>h(\alpha_{AAU}+x, \beta_{All})\} < f_{AUU} \otimes g_{All}(x)
 Therefore, Corollary.2 is proved.
 \end{proof}
 
-To study the reliability of URLLC, we propose a new process to describe the error rate and packet loss rate. 
+To study the reliability of URLLC, we propose a new process to describe the error rate and packet loss rate.
 We denote the impairment process by $I\sim<h,\gamma>$.
 It represents the error and loss happened in the server.
 \begin{definition}\label{def_SIC}
-{\bfseries(Stochastic Impairment Curve)}. 
+{\bfseries(Stochastic Impairment Curve)}.
 A system is said to have a stochastic impairment curve $\gamma\in\mathcal{F}$ with bounding function $h \in \mathcal{\bar{F}}$, denoted by $I \sim<h, \gamma>$, if for all $t\geq0$ there holds
 \begin{equation}\label{eq_sic}
 P\Bigl\{\sup_{0\leq s \leq t}[I(s,t) - \gamma(t-s)] > x \Bigr\} \leq h(x).
 \end{equation}
 \end{definition}
-The (\ref{eq_sic}) means that the system server probably make loss or error. 
-The process $I(s,t)$ represents the error or loss generated from time $s$ to $t$. 
+The (\ref{eq_sic}) means that the system server probably make loss or error.
+The process $I(s,t)$ represents the error or loss generated from time $s$ to $t$.
 The curve $\gamma$ is the upper bound for the impairment process $I$.
 The impairment process $I$ is usually less than the impairment curve $\gamma$.
-However, we assume that the impairment curve $\gamma(\tau)$ may be exceeded by impairment process $I(\tau)$ in sometimes, 
+However, we assume that the impairment curve $\gamma(\tau)$ may be exceeded by impairment process $I(\tau)$ in sometimes,
 but the probability of being exceeded is constrained by the boundary function h(x).
 
 %在这里，把那两篇论文也加上去，作为引用。
 %关于损失过程的描述，文献【1】【2】都对这个问题进行了分析。
 \subsection{write at here}
-In term of loss or impairment analysis in stochastic network calculus, article \cite{article_WLE} and \cite{proc_Loss} are both representative research on loss process. 
-A. Gulyas and J. Biro propose a Workload Loss Ratio Estimation to express the loss in the network flow. 
-An effective w-arrival curve $Z^{\varphi}$ was put forward in this paper. 
-The loss was considered in arrival process which is the beginning of the transmission. 
+In term of loss or impairment analysis in stochastic network calculus, article \cite{article_WLE} and \cite{proc_Loss} are both representative research on loss process.
+A. Gulyas and J. Biro propose a Workload Loss Ratio Estimation to express the loss in the network flow.
+An effective w-arrival curve $Z^{\varphi}$ was put forward in this paper.
+The loss was considered in arrival process which is the beginning of the transmission.
 And they use $Z^{\varphi}\oslash S^{\varphi_{s}}$ to present the loss generated in service process.
-That is little different from situation what we considered. 
+%That is little different from situation what we considered.
+However, whether it is accurate to describe the actual bandwidth by means of effective w-service curve remains to be discussed.
+In paper \cite{proc_Loss}, the authors gave a stochastic loss bound by MGF. 
+
 We mainly focus on the errors server processing and forwarding of server in URLLC.
-In paper \cite{proc_Loss}, 
+%这两句说的不是很好。
 
 The impairment process must work with the stochastic service process.
 
 
 We have built a model to represent the latency of 5G MEC (UE to gNB) and URLLC (the full path from UE to Cloud).
 Next we intend to calculate the delay boundary of the model.
-With Corollary.\ref{crl_latency_urllc}, we know that 4 key variance need to be determined. 
+With Corollary.\ref{crl_latency_urllc}, we know that 4 key variance need to be determined.
 These are stochastic arrival process $\alpha_{AAU}$, $f_{AAU}$, and stochastic service process $\beta_{All}$, $g_{All}$.
 Especially, we can also decompose $\beta_{All}$ and $g_{All}$ to obtain more detailed result.
 
