@@ -405,6 +405,8 @@ By the same token, $A_{CU}(t) = D_{DU}(t)$ similarly for CU server.
 The departure process of CU is $D_{CU}(t)$.
 It is also the departure process of the gNB subsystem.
 
+\subsubsection{Delay of gNB}
+
 Considering that the gNB subsystem is tandem deployed, we assume that the AAU server provides a $S_{AAU}(t)$ capacity to deal with the arrival data.
 Applying (\ref{eq_departure}), the departure process can be represent as
 \begin{equation} \label{eq_departure_AAU}
@@ -533,6 +535,8 @@ we can obtain
 Therefore, Corollary.\ref{crl_latency} is proved.
 \end{proof}
 
+\subsubsection{Delay of URLLC}
+
 For mobile edge computing (MEC) deployment, CU can be the end of the transmission. That because the computing resource and storage resource are located at CU.
 The Corollary.\ref{crl_latency} is suitable for analysis the delay of communication from UE to CU.
 However, in order to comprehensively discuss the delay of URLLC system, we need to convert the destination from CU to Cloud.
@@ -613,8 +617,8 @@ P\{L(x)>h(\alpha_{AAU}+x, \beta_{All})\} < f_{AUU} \otimes g_{All}(x)
 Therefore, Corollary.2 is proved.
 \end{proof}
 
+\subsubsection{Reliability of URLLC}
 
-\subsection{write here}
 %这部分内容是error和loss部分的相关工作，可以放在前面来引出。要真么引出呢？我们说，考虑URLLC的可靠性的时候，原版的SNC理论并没有对这部分的研究
 %一些研究者考虑从loss的角度来体现系统的可靠性。然后说下面的这一堆，
 In evaluating the reliability of the system, the stochastic network calculus theory still has no perfect solution.
@@ -639,33 +643,45 @@ A novel stochastic curve which work on server node will be proposed.
 %impairment表示系统在s到t时段产生的错误块，
 In order to study the reliability of URLLC, BLER is an important criteria to be discussed.
 We propose a new curve to describe the block error rate in URLLC network.
-We denote the stochastic impairment process I(\tau) as the block error rate occurred in the server.
+We denote the stochastic error process $I(\tau)$ as the block error rate occurred in the server.
 \begin{definition}\label{def_SIC}
-{\bfseries(Stochastic Impairment Curve)}.
-A system is said to have a stochastic impairment curve $\gamma\in\mathcal{F}$ with bounding function $h \in \mathcal{\bar{F}}$, denoted by $I \sim<h, \gamma>$, if for all $t\geq0$ there holds
+{\bfseries(Stochastic Error Curve)}.
+A system is said to have a stochastic error curve $\gamma\in\mathcal{F}$ with bounding function $h \in \mathcal{\bar{F}}$, denoted by $I \sim<h, \gamma>$, if for all $t\geq0$ there holds
 \begin{equation}\label{eq_sic}
 P\Bigl\{\sup_{0\leq s \leq t}[I(s,t) - \gamma(t-s)] > x \Bigr\} \leq h(x).
 \end{equation}
 \end{definition}
-The (\ref{eq_sic}) means that the system server processes the received block and probably checkouts erroneous data.
-The process $I(s,t)$ represents the error or loss generated from time $s$ to $t$.
-The curve $\gamma$ is the upper bound for the impairment process $I$.
-The impairment process $I$ is usually less than the impairment curve $\gamma$.
-However, we assume that the impairment curve $\gamma(\tau)$ may be exceeded by impairment process $I(\tau)$ in sometimes,
+The (\ref{eq_sic}) means that the system server handles the received blocks and probably checks out the erroneous data.
+The process $I(s,t)$ represents the statistical value of block error rate generated from time $s$ to $t$.
+The curve $\gamma$ is the ceiling for the error process $I$.
+The error process $I$ is usually less than the error curve $\gamma$.
+However, we assume that the error curve $\gamma(\tau)$ may be exceeded by error process $I(\tau)$ in sometimes,
 but the probability of being exceeded is constrained by the boundary function $h(x)$.
 
+In order to express the ultra reliability of the URLLC communication, we can set the $\gamma$ value as the BLER.
+If the value of $\gamma$ is small, it means the running state of system is stable and errors rarely occurs.
 In stochastic service curve (\ref{eq_ssc}), $A\otimes\beta$ represent the flow with lossless situation.
-When we take into account the loss in network system, $A\otimes\beta\oslash\gamma$ denotes the service capacity after considering loss or error.
-As defined in (\ref{eq_sic}), $\gamma$ is the upper bound for error arising.
-If the value of $\gamma$ is high, it means the running state of system is unstable and error occurs very often.
-In order to express the ultra reliability of the communication, we can set the $\gamma$ value as the BLER.
-The impairment process will be
-\begin{equation}
-P\{I(s,t)>x\}\leq h(x)
-\end{equation}
-Because of our scenario is URLLC, it is ultra reliable communication.
+When we take into account the BLER in network system, $\gamma$ is the upper bound of the block error rate.
+And $1-\gamma$ is the correct block rate. 
+The $\hat{\beta}$ denotes the service rate without errors.
+So $A\otimes(\hat{\beta}*(1-\gamma))$ denotes the service capacity after considering BLER.
+We can simplify $A\otimes(\hat{\beta}*(1-\gamma))$ as $A\otimes\beta$, where $\beta = \hat{\beta}*(1-\gamma)$.
 
-%splitting line
+%下面要做的事情就是用chernoff边界，来计算一个gamma的影响
+MGF is widely used in stochastic network calculus to compute the performance bound for network system.
+MFG has a beneficial characteristics that it is convenient to get the sum of stochastic processes by product form.
+We compute the stochastic error bound and analyze the BLER with MGF.
+The MGF of stochastic error process is defined as (\ref{mgf_err}) with any $\theta \leq 0$
+\begin{equation}\label{mgf_err}
+M_{I}(\theta, t-s)=E[e^{\theta I(s,t)}]
+\end{equation}
+And with the Chernoff's theory, the stochastic error bound will be
+\begin{equation}\label{chernoff_err}
+P\{I(s,t)\geq x\} \leq e^{-\theta x}E[e^{\theta I(s,t)}]
+\end{equation}
+
+
+\subsubsection{Calculation of Delay and Reliability}
 
 We have built a model to represent the latency of 5G MEC (UE to gNB) and URLLC (the full path from UE to Cloud).
 Next we intend to calculate the delay boundary of the model.
@@ -748,6 +764,21 @@ we put $x = d(C-\lambda)$ into (\ref{eq_appendixC_2}) and get
 d = \frac{1}{C-\lambda}\cdot\frac{n+1}{b}\cdot ln{\frac{a(n+1)}{\epsilon}}
 \end{equation}
 Therefore $d$ is solved.
+
+Considering the reliability of URLLC, the service rate of system $\beta$ should be impacted by BLER.
+We study on the right hand of (\ref{chernoff_err}) to obtain the bound of stochastic error process.
+Because of $\gamma$ is the ceiling of the process $I$, so we can get
+\begin{equation}\label{mgf_gamma}
+E[e^{\theta I(s,t)}] \leq e^{\theta \gamma(t-s)}
+\end{equation}
+Then we put (\ref{mgf_gamma}) into right hand of (\ref{chernoff_err}), and we hold
+\begin{equation}\label{chernoff_bound}
+\begin{split}
+P\{I(s,t)\geq x\} &\leq e^{-\theta x}\cdot e^{\theta \gamma(t-s)} \\
+&\leq e^{-\theta x + \theta\gamma(t-s)}  \\
+&\leq e^{\theta(\gamma(t-s)-x)}
+\end{split}
+\end{equation}
 
 \section{Numerical Results and Performance Evaluation}
 In this section, we will discuss what factors are the main cause of latency in URLLC.
