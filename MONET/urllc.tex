@@ -63,7 +63,7 @@ grestore
 %
 \begin{document}
 
-\title{Applying Stochastic Network Calculus to Analyze Delay of URLLC in 5G\thanks{Supported by program National Natural Science Foundation of China. (Nos.61370065,61502040).Beijing Municipal Program for Excellent Teacher Promotion. (No.PXM2017\_014224.000028).}}
+\title{Performance evaluation of URLLC in 5G based on Stochastic Network Calculus\thanks{Supported by program National Natural Science Foundation of China. (Nos.61502040).Beijing Municipal Program for Excellent Teacher Promotion. (No.PXM2017\_014224.000028).}}
 
 %\subtitle{Do you have a subtitle?\\ If so, write it here}
 
@@ -106,12 +106,14 @@ Ultra-reliable low latency communications (URLLC) is one of the most important s
 URLLC with strict latency and reliability requirements is widely used in some delay-sensitive applications such as self-driving.
 As the 3GPP claimed, the URLLC is amenable to 99.999\% transmission correctness and within 1ms delay bound.
 How to meet the requirements of reliability and latency is still an open issue.
-Little efforts have been made on applying a theoretical method to analyze the delay bound.
+Little effort has been made on applying a theoretical method to analyze the delay bound.
 Stochastic network calculus is an elegant way to obtain the delay bound based on traffic models and service guarantees.
 In this paper, we take the character of 5G architecture into account and use the stochastic network calculus to analyze the delay in URLLC.
-A tandem model is built to simulate the generation of delay in 5G network.
-Some factors which can influence on the delay are obtained.
-Optimizing these factors to reduce the delay will provide valuable guidelines for the early design of URLLC architecture.
+%A tandem model is built to simulate the generation of delay in 5G network.
+%Some factors which can influence on the delay are obtained.
+A tandem model of the generation of delay in 5G network is built, and parameters which have influence on the delay are analyzed 
+%Optimizing these factors to reduce the delay will provide valuable guidelines for the early design of URLLC architecture.
+We investigate how to optimize the parameters to reduce the delay, which will provide valuable guidelines for the design of URLLC architecture.
 Finally, numerical results are presented to verify the correctness of the delay analysis.
 
 \keywords{5G \and URLLC \and Stochastic Network Calculus \and Delay Analysis}
@@ -121,7 +123,7 @@ Finally, numerical results are presented to verify the correctness of the delay 
 
 \section{Introduction}
 \label{intro}
-The 5G era is getting closer to us.
+%The 5G era is getting closer to us.
 5G communication technology appeared for the first time with the 2018 Pyeongchang Winter Olympics in South Korea.
 It helps audiences watch the live broadcast continuously and smoothly.
 According to the 5G standard schedule announced by the International Telecommunication Union (ITU), 5G will begin commercialization in 2020
@@ -141,7 +143,8 @@ Many academies and companies have proposed some engineering solutions to minimiz
 Such as the HARQ retransmission or grant-free technology.
 However, how to analyze the generation of time-delay from a theoretical perspective and propose a strategy to reduce the delay effectively is an important research subject.
 
-Stochastic network calculus (SNC) theory is very good at delay performance analysis.
+%Stochastic network calculus (SNC) theory is very good at delay performance analysis.
+Stochastic network calculus (SNC) theory is an effective tool on delay performance analysis.
 The SNC is a continuous development method to analyze network traffic characteristic and evaluate performance\cite{book1}.
 Different from queuing theory, the SNC permits some packets to violate the desired performance.
 This feature can better take advantage of statistical multiplexing gains\cite{article2}.
@@ -156,10 +159,12 @@ Every stage of stochastic arrival curve characterizes the delay property, theref
 Our main contributions of this paper can be summarized as follows:
 
 1) We build a tandem model to simulate 5G network architecture.
-In this model, we can analog the data transmission from UE to cloud server.
+In this model, we can analyze the data transmission from UE to cloud server.
 We use stochastic service process and concatenation property to analysis the latency.
 
-2) Our analysis results represent which parameters are the key factors affecting the delay. By adjusting the key factors, we give some strategies which can reduce the delay effectively.
+2) Our analysis results represent which parameters are the key factors affecting the delay. 
+%By adjusting the key factors, we give some strategies which can reduce the delay effectively.
+Based on our analysis results, we can find how to reduce the delay effectively.
 
 3) Delay analysis and strategy for reducing latency have valuable theoretical guidance for the design of URLLC deployment.
 In order to meet stringent delay requirements, it provides guidelines for how to allocate resources.
@@ -866,8 +871,8 @@ Thus the reliability of the system is guaranteed.
   \label{fig_Delay_Arrival}
 \end{figure}
 
-Fig.\ref{fig_Delay_Arrival} illustrates the relationship between system delay and service rate and arrival rate. 
-As shown in the figure, system delay raises with the increase of arrival rate. 
+Fig.\ref{fig_Delay_Arrival} illustrates the relationship between system delay and service rate and arrival rate.
+As shown in the figure, system delay raises with the increase of arrival rate.
 When the arrival rate is 20Gbit/s, the system delay exceeds 1ms which is the requirement of URLLC.
 With the increase of service rate, the system delay can be reduced to less than 1ms.
 But when the arrival rate continues to increase, the delay will eventually exceed the demand.
