@@ -63,7 +63,7 @@ grestore
 %
 \begin{document}
 
-\title{Performance evaluation of URLLC in 5G based on Stochastic Network Calculus\thanks{Supported by program National Natural Science Foundation of China (Nos.61872044,61502040). Beijing Municipal Program for Excellent Teacher Promotion (No.PXM2017\_014224.000028). Beijing Municipal Program for Top Talent Cultivation (CIT\&TCD201804055). Qinxin Talent Program of Beijing Information Science and Technology University.}}
+\title{Performance Evaluation of URLLC in 5G based on Stochastic Network Calculus\thanks{Supported by program National Natural Science Foundation of China (Nos.61872044,61502040). Beijing Municipal Program for Excellent Teacher Promotion (No.PXM2017\_014224.000028). Beijing Municipal Program for Top Talent Cultivation (CIT\&TCD201804055). Qinxin Talent Program of Beijing Information Science and Technology University.}}
 
 %\subtitle{Do you have a subtitle?\\ If so, write it here}
 
@@ -112,10 +112,6 @@ In this paper, we take the character of 5G architecture into account and use the
 A tandem model describing the communication in the 5G network is built, and parameters which have an influence on the delay are analyzed.
 Numerical results are presented to verify the correctness of the delay analysis.
 We investigate how to optimize the parameters to reduce the delay, which would provide valuable guidelines for the design of URLLC architecture.
-%A tandem model is built to simulate the generation of delay in 5G network.
-%Some factors which can influence on the delay are obtained.
-%of the generation of delay
-%Optimizing these factors to reduce the delay will provide valuable guidelines for the early design of URLLC architecture.
 \keywords{5G \and URLLC \and Stochastic Network Calculus \and Delay Analysis}
 % \PACS{PACS code1 \and PACS code2 \and more}
 % \subclass{MSC code1 \and MSC code2 \and more}
@@ -123,7 +119,6 @@ We investigate how to optimize the parameters to reduce the delay, which would p
 
 \section{Introduction}
 \label{intro}
-%The 5G era is getting closer to us.
 5G communication technology appeared for the first time with the 2018 Pyeongchang Winter Olympics in South Korea.
 It helps audiences watch the live broadcast continuously and smoothly.
 According to the 5G standard schedule announced by the International Telecommunication Union (ITU), 5G will begin commercialization in 2020
@@ -135,7 +130,6 @@ URLLC is widely used in self-driving, mission-critical application, and some del
 It has stringent requirements in terms of delay and reliability in the 5G New Radio (NR) systems.
 The key requirements of URLLC as claimed by the 3GPP are to ensure the latency of user plane data less than 1ms, meanwhile to keep reliability not less than 99.999 percent \cite{article1}. %It is about 99.999 percent packet reception .
 The stringent delay requirement needs new 5G NR technology to bridge the gap.
-%Though the existing LTE networks can reach the reliability target, but the cost is some dozens of milliseconds time delay.
 Although existing LTE networks can achieve reliability goals, the cost is some dozens of milliseconds of delay.
 That is far away from the criteria of URLLC.
 So the delay becomes the bottleneck and this problem needs to be solved.
@@ -148,7 +142,6 @@ Different from queuing theory, SNC permits some packets to violate the desired p
 This feature can better take advantage of statistical multiplexing gains\cite{article2}.
 To deal with random service and statistical guarantee, SNC theory comes into being with a large number of stochastic processes and network traffic models.
 SNC theory can process service guarantee analysis of communication networks, such as delay and backlog.
-%Under a suitable traffic model and a chosen server model,
 So we capitalize on the SNC method to analyze the delay of the 5G URLLC transmission in this paper.
 
 We use stochastic arrival curve to describe the process that user equipment (UE) data sends to gNodeB (gNB) side.
@@ -162,15 +155,10 @@ In this model, we can analyze the data transmission from UE to cloud server.
 We use stochastic service process and concatenation property to analysis the latency.
 
 2) For delay analysis, stochastic latency bound for URLLC network is obtained.
-%The analysis method of delay bound also supports the communication in mobile edge computing.
 To analyze the reliability of the network, we provide a stochastic error process which can express the block error rate.
-We also investigate the impacts of block error rate on latency, and a delay boundary analysis method considering error rate is proposed.  
+We also investigate the impacts of block error rate on latency, and a delay boundary analysis method considering error rate is proposed.
 
-
-3) %Our analysis results represent which parameters are the key factors affecting the delay.
-%By adjusting the key factors, we give some strategies which can reduce the delay effectively.
-Based on our analysis results, we can find out what parameters are the key factors affecting the delay.
-% how to reduce the delay effectively.
+3) Based on our analysis results, we can find out what parameters are the key factors affecting the delay.
 Delay analysis and strategy for reducing latency have valuable theoretical guidance for the design of URLLC deployment.
 In order to meet stringent delay requirements, it provides guidelines for how to allocate resources.
 
@@ -190,7 +178,6 @@ A design without intervention in the baseband/PHY layer for URLLC is to use inte
 Jimmy and his colleagues propose an analytical framework that combines traditional reliability models with technology-specific latency probability distributions\cite{article_interface}.
 In this way, they can estimate the performance in terms of latency and reliability in such an integrated communication system.
 To guarantee a low end-to-end delay with low jitter over combined internet and wireless interfaces,
-%the article \cite{article_multiconnectivity} presents a new multiple-input multiple-output(MIMO) networked round trip time (RTT) skew control controller.
 the article \cite{article_multiconnectivity} presents a new round trip time (RTT) skew control controller with multiple-input multiple-output(MIMO).
 This controller's advantage is that it solves the data flow split problem at the controlling node.
 Jaya Rao and Sophie Vrzic have proposed an approach to adopt packet duplication (PD) method to satisfy the latency and reliability requirements\cite{article_PD}.
@@ -630,8 +617,6 @@ Therefore, Theorem.2 is proved.
 
 \subsubsection{Reliability of URLLC}
 
-%这部分内容是error和loss部分的相关工作，可以放在前面来引出。要真么引出呢？我们说，考虑URLLC的可靠性的时候，原版的SNC理论并没有对这部分的研究
-%一些研究者考虑从loss的角度来体现系统的可靠性。然后说下面的这一堆，
 In evaluating the reliability of the system, the stochastic network calculus theory still has no perfect solution.
 Some researchers are studying the system loss, which reflects the reliability of the system from another angle.
 In term of loss analysis in stochastic network calculus, article \cite{article_WLE} and \cite{proc_Loss} are both representative research on loss process. %or impairment
@@ -650,8 +635,6 @@ the loss of traffic from the server node is more reasonable than from the arriva
 In URLLC communication, we will mainly focus on the errors in processing and checking on the server.
 Referring to the article \cite{proc_infocom}, a novel stochastic curve which work on server node will be proposed.
 
-%这里引出了如何考虑urllc的可靠性。 为了说明可靠性，那么就要用impairment过程来表示BLER。
-%impairment表示系统在s到t时段产生的错误块，
 In order to study the reliability of URLLC, BLER is an important criteria to be discussed.
 We propose a new curve to describe the block error rate in URLLC network.
 We denote the stochastic error process $I(\tau)$ as the block error rate occurred in the server.
@@ -678,7 +661,6 @@ The $\hat{\beta}$ denotes the service rate without errors.
 So $A\otimes(\hat{\beta}*(1-\gamma))$ denotes the service capacity after considering BLER.
 We can simplify $A\otimes(\hat{\beta}*(1-\gamma))$ as $A\otimes\beta$, where $\beta = \hat{\beta}*(1-\gamma)$.
 
-%下面要做的事情就是用chernoff边界，来计算一个gamma的影响
 MGF is widely used in stochastic network calculus to compute the performance bound for network system.
 MFG has a beneficial characteristics that it is convenient to get the sum of stochastic processes by product form.
 We compute the stochastic error bound and analyze the BLER with MGF.
@@ -778,7 +760,6 @@ Therefore $d$ is solved.
 
 Considering the reliability of URLLC, the service rate of system $\beta$ should be impacted by BLER.
 We study on the right hand of (\ref{chernoff_err}) to obtain the bound of stochastic error process.
-%Because of $\gamma$ is the ceiling of the process $I$, and we so we can get
 By reference article \cite{article2}, we adopt the envelope model and get
 \begin{equation}\label{mgf_gamma}
 E[e^{\theta I(t)}] \leq e^{\theta (\gamma(t)+\sigma)}
@@ -847,7 +828,6 @@ Taking this boundary probability as the precondition, we simulate the relationsh
 Fig.\ref{fig2} provide the evaluated URLLC delay with different service rate under violation probability $1*10^{-5}$.
 The value of violation probability is from $5*10^{-6}$ to $15*10^{-6}$.
 We arrange the value scope to observe the effect of this value on delay.
-%to include the demand value $1*10^{-5}$
 We adopt 4 service rates in model and all the curves are slow down by violation probability value. From this, we can conduct that the violation probability is not the main factor to influence the latency.
 In order to make the delay less than 1ms, we set service rate from 45Gbit/s to 48Gbit/s based on arrival rate 20Gbit/s.
 We can procure that delay approximates 1ms when service rate is 47Gbit/s at violation probability $1*10^{-5}$.
@@ -870,8 +850,6 @@ For Reliability of URLLC, we adopt SNC theory to study the stochastic bound of b
   \centering\caption{Delay with Different BLER }
   \label{fig_Delay_BLER}
 \end{figure}
-%end the figure
-%To study the relationship between delay and reliability,
 Based on the reliability demand of URLLC, we study the influence of block error rate on system delay.
 From Fig.\ref{fig_Delay_BLER}, we can see that BLER has little effect on the delay.
 The delay varies very slightly when BLER value ranges from $1*10^{-5}$ to $1*10^{-3}$
@@ -920,7 +898,6 @@ The service rate of the server is also a factor affecting the delay.
 With the increase of service rate, the delay can be reduced.
 The results derived from evaluation provide valuable guidelines for the early design of URLLC deployment.
 For our future work, we would consider to include handover access in URLLC communication.
-%With the further development of the researches
 
 % BibTeX users please use one of
 %\bibliographystyle{spbasic}      % basic style, author-year citations
