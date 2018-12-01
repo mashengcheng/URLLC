@@ -63,7 +63,7 @@ grestore
 %
 \begin{document}
 
-\title{Performance evaluation of URLLC in 5G based on Stochastic Network Calculus\thanks{Supported by program National Natural Science Foundation of China (Nos.61502040). Beijing Municipal Program for Excellent Teacher Promotion (No.PXM2017\_014224.000028). Beijing Municipal Program for Top Talent Cultivation (CIT\&TCD201804055). Qinxin Talent Program of Beijing Information Science and Technology University.}}
+\title{Performance evaluation of URLLC in 5G based on Stochastic Network Calculus\thanks{Supported by program National Natural Science Foundation of China (Nos.61872044,61502040). Beijing Municipal Program for Excellent Teacher Promotion (No.PXM2017\_014224.000028). Beijing Municipal Program for Top Talent Cultivation (CIT\&TCD201804055). Qinxin Talent Program of Beijing Information Science and Technology University.}}
 
 %\subtitle{Do you have a subtitle?\\ If so, write it here}
 
@@ -161,10 +161,11 @@ Our main contributions of this paper can be summarized as follows:
 In this model, we can analyze the data transmission from UE to cloud server.
 We use stochastic service process and concatenation property to analysis the latency.
 
-2) Stochastic latency bound for URLLC network is obtained.
-The analysis method of delay bound also supports the communication in mobile edge computing.
+2) For delay analysis, stochastic latency bound for URLLC network is obtained.
+%The analysis method of delay bound also supports the communication in mobile edge computing.
 To analyze the reliability of the network, we provide a stochastic error process which can express the block error rate.
-We also investigate the impacts of block error rate on latency.
+We also investigate the impacts of block error rate on latency, and a delay boundary analysis method considering error rate is proposed.  
+
 
 3) %Our analysis results represent which parameters are the key factors affecting the delay.
 %By adjusting the key factors, we give some strategies which can reduce the delay effectively.
@@ -839,7 +840,7 @@ More simulation parameters can be found in Table.\ref{tab_2}.
 Taking this boundary probability as the precondition, we simulate the relationship between system latency and service rate by applying the conclusions we have drawn in the previous section.
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=.5\textwidth]{delay_no_tandem.png}
+  \includegraphics[width=.7\textwidth]{delay_no_tandem.png}
   \caption{Service Rate Influence}
   \label{fig2}
 \end{figure}
@@ -856,7 +857,7 @@ That means system can guarantee the low latency communication in a stable state.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=.5\textwidth]{BLER.png}
+  \includegraphics[width=0.7\textwidth]{BLER.png}
   \centering\caption{BLER Bound with parameter $\gamma$ }
   \label{fig_BLER}
 \end{figure}
@@ -865,7 +866,7 @@ For Reliability of URLLC, we adopt SNC theory to study the stochastic bound of b
 %add a new figure
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=.5\textwidth]{Delay_BLER.png}
+  \includegraphics[width=.7\textwidth]{Delay_BLER.png}
   \centering\caption{Delay with Different BLER }
   \label{fig_Delay_BLER}
 \end{figure}
@@ -880,7 +881,7 @@ Thus the reliability of the system is guaranteed.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=.5\textwidth]{Delay_Arrival.png}
+  \includegraphics[width=.7\textwidth]{Delay_Arrival.png}
   \centering\caption{Delay with Arrival Rate }
   \label{fig_Delay_Arrival}
 \end{figure}
@@ -895,7 +896,7 @@ Therefore, we should do a good job in task scheduling and resource allocation.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=.5\textwidth]{delay_servers.png}
+  \includegraphics[width=.7\textwidth]{delay_servers.png}
   \caption{Number of Tandem Servers Influence}
   \label{fig3}
 \end{figure}
