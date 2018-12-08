@@ -14,7 +14,7 @@
 % \renewcommand\UrlFont{\color{blue}\rmfamily}
 \begin{document}
 %
-\title{Delay Analysis for URLLC in 5G Based on Stochastic Network Calculus\thanks{Supported by program National Natural Science Foundation of China. (Nos.61370065,61502040).
+\title{Delay Analysis for URLLC in 5G Based on Stochastic Network Calculus\thanks{Supported by program National Natural Science Foundation of China. (Nos.61872044,61502040).
 Beijing Municipal Program for Excellent Teacher Promotion. (No.PXM2017\_014224.000028).}}
 %
 %\titlerunning{Abbreviated paper title}
@@ -31,7 +31,7 @@ Ying Chen\inst{1}\orcidID{0000-0002-0844-0882}}
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
 %
-\institute{Beijing Information Science and Technology University, Beijing 08544, China \email{mashengcheng@163.com}\\
+\institute{Beijing Information Science and Technology University, Beijing , China \email{mashengcheng@163.com}\\
 }
 %
 \maketitle              % typeset the header of the contribution
@@ -40,18 +40,18 @@ Ying Chen\inst{1}\orcidID{0000-0002-0844-0882}}
 %The fifth generation (5G) wireless networks are upcoming to our life.
 %The higher performance requirements are raised to satisfy the needs in modern communication.
 Ultra-reliable low latency communications (URLLC) is one of the most important scenarios in 5G.
-URLLC with strict latency and reliability requirements is widely used in some delay-sensitive applications such as self-driving.
+URLLC with strict latency and reliability requirements is widely used in delay-sensitive applications such as self-driving.
 As the 3GPP claimed, the URLLC is amenable to 99.999\% transmission correctness and within 1ms delay bound.
 How to meet the requirements of reliability and latency is still an open issue.
 %Some academic studies and companies proposed various methods to design URLLC standard, but
-Little efforts have been made on applying a theoretical method to analyze the delay bound.
+Few efforts have been made on applying a theoretical method to analyze the delay bound.
 %Little efforts has been made on applying a theoretical method to analyze the delay bound.
 Stochastic network calculus is an elegant way to obtain the delay bound based on traffic models and service guarantees.
 In this paper, we take the character of 5G architecture into account and use the stochastic network calculus to analyze the delay in URLLC.
 A tandem model is built to simulate the generation of delay in 5G network.
 Some factors which can influence on the delay are obtained.
+Numerical results are presented to verify the correctness of the delay analysis.
 Optimizing these factors to reduce the delay will provide valuable guidelines for the early design of URLLC architecture.
-Finally, numerical results are presented to verify the correctness of the delay analysis.
 
 \keywords{5G \and URLLC \and Stochastic Network Calculus \and Delay Analysis.}
 \end{abstract}
@@ -74,12 +74,12 @@ The stringent delay requirement needs new 5G NR technology to bridge the gap.
 %Though the existing LTE networks can reach the reliability target, but the cost is some dozens of milliseconds time delay.
 Although existing LTE networks can achieve reliability goals, the cost is some dozens of milliseconds of time delay.
 That is far away from the criteria of URLLC.
-So the delay becomes the choke point and it needs to be solved.
+So the delay becomes the bottleneck and it needs to be solved.
 Many academies and companies have proposed some engineering solutions to minimize the delay.
 Such as the HARQ retransmission or grant-free technology.
-However, how to analyze the generation of time-delay from a theoretical perspective and propose a strategy to reduce the delay effectively is an important research subject.
+However, how to analyze the generation of delay from a theoretical perspective and propose a strategy to reduce the delay effectively is an important research subject.
 
-Stochastic network calculus (SNC) theory is very good at delay performance analysis.
+Stochastic network calculus (SNC) theory is an effective tool to analyze the delay performance.
 The SNC is a continuous development method to analyze network traffic characteristic and evaluate performance\cite{book1}.
 Different from queuing theory, the SNC permits some packets to violate the desired performance.
 This feature can better take advantage of statistical multiplexing gains\cite{article2}.
@@ -174,10 +174,9 @@ It mainly applies SNC theory to analyze the delay boundary of multi-server syste
 %We only consider the 5G standalone network situation.
 %Generally speaking, 5G Standalone networking (SA) is the establishment of whole new 5G network, while Non-standalone networking (NSA) is the combination of 5G and 4G LTE.
 %Although 5G network includes NSA mode and SA mode, in order to simplify the system model, we only consider the case of 5G standalone network.
-
 Generally speaking, 5G network includes 5G Standalone networking (SA) and Non-standalone networking (NSA).
 The SA mode is the establishment of whole new 5G network, while the NSA mode is the combination of 5G and 4G LTE.
-According to the implementation technology of core network, the NSA mode can continue to be divided.  
+According to the implementation technology of core network, the NSA mode can continue to be divided.
 In order to simplify the system model, we only discuss the case of 5G standalone network.
 
 We consider URLLC network as a concatenate system from UE to Cloud.
@@ -220,11 +219,14 @@ where
 \item $T_{Cloud}$ is the latency which data transmission between NGC and Cloud server.
 \end{itemize}
 To meet the URLLC key requirement, we should do a good job of studying $T_{Total}$.
-In this part, we discuss the latency mainly on the User Plane (UP) rather than the Control Plane (C-Plane).
-That because most of the latency is attributed to the UP.
-UP latency is the communication time between UE and network nodes when transmission and reception of the data at the corresponding IP layer.
-Whereas, the C-Plane latency is the time spend on radio resource allocating and state switching from idle to active.
-Compared with UP latency, the C-Plane delay is tiny and can be ignored.
+User Plane (UP) latency is the communication time between UE and network nodes when transmission and reception of the data at the corresponding IP layer.
+Control Plane (C-Plane) latency is the time spend on radio resource allocating and state switching from idle to active.
+According to the 3GPP acclaims, the C-Plane delay should be less than 10ms. On the contrary, the User Plane delay should be less than 1ms.
+In this part, we discuss the latency mainly on the UP rather than the C-Plane.
+It because the delay requirement of user plane is higher than that of the control plane.
+%
+%To simplify the analysis, we mainly consider the delay generated by the User Plane.
+
 \subsection{Problem Description}
 The data is transferred from UE, through each node, and finally to the cloud.
 According to the requirement of URLLC, the reliability and random latency \cite{article_MF_Random} can be described as (\ref{eq_urllc_delay_problem}):
@@ -233,11 +235,11 @@ According to the requirement of URLLC, the reliability and random latency \cite{
 P\{delay > d \} < \epsilon
 \end{equation}
 
-The delay should be within 1ms, so the $d < 1$, the unit is millisecond (ms).
+The delay should be within 1ms, so the $d = 1$, the unit is millisecond (ms).
 Where $\epsilon$ is defined as a very small probability.
+The Formula.\ref{eq_urllc_delay_problem} represents the 5G URLLC network successfully transport data and satisfy the delay requirements.
 %Meanwhile the block error rate (BLER) must be 99.999\%.
 %It means that the value of $\epsilon$ must be less than $1*10^{-5}$, (i.e. $1 - 1*10^{-5} = 0.99999$, It equals to BLER $99.999\%$).
-The Formula.\ref{eq_urllc_delay_problem} represents the 5G URLLC network successfully transport data and satisfy the delay requirements.
 %and reliability
 
 \subsection{Stochastic Network Calculus}
@@ -552,16 +554,16 @@ In order to ensure low latency of communication, it is necessary to reduce the n
 \end{figure}
 
 \section{Conclusions}
-In this paper, the architecture of 5G URLLC network researched.
-According to the architecture characteristics, the URLLC network is modeled as a tandem system which demonstrates the communication from UE to Cloud.
+In this paper, the architecture of 5G URLLC network is researched.
+According to the architecture characteristics, the URLLC network is modeled as a tandem system which describes the communication from UE to Cloud.
 Applying stochastic network theory and combining the features of URLLC network, performance analysis has been conducted.
 We have investigated the relationship between delay constraints, service rates, violation probabilities and the number of deployed servers in URLLC networks.
 The 3GPP standard is taken into account when we set the simulation parameters.
-Numerical results demonstrate that the main factor which can impact on latency is the number of servers deployed in tandem.
+Numerical results verify that the main factor which can impact on latency is the number of servers deployed in tandem.
 That also means Edge Computing will be the trend in URLLC application deployment.
 The service rate of the server is also a factor affecting the delay. With the increase of service rate, delay can be reduced.
-The results derived from evaluation which provide valuable guidelines for the early design of URLLC deployment.
-With the further development of the researches, we would consider to include handover access in URLLC communication.
+The results derived from evaluation provide valuable guidelines for the early design of URLLC deployment.
+For our future work, we would consider to include handover access in URLLC communication.
 
 \section{Appendix}
 \subsection{Proof of Corollary.1}
@@ -636,8 +638,7 @@ Therefore, Corollary.\ref{crl_latency} is proved.
 \end{proof}
 
 \subsection{Proof of Corollary.2}
-\begin{proof}
-In the Corollary.\ref{crl_latency}, the gNB subsystem are constituted by AAU, DU and CU. In addition to gNB, the whole 5G URLLC system also include NGC and Cloud.
+\begin{proof}In the Corollary.\ref{crl_latency}, the gNB subsystem are constituted by AAU, DU and CU. In addition to gNB, the whole 5G URLLC system also include NGC and Cloud.
 %只需要在这里加入一些适当的话，就可以了。
 According to the concatenation property which mentioned in Theorem.\ref{thrm_concatenation}, then the network guarantees to the flow a stochastic service curve $S_{All}\sim<g_{All},\beta_{All}>$ with
 \begin{equation}\label{eq_tandem_beta_top}
@@ -697,6 +698,7 @@ P\{L(x)>h(\alpha_{AAU}+x, \beta_{All})\} < f_{AUU} \otimes g_{All}(x)
 \end{equation}
 Therefore, Corollary.2 is proved.
 \end{proof}
+
 
 \subsection{Calculation of Delay}
 We first set right side of (\ref{eq_latency_f_g}) equals to $\epsilon$, and we logarithm on both sides then hold
