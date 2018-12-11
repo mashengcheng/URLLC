@@ -120,45 +120,44 @@ We investigate how to optimize the parameters to reduce the delay, which would p
 \section{Introduction}
 \label{intro}
 5G communication technology appeared for the first time with the 2018 Pyeongchang Winter Olympics in South Korea.
-It helps audiences watch the live broadcast continuously and smoothly.
+It helped audiences watch the live broadcast continuously and smoothly.
 According to the 5G standard schedule announced by the International Telecommunication Union (ITU), 5G will begin commercialization in 2020
 \cite{standard1}.
 5G wireless networks are designed to support diverse and complicated scenarios.
 The third generation partnership project (3GPP) classifies these different scenarios into three big categories: enhanced mobile broadband (eMBB), massive machine type communications (mMTC), and ultra-reliable low-latency communications (URLLC) \cite{standard2}.
 
-URLLC is widely used in self-driving, mission-critical application, and some delay sensitive systems.
-It has stringent requirements in terms of delay and reliability in the 5G New Radio (NR) systems.
+Among them, URLLC is widely used in self-driving, mission-critical application, and some delay sensitive systems.
+It has stringent requirements for the delay and reliability in the 5G New Radio (NR) systems.
 The key requirements of URLLC as claimed by the 3GPP are to ensure the latency of user plane data less than 1ms, meanwhile to keep reliability not less than 99.999 percent \cite{article1}. %It is about 99.999 percent packet reception .
-The stringent delay requirement needs new 5G NR technology to bridge the gap.
-Although existing LTE networks can achieve reliability goals, the cost is some dozens of milliseconds of delay.
-That is far away from the criteria of URLLC.
-So the delay becomes the bottleneck and this problem needs to be solved.
+Such stringent delay requirement needs new 5G NR technology to bridge the gap.
+Although existing 4G LTE (Long Term Evaluation) networks can achieve reliability goals, the cost is some dozens of milliseconds of delay.
+That is far from the criteria of URLLC, so the delay becomes the bottleneck and this problem needs to be solved.
 Many academies and companies have proposed some engineering solutions to minimize the delay, such as the HARQ retransmission or grant-free technology.
 However, how to analyze the generation of delay from a theoretical perspective and propose a strategy to effectively reduce the delay is an important research subject.
 
-Stochastic network calculus (SNC) theory is an effective tool on delay performance analysis.
+Stochastic network calculus (SNC) theory is an effective tool for delay performance analysis.
 SNC is a continuous development method to analyze network traffic characteristic and evaluate performance\cite{book1}.
 Different from queuing theory, SNC permits some packets to violate the desired performance.
 This feature can better take advantage of statistical multiplexing gains\cite{article2}.
 To deal with random service and statistical guarantee, SNC theory comes into being with a large number of stochastic processes and network traffic models.
 SNC theory can process service guarantee analysis of communication networks, such as delay and backlog.
-So we capitalize on the SNC method to analyze the delay of the 5G URLLC transmission in this paper.
+Therefore, we utilize the SNC method to analyze the delay of the 5G URLLC transmission in this paper.
 
 We use stochastic arrival curve to describe the process that user equipment (UE) data sends to gNodeB (gNB) side.
 According to the 5G network topology architecture, we can deduce the rest stages of data transmission from gNB to cloud server.
-Every stage of stochastic arrival curve characterizes the delay property, therefore the whole delay of URLLC system is comprised by delays generated from UE to the cloud server.
+Every stage of stochastic arrival curve characterizes the delay property, so the whole delay of URLLC system is comprised by delays generated from UE to the cloud server.
 
 Our main contributions of this paper can be summarized as follows:
 
 1) We build a tandem model to simulate 5G network architecture.
 In this model, we can analyze the data transmission from UE to cloud server.
-We use stochastic service process and concatenation property to analysis the latency.
+We use stochastic service process and concatenation property to analyze the latency.
 
 2) For delay analysis, stochastic latency bound for URLLC network is obtained.
 To analyze the reliability of the network, we provide a stochastic error process which can express the block error rate.
 We also investigate the impacts of block error rate on latency, and a delay boundary analysis method considering error rate is proposed.
 
-3) Based on our analysis results, we can find out what parameters are the key factors affecting the delay.
+3) Based on our analysis, we can find out what parameters are the key factors affecting the delay.
 Delay analysis and strategy for reducing latency have valuable theoretical guidance for the design of URLLC deployment.
 In order to meet stringent delay requirements, it provides guidelines for how to allocate resources.
 
@@ -173,23 +172,23 @@ We conclude this paper in Section V.
 \label{sec:1}
 Because the standard of URLLC has not been worked out, many researchers have put forward different solutions for the design of URLLC.
 
-Researches focus on how to design and implement URLLC to meet the performance requirements.
+Research focuses on how to design and implement URLLC to meet the performance requirements.
 A design without intervention in the baseband/PHY layer for URLLC is to use interface diversity and integrate multiple communication interfaces.
-Jimmy and his colleagues propose an analytical framework that combines traditional reliability models with technology-specific latency probability distributions\cite{article_interface}.
-In this way, they can estimate the performance in terms of latency and reliability in such an integrated communication system.
+Jimmy and his colleagues proposed an analytical framework that combines traditional reliability models with technology-specific latency probability distributions\cite{article_interface}.
+In this way, they were able to estimate the performance in terms of latency and reliability in such an integrated communication system.
 To guarantee a low end-to-end delay with low jitter over combined internet and wireless interfaces,
 the article \cite{article_multiconnectivity} presents a new round trip time (RTT) skew control controller with multiple-input multiple-output(MIMO).
 This controller's advantage is that it solves the data flow split problem at the controlling node.
-Jaya Rao and Sophie Vrzic have proposed an approach to adopt packet duplication (PD) method to satisfy the latency and reliability requirements\cite{article_PD}.
+Jaya Rao and Sophie Vrzic proposed an approach to adopt packet duplication (PD) method to satisfy the latency and reliability requirements\cite{article_PD}.
 PD technology generates multiple instances and sends them simultaneously in multiple unrelated channels.
 The receiver selects the best packet according to the channel condition in order to achieve better transmission reliability.
 This PD technique can provide a cost-effective solution without increasing the complexity in the radio access network (RAN).
 
-In terms of resource allocation and energy efficiency, there are also some researches on URLLC.
+In terms of resource allocation and energy efficiency, there are also some research on URLLC.
 How the frequency resource will be allocated to the user to send data in URLLC scenario.
 That is an interesting study which is plunged by Anand A and De Veciana G\cite{article_Anand}.
-Based on the 5G standard technology Orthogonal Frequency Division Multiple Access (OFDMA), they build a One Shot Transmission model.
-Adopting queuing theory analysis, they find out a result that a small bandwidth over a longer duration is better than a large swath of bandwidth for short duration in One Shot Transmission system.
+Based on the 5G standard technology Orthogonal Frequency Division Multiple Access (OFDMA), they built a One Shot Transmission model.
+Adopting queuing theory analysis, they found out that a small bandwidth over a longer duration is better than a large swath of bandwidth for short duration in One Shot Transmission system.
 Green energy saving is getting more and more attention.
 The article \cite{article_Energy} provides a coordinated on-off switching scheme across a set of adjacent gNBs.
 The gNBs share a sleep schedule among themselves.
@@ -210,35 +209,35 @@ In order to satisfy the key requirements including latency and reliability, some
 These technologies contain fast HARQ retransmission, MIMO, beam forming, diversity interfaces, D2D communication, Ultra Density Network and so on.
 Some of these technologies can be employed alone to promote performance, and others need to be combined together to achieve better results.
 They all mentioned the design of frame structures.
-That because low latency and high reliability are contradictory.
+That was because low latency and high reliability are contradictory.
 This requires more flexible frequency and time division.
 
 Stochastic network calculus is a very practical tool, and it has a good practical effect in performance analysis and theoretical boundary calculation.
 Li and Jiang \cite{article_jiang_power} analyzed the throughput performance on the wireless-powered communication system.
 They considered the delay as a constrained condition.
 The stochastic traffic arrival was adopted to derive the cumulative data transmission capacity.
-M. Fidler and his partner \cite{proc_MF_Estimation} used stochastic service process to analyze the end-to-end delay performance of TCP.
+M. Fidler and his coauthors \cite{proc_MF_Estimation} used stochastic service process to analyze the end-to-end delay performance of TCP.
 The estimation method of closed-loop flow was implemented by random service process in this paper.
 They considered both backlog and delay by using stochastic network calculus.
-In article \cite{article_beiyou_lei1}, the performance of wireless finite-state Markov channel was analyzed.
+In reference \cite{article_beiyou_lei1}, the performance of wireless finite-state Markov channel was analyzed.
 The delay boundary was derived based on the moment generating functions (MGF).
-Xin Chen's team was focused on LTE network and researched the resource allocation to guarantee the delay performance \cite{article_si_yuan}.
+Xin Chen's team focused on LTE network and researched the resource allocation to guarantee the delay performance \cite{article_si_yuan}.
 The delay was constrained by the difference value between stochastic arrival curve and stochastic service curve.
-The article \cite{article_MF_jiang} is an article of cooperation between Fidler M and Jiang.
+Reference \cite{article_MF_jiang} is a collaboration between Fidler M and Jiang.
 It mainly applies SNC theory to analyze the delay boundary of multi-server systems.
 
 \section{System Model}
 \subsection{URLLC Network Architecture}
 \label{sec:2}
-Generally speaking, 5G network includes 5G Standalone networking (SA) and Non-standalone networking (NSA).
+Generally speaking, 5G network includes Standalone networking (SA) and Non-standalone networking (NSA).
 The SA mode is the establishment of whole new 5G network, while the NSA mode is the combination of 5G and 4G LTE.
-According to the implementation technology of core network, the NSA mode can continue to be divided.
+According to the implementation technology of the core network, the NSA mode can further be divided.
 In order to simplify the system model, we only discuss the case of 5G standalone network.
 
 We consider URLLC network as a concatenate system from UE to Cloud.
-The 4G LTE network is composed by UE, RRU (Radio Remote Unit), BBU (Building Baseband Unit), the EPC (Evolved Packet Core) which is the LTE's core network, and end by cloud servers.
+The 4G LTE network is composed by UE, RRU (Radio Remote Unit), BBU (Building Baseband Unit), the EPC (Evolved Packet Core) which is the LTE's core network, and the endpoint is cloud servers.
 Different from 4G LTE, 5G networks are composed by UE, gNB, NGC and Cloud.
-The gNB contains three parts that are AAU (Active Antenna Unit), DU (Distributed Unit) and CU (Centralized Unit).
+The gNB contains three parts, which are AAU (Active Antenna Unit), DU (Distributed Unit), and CU (Centralized Unit).
 AAU takes the place of the original RRU and combines some physical layer processing functions of BBU.
 The BBU function of 4G will be rebuilt into DU and CU in 5G.
 CU provides the service convergence function in the access side. It focuses on the low real-time capabilities of the protocol stack and adopts a centralized deployment.
@@ -263,7 +262,7 @@ The data leave CU and continue upward to the NGC. This part of the communication
 NGC will process the data and it will take some time.
 Finally, NGC sends the data to Cloud servers. The unidirectional transmission is finished.
 
-So the whole delay or latency in 5G system is contributed by the time processing of RAN, fronthual, backhaul, Core Network, and Cloud server. It can be expressed as (\ref{eq_urllc_delay_composition}).
+Consequently, the whole delay or latency in 5G system is contributed by the time processing of RAN, fronthual, backhaul, Core Network, and Cloud server. It can be expressed as (\ref{eq_urllc_delay_composition}).
 \begin{equation}\label{eq_urllc_delay_composition}
 T_{Total} = T_{RAN} + T_{Fronthaul} + T_{Backhaul} + T_{NGC} + T_{Cloud}
 \end{equation}
@@ -275,14 +274,14 @@ where
 \item $T_{NGC}$ is the delay taken place in NGC.
 \item $T_{Cloud}$ is the latency which data transmission between NGC and Cloud server.
 \end{itemize}
-To meet the URLLC key requirement, we should do a good job of studying $T_{Total}$.
+To meet the URLLC key requirement, it is essential to study $T_{Total}$.
+%we should do a good job of studying $T_{Total}$.
 In this part, we discuss the latency mainly on the User Plane (UP) rather than the Control Plane (C-Plane).
 %That because most of the latency is attributed to the UP.
-It because the delay requirement of user plane is higher than that of control plane.
-UP latency is the communication time between UE and network nodes when transmission and reception of the data at the corresponding IP layer.
-Whereas, the C-Plane latency is the time spend on radio resource allocating and state switching from idle to active.
+That is because the delay requirement of user plane is higher than that of control plane.
+UP latency is the communication time between UE and network nodes when transmission and reception of the data at the corresponding IP layer, whereas the C-Plane latency is the time spend on radio resource allocating and state switching from idle to active.
 %Compared with UP latency, the C-Plane delay is tiny.
-The results of comparison between UP latency and C-Plane have been discussed in article \cite{article_Energy}.
+The results of comparison between UP latency and C-Plane have been discussed in reference \cite{article_Energy}.
 To simplify the analysis, we mainly consider the delay generated by the User Plane.
 
 \subsection{Problem Description}
@@ -291,9 +290,9 @@ According to the requirement of URLLC, the random latency \cite{article_MF_Rando
 \begin{equation}\label{eq_urllc_delay_problem}
 P\{delay > d \} < \epsilon
 \end{equation}
-The delay should be within 1ms, so the $d < 1$, the unit is millisecond (ms).
-Where $\epsilon$ is defined as a very small probability.
-The (\ref{eq_urllc_delay_problem}) represents the 5G URLLC network successfully transport data and satisfy the delay requirements.
+The delay should be within 1ms, so the value of $d$ should be less than 1 and the unit is millisecond (ms).
+The $\epsilon$ is defined as a very small probability.
+Equation(\ref{eq_urllc_delay_problem}) represents the 5G URLLC network successfully transport data and satisfy the delay requirements.
 
 \subsection{Basics of Stochastic Network Calculus}
 In SNC theory, the min-plus algebra is applied to analyze queuing system.
@@ -324,12 +323,12 @@ P\Bigl\{\sup_{0\leq s \leq t}[A\otimes\beta(s) - D(s)] > x \Bigr\} \leq g(x).
 \end{definition}
 
 The symbol $\otimes$ represents the cumulative min-plus convolution operation.
-Which
+Where
 \begin{equation}\label{eq_convolution}
 A\otimes\beta(t) = \inf_{0 \leq s \leq t}\{A(s)+\beta(s,t)\}
 \end{equation}
 $\beta(t)$ is the stochastic service curve which means the worst service capability provided by the server.
-Similar to the stochastic arrival curve, the data that already have been processed are probably more than the data departed.
+Similar to the stochastic arrival curve, the data that have been processed are probably more than the data departed.
 The probability of producing exceeding data can be constrained by the boundary function $g(x)$.
 
 Similarly as in (\ref{eq_ssc}), the departure process relates to the arrival and service process and it is described as
@@ -350,13 +349,13 @@ L(t) = \inf\{d \geq 0 : A(t) \leq D(t+d)\}.
 \end{equation}
 \end{definition}
 
-The (\ref{eq_delay_define}) express that latency $L(t)$ is the least value of $d$, and the $d$ must meet the condition which the amount of arrival data at time $t$ is less than or equal to the departure data at time $t+d$.
+Equation (\ref{eq_delay_define}) express that latency $L(t)$ is the least value of $d$, and $d$ must meet the condition that the amount of arrival data at time $t$ is less than or equal to the departure data at time $t+d$.
 It also means that the data do not leave the server immediately.
 The duration of the data in server is the delay time.
-In (\ref{eq_delay_define}), the arrival process $A(t)$ is little than or equal to the departure process $D(t+d)$.
+In (\ref{eq_delay_define}), the arrival process $A(t)$ is less than or equal to the departure process $D(t+d)$.
 It means that the data arrived in server at time $t$ are all leaving from server at time $t+d$.
 If $A(t)$ is large than or equal to the departure process $D(t+d)$, that represents the data arrived at $t$ moment have not been completed by service during $d$ period of time.
-So the $A(t)$ little than or equal to $D(t+d)$ situation is utilized to describe the shortest time that server takes for the data to be serviced.
+Therefore, the $A(t)$ less than or equal to $D(t+d)$ situation is utilized to describe the shortest time that server takes for the data to be serviced.
 That is the latency or delay.
 
 According to the latency process definition, and utilizing stochastic arrival process and stochastic service process, so the stochastic latency bound has been defined at following.
@@ -388,17 +387,15 @@ g(x)=g^{1}\otimes g^{2}\otimes\cdot\cdot\cdot\otimes g^{N}(t)
 The network character of URLLC can be described as a dynamic server by stochastic processes as introducing in above.
 The data sent by UE can be represented by the arrival process $A(t)$.
 The service capacity provided by the network server node can be depicted as the stochastic service process $S(t)$.
-
-As assumption the latency of URLLC in Formula.\ref{eq_urllc_delay_composition}, we consider the URLLC network is a tandem system.
-So the delay of URLLC should fall in the concatenation characterization in SNC.
+As the assumption in equation (\ref{eq_urllc_delay_composition}), we consider the URLLC network is a tandem system.
+Therefore, the delay of URLLC should fall in the concatenation characterization in SNC.
 
 We consider that a UE's network flow passing through the gNB, CN and Cloud in tandem mode.
 Each network node $k(=gNB, AAU, DU, CU, CN, Cloud)$ provides a stochastic service curve $S_{k}\sim<g_k, \beta_k>$ to its flow.
 We first discuss about the gNB subsystem.
 The gNB includes AAU, DU and CU, so $S_{AAU}(s,t)$, $S_{DU}(s,t)$ and $S_{CU}(s,t)$ are in series.
 We use the same indices to denote the arrival and departure process of the respective systems.
-Especially the source of data is from UE.
-So $A_{AAU}(t)$ as arrival process denotes the input data of AAU from UE in gNB subsystem.
+Especially the source of data is from UE, so $A_{AAU}(t)$ as arrival process denotes the input data of AAU from UE in gNB subsystem.
 The arrival process of DU $A_{DU}(t)$ actually equals to the departure process of AAU $D_{AAU}(t)$, where $A_{DU}(t) = D_{AAU}(t)$.
 By the same token, $A_{CU}(t) = D_{DU}(t)$ similarly for CU server.
 The departure process of CU is $D_{CU}(t)$.
@@ -431,7 +428,7 @@ D_{CU}(t) &\geq ((A_{AAU}\otimes S_{AAU}) \otimes S_{DU})\otimes S_{CU}(t) \\
 \end{split}
 \end{equation}
 From the gNB subsystem perspective to see, $A_{AAU}(t)$ is the first input and $D_{CU}(t)$ is the last output of gNB.
-So $A_{AAU}(t)$ equal to $A_{gNB}(t)$, and $D_{CU}(t)$ is the departure process of the gNB $D_{gNB}(t)$.
+Therefore, $A_{AAU}(t)$ equal to $A_{gNB}(t)$, and $D_{CU}(t)$ is the departure process of the gNB $D_{gNB}(t)$.
 Then we can get gNB subsystem
 \begin{equation}\label{eq_departure_gNB}
 D_{gNB} \geq A_{AAU}\otimes (S_{AAU}\otimes S_{DU} \otimes S_{CU})(t).
@@ -537,7 +534,7 @@ Therefore, Theorem.\ref{crl_latency} is proved.
 \subsubsection{Delay of URLLC}
 
 For mobile edge computing (MEC) deployment, CU can be the end of the transmission. That is because the computing resource and storage resource are located at CU.
-The Theorem.\ref{crl_latency} is suitable for analysis the delay of communication from UE to CU.
+The Theorem.\ref{crl_latency} is suitable for analyzing the delay of communication from UE to CU.
 However, in order to comprehensively discuss the delay of URLLC system, we need to convert the destination from CU to Cloud.
 By extending Theorem.\ref{crl_latency}, we can draw the whole URLLC system latency bound.
 \begin{theorem}\label{crl_latency_urllc}{\bfseries (Latency Bound of URLLC)}
@@ -618,9 +615,9 @@ Therefore, Theorem.2 is proved.
 
 \subsubsection{Reliability of URLLC}
 
-In evaluating the reliability of the system, the stochastic network calculus theory still has no perfect solution.
+For evaluating the reliability of the system, the stochastic network calculus theory still has no perfect solution.
 Some researchers are studying the system loss, which reflects the reliability of the system from another angle.
-In term of loss analysis in stochastic network calculus, article \cite{article_WLE} and \cite{proc_Loss} are both representative research on loss process. %or impairment
+In term of loss analysis in stochastic network calculus, article \cite{article_WLE} and \cite{proc_Loss} are both representative studies on loss process. %or impairment
 A. Gulyas and J. Biro propose a Workload Loss Ratio Estimation to express the loss in the network flow.
 An effective w-arrival curve $Z^{\varphi}$ is put forward in this paper.
 They use $Z^{\varphi}\oslash S^{\varphi_{s}}$ to present the loss generated in service process.
@@ -684,8 +681,7 @@ These are stochastic arrival process $\alpha_{AAU}$, $f_{AAU}$, and stochastic s
 Especially, we can also decompose $\beta_{All}$ and $g_{All}$ to obtain more detailed result.
 
 In URLLC scenario, the data is usually fixed unit packet size, the data size sometimes very tiny while applying millimeter-wave technology.
-We assume that UE data arrive will approximate to a Poisson distribution with mean rate $\lambda$.
-So arrive curve $\alpha_{AAU}=\lambda t$ and bound function will be
+We assume that UE data arrive will approximate to a Poisson distribution with mean rate $\lambda$, so arrive curve $\alpha_{AAU}=\lambda t$ and bound function will be
 \begin{equation}\label{eq_f_1}
 f_{AAU}(x)=\sum_{k=x+\lambda t}^{\infty} \frac{e^{\lambda t}\cdot (\lambda t)^{k}}{k!}
 \end{equation}
@@ -729,12 +725,12 @@ We put (\ref{eq_f_2}), (\ref{eq_g_all}) into (\ref{eq_in_crl_2}) and apply the T
 \end{split}
 \end{equation}
 Then we hold the latency bound as (\ref{eq_urllc_delay_problem}).
-Let $d=\frac{x}{C-\lambda}$ and set the right side of (\ref{eq_latency_f_g}) equal to $\epsilon$. The $\epsilon$ is a small latency bound violation probability. We can obtain a relationship between $d$ and $\epsilon$.
+Let $d=\frac{x}{C-\lambda}$ and set the right side of (\ref{eq_latency_f_g}) equals to $\epsilon$. The $\epsilon$ is a small latency bound violation probability. We can obtain a relationship between $d$ and $\epsilon$.
 \begin{equation}
 d = \frac{1}{C-\lambda}\cdot\frac{n+1}{b}\cdot ln{\frac{a(n+1)}{\epsilon}}
 \end{equation}
 
-We first set right side of (\ref{eq_latency_f_g}) equals to $\epsilon$, and we logarithm on both sides then hold
+We first set right side of (\ref{eq_latency_f_g}) equals to $\epsilon$, and we take the logarithm on both sides then hold
 \begin{equation}\label{eq_appendixC_1}
 \begin{split}
 &e^{x-(\lambda t+x)ln\frac{\lambda t+x}{\lambda t}}\cdot e^{\frac{-xb}{n+1}}(a(n+1)) = \epsilon \\
@@ -759,7 +755,7 @@ d = \frac{1}{C-\lambda}\cdot\frac{n+1}{b}\cdot ln{\frac{a(n+1)}{\epsilon}}
 \end{equation}
 Therefore $d$ is solved.
 
-Considering the reliability of URLLC, the service rate of system $\beta$ should be impacted by BLER.
+For the reliability of URLLC, the service rate of system $\beta$ should be impacted by BLER.
 We study on the right hand of (\ref{chernoff_err}) to obtain the bound of stochastic error process.
 By reference article \cite{article2}, we adopt the envelope model and get
 \begin{equation}\label{mgf_gamma}
@@ -790,13 +786,13 @@ Then we can get a stochastic delay bound with block error rate.
 
 
 \section{Numerical Results and Performance Evaluation}
-In this section, we will discuss what factors are the main cause of latency in URLLC.
+In this section, we will discuss what are the determining factors for latency in URLLC.
 
 Although the deployment details of the URLLC standard are not yet released, we can still apply SNC theory for quantitative analysis.
 We assume that the 5G URLLC networks are standalone deployment.
 The packet arrival rate is constant and arrival process satisfies Poisson distribution.
 A general URLLC reliability requirement for one transmission of a packet is $1*10^{-5}$ for 32 bytes with a user plane latency of 1ms.
-So we set the block error rate value around $1*10^{-5}$.
+%so we set the block error rate value around $1*10^{-5}$.
 More simulation parameters can be found in Table.\ref{tab_2}.
 \begin{table}
   \caption{evaluation parameters}\label{tab_2}
@@ -842,7 +838,7 @@ That means system can guarantee the low latency communication in a stable state.
   \centering\caption{BLER Bound with parameter $\gamma$ }
   \label{fig_BLER}
 \end{figure}
-For Reliability of URLLC, we adopt SNC theory to study the stochastic bound of block error rate. In Fig.(\ref{fig_BLER}), we set the parameter $\gamma$ in three different values which is near to the $1*10^{-5}$. This parameter is set according to the BLER requirement of URLLC in 3GPP\cite{standard2}. We can get that the block error rate will get down with the violate probability increasing. For the upper bound parameter $\gamma = 0.00001$, the BLER is well limited to the $1*10^{-5}$. It also means that the $99.999\%$ transmission correctness.
+For Reliability of URLLC, we adopt SNC theory to study the stochastic bound of block error rate. In Fig.(\ref{fig_BLER}), we set the parameter $\gamma$ in three different values which is near to the $1*10^{-5}$. This parameter is set according to the BLER requirement of URLLC in 3GPP\cite{standard2}. We can get that the block error rate will decrease with the violate probability increasing. For the upper bound parameter $\gamma = 0.00001$, the BLER is well limited to the $1*10^{-5}$. It also means that the $99.999\%$ transmission correctness.
 
 %add a new figure
 \begin{figure}[htbp]
@@ -871,12 +867,12 @@ When the arrival rate is 20Gbit/s, the system delay exceeds 1ms which is the req
 With the increase of service rate, the system delay can be reduced to less than 1ms.
 But when the arrival rate continues to increase, the delay will eventually exceed the demand.
 Due to limited resources, service rates cannot increase infinitely.
-Therefore, we should do a good job in task scheduling and resource allocation.
+Therefore, we should improve task scheduling and resource allocation.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=.7\textwidth]{delay_servers.png}
-  \caption{Number of Tandem Servers Influence}
+  \caption{The Influence of Number of Tandem Servers on Delay}
   \label{fig3}
 \end{figure}
 Fig.\ref{fig3} presents the relationship among latency, number of server levels and service rate.
