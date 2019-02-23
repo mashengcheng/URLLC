@@ -303,7 +303,7 @@ P\{delay > d \} < \epsilon
 \end{equation}
 The delay should be within 1ms, so the value of $d$ should be less than 1 and the unit is millisecond (ms).
 The $\epsilon$ is defined as a very small probability.
-Equation(\ref{eq_urllc_delay_problem}) represents the 5G URLLC network successfully transport data and satisfy the delay requirements.
+Equation(\ref{eq_urllc_delay_problem}) represents a 5G URLLC network that successfully transfers data and meets the delay requirements.
 
 \subsection{Basics of Stochastic Network Calculus}
 In SNC theory, the min-plus algebra is applied to analyze queuing system.
@@ -473,7 +473,7 @@ where service rate $\beta_{gNB}(t)=\beta_{AAU}\otimes \beta_{DU}\otimes \beta_{C
 
 
 \begin{proof}:
-Since the latency process Definition.(\ref{def_delay_process}) are defined as $L(t) = \inf\{d \geq 0 : A(t) \leq D(t+d)\}$,
+Since the latency process Definition.(\ref{def_delay_process}) is defined as $L(t) = \inf\{d \geq 0 : A(t) \leq D(t+d)\}$,
 event ${L(t)} > d$ implies event ${A(t)\leq D(t+d)}$.
 We move $D(t+d)$ from right hand to left hand, and according to (\ref{eq_latency_gNB}), the latency bound of gNB can be hold as
 \begin{equation}\label{eq_latencybound_gNB}
@@ -834,7 +834,7 @@ Taking this boundary probability as the precondition, we simulate the relationsh
   \caption{Service Rate Influence}
   \label{fig2}
 \end{figure}
-Fig.\ref{fig2} provide the evaluated URLLC delay with different service rate under violation probability $1*10^{-5}$.
+Fig.\ref{fig2} provides the evaluated URLLC delay with different service rate under violation probability $1*10^{-5}$.
 The value of violation probability is from $5*10^{-6}$ to $15*10^{-6}$.
 We arrange the value scope to observe the effect of this value on delay.
 We adopt 4 service rates in model and all the curves are slow down by violation probability value. From this, we can conduct that the violation probability is not the main factor to influence the latency.
@@ -892,21 +892,21 @@ The arrival rate is constant and the speed is 20Gbit/s. The violation probabilit
 Based on the above setting, we can derived that the delay is sensitive on number of tandem servers.
 From Fig.\ref{fig3}, we can see the slope of latency caused by number of tandem servers is larger than the service rate.
 We draw a delay equals 1ms flat plane to cut the curved surface.
-The part below the plane is the scope of deployment parameters which satisfy the delay condition. 
+The part below the plane is the scope of deployment parameters which satisfy the delay condition.
 %This means that the delay is maintained below 1ms when the number of servers less than 5 at the same time service rate more than 40 Gbit/s.
 This means that when the number of servers is less than 5 and the service rate is over 40 Gbit/s, the delay is maintained below 1 ms.
-In order to ensure low latency of communication, it is necessary to reduce the number of tandem servers in deployment. 
+In order to ensure low latency of communication, it is necessary to reduce the number of tandem servers in deployment.
 The edge computing is a popular deployment in 5G network. It is a typical example for reducing the number of servers in the transmission path.
-Increasing server service rate is another way to reduce latency. 
-When the transmission rate is 20 Gbit/s, the service rate should be set above 40 Gbit/s. 
+Increasing server service rate is another way to reduce latency.
+When the transmission rate is 20 Gbit/s, the service rate should be set above 40 Gbit/s.
 In this way, the delay requirement of URLLC can be guaranteed.
 
 The simulation experiment of the whole paper is mainly aimed at the performance requirements of URLLC.
 In terms of Low-Latency, URLLC requires transmission delay less than or equal to 1 ms.
 At the same time, in terms of Ultra-reliability, URLLC should ensure that the block error rate is $1*10^{-5}$.
-Our simulation experiment reveals how to meet the requirements of latency and reliability. 
-In order to increase the transmission rate of the network to 20GBit/s, we need to meet the conditions in network construction. 
-The conditions like what kind of processing speed should the service rate of network nodes satisfy, and what range should be the number of hops 
+Our simulation experiment reveals how to meet the requirements of latency and reliability.
+In order to increase the transmission rate of the network to 20GBit/s, we need to meet the conditions in network construction.
+The conditions like what kind of processing speed should the service rate of network nodes satisfy, and what range should be the number of hops
 (tandem servers) from the access network to the cloud.
 
 \section{Conclusions}
