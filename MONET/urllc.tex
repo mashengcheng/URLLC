@@ -63,6 +63,8 @@ grestore
 %
 \begin{document}
 
+%bibliographystyle{plain}
+
 \title{Performance Evaluation of URLLC in 5G based on Stochastic Network Calculus\thanks{Supported by program National Natural Science Foundation of China (Nos.61872044,61502040). Beijing Municipal Program for Excellent Teacher Promotion (No.PXM2017\_014224.000028). Beijing Municipal Program for Top Talent Cultivation (CIT\&TCD201804055). Qinxin Talent Program of Beijing Information Science and Technology University.}}
 
 %\subtitle{Do you have a subtitle?\\ If so, write it here}
@@ -177,7 +179,7 @@ In section IV, we introduce the experimental environment and analyze the relatio
 We conclude this paper in Section V.
 
 \section{Related Work}
-\label{sec:1}
+\label{sec:2}
 Because the standard of URLLC has not been worked out, many researchers have put forward different solutions for the design of URLLC.
 
 Research focuses on how to design and implement URLLC to meet the performance requirements.
@@ -235,7 +237,7 @@ Reference \cite{article_MF_jiang} is a collaboration between Fidler M and Jiang.
 It mainly applies SNC theory to analyze the delay boundary of multi-server systems.
 
 \section{System Model}
-
+\label{sec:3}
 To build a system model, we need to consider two points. The first is how to reflect the real situation of 5G networks in our system. The article \cite{article_Energy} and \cite{article_joachim} are both use the concatenate model to describe the composition of the delay in URLLC networks. The second point is that does the SNC theory suit for the performance analysis in URLLC communication? Guang Yang, Ming Xiao, and H. Vincent Poor have done similar work by using SNC theory in Low-Latency Millimeter-Wave Communication \cite{article_Millimeter}. Although the Millimeter-Wave is not the only way to implement URLLC, it still can prove the SNC theory can accomplish the delay analysis. To sum up these two points, we make an attempt to combine SNC and the tandem model to analyze the performance in 5G URLLC. Furthermore, system reliability will be discussed in this section.
 
 \subsection{URLLC Network Architecture}
@@ -256,7 +258,7 @@ The NGC (Next Generation Core Network) as Core Network in 5G replace the EPC. 5G
 The architecture is depicted as Fig. \ref{fig_architecture}.
 \begin{figure*}[htbp]
 \centering
-  \includegraphics[width=0.75\textwidth]{5G_delay_en.jpg}
+  \includegraphics[width=0.75\textwidth]{5G_delay_en.eps}
 \caption{5G network architecture.}
 \label{fig_architecture}
 \end{figure*}
@@ -454,7 +456,7 @@ L_{gNB}(t) &= \inf\{d\geqslant0: A_{gNB}(t) - D_{gNB}(t+d) \leqslant 0 \} \\
 \end{split}
 \end{equation}
 
-With Lemma.\ref{thrm_latency} and Lemma.\ref{thrm_concatenation}, the delay bound can be analysis by following theorem.
+With Lemma. \ref{thrm_latency} and Lemma. \ref{thrm_concatenation}, the delay bound can be analysis by following theorem.
 \begin{theorem}\label{crl_latency}{\bfseries (Latency Bound of gNB)}
 In gNB subsystem, $A_{AAU}(t)$ is a stochastic arrival process with stochastic arrival curve $\alpha_{AAU}$, i.e. $A \sim <f_{AAU}, \alpha_{AAU}>$.
  $\alpha_{AAU} \in \mathcal{F}$, $f_{AAU} \in \mathcal{\bar{F}}$.
@@ -489,7 +491,7 @@ Then we focus on the $\{A_{AAU}(t) - D_{CU}(t+d)\}$ part. We put right hand of (
 \end{split}
 \end{equation}
 
-With the Lemma.\ref{thrm_concatenation}, utilizing the concatenation property we can obtain that
+With the Lemma. \ref{thrm_concatenation}, utilizing the concatenation property we can obtain that
 $S_{AAU}\sim<g_{AAU},\beta_{AAU}>$, $S_{DU}\sim<g_{DU},\beta_{DU}>$, $S_{CU}\sim<g_{CU},\beta_{CU}>$.
 Stochastic service process convolution operation $(S_{AAU}\otimes S_{DU}\otimes S_{CU})$ means gNB subsystem provides maybe lower than $(\beta_{AAU}\otimes \beta_{DU} \otimes \beta_{CU})$ processing capacity,
 but the violation probability in this case is limited by $g_{AAU}\otimes g_{DU}\otimes g_{DU}$.
@@ -539,15 +541,15 @@ we can obtain
 &\leqslant \inf\{f_{AAU}(t)+g_{gNB}(x-t)\} \\
 &\leqslant f_{AAU}\otimes g_{gNB}(x)
 \end{align*}
-Therefore, Theorem.\ref{crl_latency} is proved.
+Therefore, Theorem. \ref{crl_latency} is proved.
 \end{proof}
 
 \subsubsection{Delay of URLLC}
 
 For mobile edge computing (MEC) deployment, CU can be the end of the transmission. That is because the computing resource and storage resource are located at CU.
-The Theorem.\ref{crl_latency} is suitable for analyzing the delay of communication from UE to CU.
+The Theorem. \ref{crl_latency} is suitable for analyzing the delay of communication from UE to CU.
 However, in order to comprehensively discuss the delay of URLLC system, we need to convert the destination from CU to Cloud.
-By extending Theorem.\ref{crl_latency}, we can draw the whole URLLC system latency bound.
+By extending Theorem. \ref{crl_latency}, we can draw the whole URLLC system latency bound.
 \begin{theorem}\label{crl_latency_urllc}{\bfseries (Latency Bound of URLLC)}
 In 5G URLLC system, $A_{AAU}(t)$ is a stochastic arrival process with stochastic arrival curve $\alpha_{AAU}$, i.e. $A\sim<f_{AAU},\alpha_{gNB}>$. $\alpha_{AAU}\in\mathcal{F}$, $f_{AAU}\in\mathcal{\bar{F}}$.
 The server nodes in URLLC system provide stochastic service process $S_{gNB}(t)$, $S_{NGC}(t)$ and $S_{Cloud}(t)$ respectively, i.e.
@@ -564,8 +566,8 @@ P\{L_{All}(t) \geq d\} &= P\{L_{All}(t) \geq h(\alpha_{AUU}+x, \beta_{All})\} \\
 where $\beta_{All}(t)=\beta_{gNB}\otimes \beta_{NGC}\otimes \beta_{Cloud}(t)$, and $g_{All}=g_{gNB}\otimes g_{NGC}\otimes g_{Cloud}(x)$.
 
 \begin{proof}:
-In the Theorem.\ref{crl_latency}, the gNB subsystem are constituted by AAU, DU and CU. In addition to gNB, the whole 5G URLLC system also include NGC and Cloud.
-According to the concatenation property which mentioned in Lemma.\ref{thrm_concatenation}, then the network guarantees to the flow a stochastic service curve $S_{All}\sim<g_{All},\beta_{All}>$ with
+In the Theorem. \ref{crl_latency}, the gNB subsystem are constituted by AAU, DU and CU. In addition to gNB, the whole 5G URLLC system also include NGC and Cloud.
+According to the concatenation property which mentioned in Lemma. \ref{thrm_concatenation}, then the network guarantees to the flow a stochastic service curve $S_{All}\sim<g_{All},\beta_{All}>$ with
 \begin{equation}\label{eq_tandem_beta_top}
 \beta_{All}(t)=\beta_{gNB}\otimes\beta_{CN}\otimes\beta_{Cloud}(t)
 \end{equation}
@@ -617,11 +619,11 @@ where $D_{Cloud}\geqslant A_{AAU}\otimes S_{AAU}\otimes S_{DU}\otimes S_{CU}\oti
 With stochastic arrival curve (\ref{eq_sac}), $A_{AAU}(s,t)-\alpha_{AAU}(t-s)$ is bounded by $f_{AAU}(x)$.
 According to stochastic service curve (\ref{eq_ssc}), $A_{AAU}\otimes \beta_{All}(t+d)-D_{Cloud}(t+d)$ is limited by $g_{All}$.
 For long-term running, if $t\rightarrow\infty$, $\alpha_{AAU}(t-s)-\beta_{All}(t+d-s)$ approximate to zero because of $\alpha_{AAU},\beta_{All}\in\mathcal{F}$.
-Finally, with Lemma.\ref{thrm_latency}, the delay of the URLLC system can be bounded by this
+Finally, with Lemma. \ref{thrm_latency}, the delay of the URLLC system can be bounded by this
 \begin{equation}\label{eq_latency_urllc}
 P\{L(x)>h(\alpha_{AAU}+x, \beta_{All})\} < f_{AUU} \otimes g_{All}(x)
 \end{equation}
-Therefore, Theorem.2 is proved.
+Therefore, Theorem. \ref{crl_latency_urllc} is proved.
 \end{proof}
 
 \subsubsection{Reliability of URLLC}
@@ -727,7 +729,7 @@ with all the information we discuss above,  and applying the lemma which proved 
 \begin{equation}\label{eq_g_all}
 g_{All}(x) = e^{\frac{-xb}{n+1}}(a(n+1))
 \end{equation}
-We put (\ref{eq_f_2}) and (\ref{eq_g_all}) into (\ref{eq_in_crl_2}), and apply the Theorem.3 which proved in \cite{proc_Michael}. It can be derived that
+We put (\ref{eq_f_2}) and (\ref{eq_g_all}) into (\ref{eq_in_crl_2}), and apply the Theorem. 3 which proved in \cite{proc_Michael}. It can be derived that
 \begin{equation}\label{eq_latency_f_g}
 \begin{split}
 &P\{L(t)>h(\alpha_{AAU}+x, \beta)\} \\
@@ -798,6 +800,7 @@ Then we can get a stochastic delay bound with block error rate.
 After the derivation of the stochastic network calculus, we can find out which are the factors affecting delay and reliability.
 
 \section{Numerical Results and Performance Evaluation}
+\label{sec:4}
 In this section, we will discuss what are the determining factors for latency in URLLC.
 
 Although the deployment details of the URLLC standard are not yet released, we can still apply SNC theory for quantitative analysis.
@@ -830,7 +833,7 @@ More simulation parameters can be found in Tab. \ref{tab_2}.
 Taking this boundary probability as the precondition, we simulate the relationship between system latency and service rate by applying the conclusions we have drawn in the previous section.
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=.7\textwidth]{delay_no_tandem.png}
+  \includegraphics[width=.7\textwidth]{delay_no_tandem.eps}
   \caption{Service Rate Influence}
   \label{fig2}
 \end{figure}
@@ -846,7 +849,7 @@ That means system can guarantee the low latency communication in a stable state.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.7\textwidth]{BLER.png}
+  \includegraphics[width=0.7\textwidth]{BLER.eps}
   \centering\caption{BLER Bound with Parameter $\gamma$ }
   \label{fig_BLER}
 \end{figure}
@@ -855,7 +858,7 @@ For Reliability of URLLC, we adopt SNC theory to study the stochastic bound of b
 %add a new figure
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=.7\textwidth]{Delay_BLER.png}
+  \includegraphics[width=.7\textwidth]{Delay_BLER.eps}
   \centering\caption{Delay with Different BLER }
   \label{fig_Delay_BLER}
 \end{figure}
@@ -868,7 +871,7 @@ Thus the reliability of the system is guaranteed.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=.7\textwidth]{Delay_Arrival.png}
+  \includegraphics[width=.7\textwidth]{Delay_Arrival.eps}
   \centering\caption{Delay with Arrival Rate }
   \label{fig_Delay_Arrival}
 \end{figure}
@@ -883,7 +886,7 @@ Therefore, we should improve task scheduling and resource allocation.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=.7\textwidth]{delay_servers.png}
+  \includegraphics[width=.7\textwidth]{delay_servers.eps}
   \caption{The Influence of Number of Tandem Servers on Delay}
   \label{fig3}
 \end{figure}
@@ -910,6 +913,7 @@ The conditions like what kind of processing speed should the service rate of net
 (tandem servers) from the access network to the cloud.
 
 \section{Conclusions}
+\label{sec:5}
 In this paper, the architecture of the 5G URLLC network is researched.
 According to the architecture characteristics, the URLLC network is modeled as a tandem system which describes the communication from UE to Cloud.
 Applying stochastic network theory and combining the features of URLLC network, performance analysis has been conducted.
