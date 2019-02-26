@@ -136,9 +136,9 @@ Many academies and companies have proposed some engineering solutions to minimiz
 However, how to analyze the generation of delay from a theoretical perspective and propose a strategy to effectively reduce the delay is an important research subject.
 
 Stochastic network calculus (SNC) theory is an effective tool for delay performance analysis.
-SNC is a continuous development method to analyze network traffic characteristic and evaluate performance\cite{book1}.
+SNC is a continuous development method to analyze network traffic characteristic and evaluate performance \cite{book1}.
 Different from queuing theory, SNC permits some packets to violate the desired performance.
-This feature can better take advantage of statistical multiplexing gains\cite{article2}.
+This feature can better take advantage of statistical multiplexing gains \cite{article2}.
 To deal with random service and statistical guarantee, SNC theory comes into being with a large number of stochastic processes and network traffic models.
 SNC theory can process service guarantee analysis of communication networks, such as delay and backlog.
 Therefore, we utilize the SNC method to analyze the delay of the 5G URLLC transmission in this paper.
@@ -164,9 +164,10 @@ To analyze the reliability of the network, we provide a stochastic error process
 We also investigate the impacts of block error rate on latency and propose a delay boundary analysis method.
 %For delay analysis, stochastic latency bound for URLLC network is obtained.
 
-3) Based on our analysis, we can find out what parameters are the key factors affecting the delay.
-Delay analysis and strategy for reducing latency have valuable theoretical guidance for the design of URLLC deployment.
-In order to meet stringent delay requirements, it provides guidelines for how to allocate resources.
+3) Based on our analysis method, we obtain the relationship between Delay and Arrival Rate and Service Rate.
+We also calculate the minimum system service rate that meets the delay requirement of URLLC.
+Further, our analysis reveals that the system delay can be reduced by decreasing number of tandem servers.
+The result provides guidelines for deployment to meet stringent delay requirements.
 
 The rest of this paper is organized as follows.
 Section II summarizes related work of URLLC technology and stochastic network calculus.
@@ -181,19 +182,19 @@ Because the standard of URLLC has not been worked out, many researchers have put
 
 Research focuses on how to design and implement URLLC to meet the performance requirements.
 A design without intervention in the baseband/PHY layer for URLLC is to use interface diversity and integrate multiple communication interfaces.
-Jimmy and his colleagues proposed an analytical framework that combines traditional reliability models with technology-specific latency probability distributions\cite{article_interface}.
+Jimmy and his colleagues proposed an analytical framework that combines traditional reliability models with technology-specific latency probability distributions \cite{article_interface}.
 In this way, they were able to estimate the performance in terms of latency and reliability in such an integrated communication system.
 To guarantee a low end-to-end delay with low jitter over combined internet and wireless interfaces,
 the article \cite{article_multiconnectivity} presents a new round trip time (RTT) skew control controller with multiple-input multiple-output(MIMO).
 This controller's advantage is that it solves the data flow split problem at the controlling node.
-Jaya Rao and Sophie Vrzic proposed an approach to adopt packet duplication (PD) method to satisfy the latency and reliability requirements\cite{article_PD}.
+Jaya Rao and Sophie Vrzic proposed an approach to adopt packet duplication (PD) method to satisfy the latency and reliability requirements \cite{article_PD}.
 PD technology generates multiple instances and sends them simultaneously in multiple unrelated channels.
 The receiver selects the best packet according to the channel condition in order to achieve better transmission reliability.
 This PD technique can provide a cost-effective solution without increasing the complexity in the RAN.
 
 In terms of resource allocation and energy efficiency, there are also some research on URLLC.
 How the frequency resource will be allocated to the user to send data in URLLC scenario.
-That is an interesting study which is plunged by Anand A and De Veciana G\cite{article_Anand}.
+That is an interesting study which is plunged by Anand A and De Veciana G \cite{article_Anand}.
 Based on the 5G standard technology Orthogonal Frequency Division Multiple Access (OFDMA), they built a One Shot Transmission model.
 Adopting queuing theory analysis, they found out that a small bandwidth over a longer duration is better than a large swath of bandwidth for short duration in One Shot Transmission system.
 Green energy saving is getting more and more attention.
@@ -203,11 +204,11 @@ If the gNBs have lower traffic and fewer connected UEs, they will be set to the 
 This On-Off mode is more energy-efficient than traditional mode on the premise of guaranteeing the time delay.
 
 Because URLLC has strict requirements for delay and reliability, it is very meaningful to evaluate the performance of URLLC.
-Joachim et al. provide an achievable latency bound evaluation in their article\cite{article_joachim}.
+Joachim et al. provide an achievable latency bound evaluation in their article \cite{article_joachim}.
 They compare the latencies for different configurations in 5G RAN transmission.
 The configuration contains FDD, TDD, frequency numerologies and usage of slots.
 According to the analysis, a frequency with higher numerology can be used to reduce the latency.
-An article derived from HUAWEI company proposes a grant-free mode uplink transmission mechanism\cite{proc_Huawei}.
+An article derived from HUAWEI company proposes a grant-free mode uplink transmission mechanism \cite{proc_Huawei}.
 Grant-free transmission grants dynamically without scheduling request.
 This mode is poised to meet the reliability requirement of URLLC in uplink transmission.
 By simulating random arriving from different numbers of active UEs, the reliability can be improved after adopting the grant-free mode with increasing retransmission.
@@ -235,10 +236,9 @@ It mainly applies SNC theory to analyze the delay boundary of multi-server syste
 
 \section{System Model}
 
-To build a system model, we need to consider two points. The first is how to reflect the real situation of 5G networks in our system. The article \cite{article_Energy} and \cite{article_joachim} are both use the concatenate model to describe the composition of the delay in URLLC networks. The second point is that does the SNC theory suit for the performance analysis in URLLC communication? Guang Yang, Ming Xiao, and H. Vincent Poor have done similar work by using SNC theory in Low-Latency Millimeter-Wave Communication\cite{article_Millimeter}. Although the Millimeter-Wave is not the only way to implement URLLC, it still can prove the SNC theory can accomplish the delay analysis. To sum up these two points, we make an attempt to combine SNC and the tandem model to analyze the performance in 5G URLLC. Furthermore, system reliability will be discussed in this section.
+To build a system model, we need to consider two points. The first is how to reflect the real situation of 5G networks in our system. The article \cite{article_Energy} and \cite{article_joachim} are both use the concatenate model to describe the composition of the delay in URLLC networks. The second point is that does the SNC theory suit for the performance analysis in URLLC communication? Guang Yang, Ming Xiao, and H. Vincent Poor have done similar work by using SNC theory in Low-Latency Millimeter-Wave Communication \cite{article_Millimeter}. Although the Millimeter-Wave is not the only way to implement URLLC, it still can prove the SNC theory can accomplish the delay analysis. To sum up these two points, we make an attempt to combine SNC and the tandem model to analyze the performance in 5G URLLC. Furthermore, system reliability will be discussed in this section.
 
 \subsection{URLLC Network Architecture}
-\label{sec:2}
 Generally speaking, 5G network includes Standalone networking (SA) and Non-standalone networking (NSA).
 The SA mode is the establishment of whole new 5G network, while the NSA mode is the combination of 5G and 4G LTE.
 According to the implementation technology of the core network, the NSA mode can further be divided.
@@ -253,7 +253,7 @@ The BBU function of 4G will be rebuilt into DU and CU in 5G.
 CU provides the service convergence function in the access side. It focuses on the low real-time capabilities of the protocol stack and adopts a centralized deployment.
 DU mainly provides data access function to the terminal, including radio frequency and partial signal processing. DU concentrate on the high real-time capabilities of the transport requirements and suit for a distributed deployment method.
 The NGC (Next Generation Core Network) as Core Network in 5G replace the EPC. 5G NGC is based on SDN/NFV technology and designed to better fit the cloud platform.
-The architecture is depicted as Fig.\ref{fig_architecture}.
+The architecture is depicted as Fig. \ref{fig_architecture}.
 \begin{figure*}[htbp]
 \centering
   \includegraphics[width=0.75\textwidth]{5G_delay_en.jpg}
@@ -265,7 +265,7 @@ The architecture is depicted as Fig.\ref{fig_architecture}.
 \subsection{Delay of URLLC Network}
 
 In this part, we discuss the latency mainly on the User Plane (UP) rather than the Control Plane (C-Plane).
-That is because the delay requirement of user plane is higher than that of control plane.
+That is because the delay requirement of the user plane is higher than that of control plane.
 UP latency is the communication time between UE and network nodes when transmission and reception of the data at the corresponding IP layer, whereas the C-Plane latency is the time spend on radio resource allocating and state switching from idle to active.
 %Compared with UP latency, the C-Plane delay is tiny.
 The results of comparison between UP latency and C-Plane have been discussed in reference \cite{article_Energy}.
@@ -303,7 +303,7 @@ P\{delay > d \} < \epsilon
 \end{equation}
 The delay should be within 1ms, so the value of $d$ should be less than 1 and the unit is millisecond (ms).
 The $\epsilon$ is defined as a very small probability.
-Equation(\ref{eq_urllc_delay_problem}) represents a 5G URLLC network that successfully transfers data and meets the delay requirements.
+Equation(\ref{eq_urllc_delay_problem}) represents that a 5G URLLC network successfully transfers data and meets the delay requirements.
 
 \subsection{Basics of Stochastic Network Calculus}
 In SNC theory, the min-plus algebra is applied to analyze queuing system.
@@ -805,9 +805,9 @@ We assume that the 5G URLLC networks are standalone deployment.
 The packet arrival rate is constant and arrival process satisfies Poisson distribution.
 A general URLLC reliability requirement for one transmission of a packet is $1*10^{-5}$ for 32 bytes with a user plane latency of 1ms.
 %so we set the block error rate value around $1*10^{-5}$.
-More simulation parameters can be found in Table.\ref{tab_2}.
+More simulation parameters can be found in Tab. \ref{tab_2}.
 \begin{table}
-  \caption{evaluation parameters}\label{tab_2}
+  \caption{Evaluation Parameters}\label{tab_2}
   \center
   \begin{tabular}{|l|l|}
     \hline
@@ -834,7 +834,7 @@ Taking this boundary probability as the precondition, we simulate the relationsh
   \caption{Service Rate Influence}
   \label{fig2}
 \end{figure}
-Fig.\ref{fig2} provides the evaluated URLLC delay with different service rate under violation probability $1*10^{-5}$.
+Fig. \ref{fig2} provides the evaluated URLLC delay with different service rate under violation probability $1*10^{-5}$.
 The value of violation probability is from $5*10^{-6}$ to $15*10^{-6}$.
 We arrange the value scope to observe the effect of this value on delay.
 We adopt 4 service rates in model and all the curves are slow down by violation probability value. From this, we can conduct that the violation probability is not the main factor to influence the latency.
@@ -847,10 +847,10 @@ That means system can guarantee the low latency communication in a stable state.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.7\textwidth]{BLER.png}
-  \centering\caption{BLER Bound with parameter $\gamma$ }
+  \centering\caption{BLER Bound with Parameter $\gamma$ }
   \label{fig_BLER}
 \end{figure}
-For Reliability of URLLC, we adopt SNC theory to study the stochastic bound of block error rate. In Fig.(\ref{fig_BLER}), we set the parameter $\gamma$ in three different values which is near to the $1*10^{-5}$. This parameter is set according to the BLER requirement of URLLC in 3GPP\cite{standard2}. We can get that the block error rate will decrease with the violate probability increasing. For the upper bound parameter $\gamma = 0.00001$, the BLER is well limited to the $1*10^{-5}$. It also means that the $99.999\%$ transmission correctness.
+For Reliability of URLLC, we adopt SNC theory to study the stochastic bound of block error rate. In Fig. \ref{fig_BLER}, we set the parameter $\gamma$ in three different values which is near to the $1*10^{-5}$. This parameter is set according to the BLER requirement of URLLC in 3GPP \cite{standard2}. We can get that the block error rate will decrease with the violate probability increasing. For the upper bound parameter $\gamma = 0.00001$, the BLER is well limited to the $1*10^{-5}$. It also means that the $99.999\%$ transmission correctness.
 
 %add a new figure
 \begin{figure}[htbp]
@@ -860,7 +860,7 @@ For Reliability of URLLC, we adopt SNC theory to study the stochastic bound of b
   \label{fig_Delay_BLER}
 \end{figure}
 Based on the reliability demand of URLLC, we study the influence of block error rate on system delay.
-From Fig.\ref{fig_Delay_BLER}, we can see that BLER has little effect on the delay.
+From Fig. \ref{fig_Delay_BLER}, we can see that BLER has little effect on the delay.
 The delay varies very slightly when BLER value ranges from $1*10^{-5}$ to $1*10^{-3}$
 A reason is that ultra reliability requires BLER not to exceed $1*10^{-5}$.
 It is difficult for such a small value to have a large impact on service rate.
@@ -887,25 +887,25 @@ Therefore, we should improve task scheduling and resource allocation.
   \caption{The Influence of Number of Tandem Servers on Delay}
   \label{fig3}
 \end{figure}
-Fig.\ref{fig3} presents the relationship among latency, number of server levels and service rate.
+Fig. \ref{fig3} presents the relationship among latency, number of server levels and service rate.
 The arrival rate is constant and the speed is 20Gbit/s. The violation probability is maintained at $1*10^{-5}$.
 Based on the above setting, we can derived that the delay is sensitive on number of tandem servers.
-From Fig.\ref{fig3}, we can see the slope of latency caused by number of tandem servers is larger than the service rate.
+From Fig. \ref{fig3}, we can see the slope of latency caused by number of tandem servers is larger than the service rate.
 We draw a delay equals 1ms flat plane to cut the curved surface.
 The part below the plane is the scope of deployment parameters which satisfy the delay condition.
 %This means that the delay is maintained below 1ms when the number of servers less than 5 at the same time service rate more than 40 Gbit/s.
-This means that when the number of servers is less than 5 and the service rate is over 40 Gbit/s, the delay is maintained below 1 ms.
-In order to ensure low latency of communication, it is necessary to reduce the number of tandem servers in deployment.
+It means that when the number of servers is less than 5 and the service rate is over 40 Gbit/s, the delay maintains below 1 ms.
+In order to ensure low latency of communication, it is necessary to reduce the number of tandem servers in the deployment.
 The edge computing is a popular deployment in 5G network. It is a typical example for reducing the number of servers in the transmission path.
 Increasing server service rate is another way to reduce latency.
 When the transmission rate is 20 Gbit/s, the service rate should be set above 40 Gbit/s.
 In this way, the delay requirement of URLLC can be guaranteed.
 
-The simulation experiment of the whole paper is mainly aimed at the performance requirements of URLLC.
+The simulation experiment of the whole paper mainly aims at the performance requirements of URLLC.
 In terms of Low-Latency, URLLC requires transmission delay less than or equal to 1 ms.
 At the same time, in terms of Ultra-reliability, URLLC should ensure that the block error rate is $1*10^{-5}$.
-Our simulation experiment reveals how to meet the requirements of latency and reliability.
-In order to increase the transmission rate of the network to 20GBit/s, we need to meet the conditions in network construction.
+Our experiment reveals how to meet the requirements of latency and reliability.
+To increase the transmission rate of the network to 20GBit/s, we need to meet the conditions in network construction.
 The conditions like what kind of processing speed should the service rate of network nodes satisfy, and what range should be the number of hops
 (tandem servers) from the access network to the cloud.
 
