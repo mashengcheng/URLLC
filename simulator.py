@@ -39,6 +39,7 @@ var_delay = 1
 
 pic_label = ""
 
+#测试函数
 def test_var():
     #print(var_lambda, var_service)
     #show message
@@ -49,6 +50,7 @@ def test_var():
     messagebox.showinfo('Parameters', 'arrival rate:%f\nservice rate:%f '\
                         %(var_lambda,var_service))
     
+#将多有的输入参数的文本框清空
 def clear_entry():
     str_lambda.set("")
     str_service.set("")    
@@ -59,14 +61,14 @@ def clear_entry():
     str_delay.set("")
     #l_result.config(text="Latency:")
     
-    
+#计算时延
 def calculate_delay():
-    var_lambda = float(str_lambda.get())
-    var_service = float(str_service.get())
-    var_num_server = float(str_num_server.get())
-    var_a = float(str_a.get())
-    var_b = float(str_b.get())
-    var_epsilon = float(str_epsilon.get())
+    var_lambda = float(str_lambda.get())    #泊松分布的数据到达速率
+    var_service = float(str_service.get())    #系统提供的服务速率
+    var_num_server = float(str_num_server.get())    #串联服务节点的数量
+    var_a = float(str_a.get())    #服务概率边界参数a
+    var_b = float(str_b.get())    #服务概率边界参数b
+    var_epsilon = float(str_epsilon.get())    #时延概率边界epsilon
     
     delay = 1/(var_service - var_lambda) * ((var_num_server+1)/var_b) *\
     math.log(var_a*(var_num_server+1)/var_epsilon)
@@ -208,6 +210,9 @@ def highlight_compare(*args):
     l_b.config(text='b')
     l_epsilon.config(text='Violation')
     global pic_label
+    if compare_label.get()[:1] == var_comb1.get()[:1]:
+        messagebox.showinfo('Error!','Select a repetitive Parameters!')
+        return;
     if compare_label.get().startswith("Arrival"):
         l_lambda.config(text='Arrival Rate -->>>>')        
         pic_label = "Arrival Rate:"
@@ -303,11 +308,22 @@ def draw_line():
     
     if pic_label != "":
         pic.legend()
+            
     canvas.draw()
 
 b_draw_line = Button(frame_input, text='Draw Line', command = draw_line)
 b_draw_line.grid(row=11, column=0)
 
+
+def save_figure():
+    figure_name = '%s.jpg'%(compare_label.get());
+    #if(os.path.exists(figure_name)):
+    #    figure_name = '%s_%s.jpg'%(figure_name, 'new');
+    f.savefig(figure_name);
+    messagebox.showinfo('Info!', 'Save figure: %s '%(figure_name))
+
+b_save_figure = Button(frame_input, text='Save Figure', command = save_figure)
+b_save_figure.grid(row=12, column=0)
 
 #清除图像的按钮
 def clear_pic():
