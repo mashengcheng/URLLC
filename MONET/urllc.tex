@@ -558,7 +558,7 @@ Service rate $\beta_{gNB},\beta_{NGC},\beta_{Cloud}\in\mathcal{F}$, $g_{gNB}, g_
 Then, for all $t\geq 0$ and $x \geq 0$, the Latency of URLLC system $L_{All}(t)$ is bounded by
 \begin{equation}\label{eq_in_crl_2}
 \begin{split}
-P\{L_{All}(t) \geq d\} &= P\{L_{All}(t) \geq h(\alpha_{AUU}+x, \beta_{All})\} \\
+P\{L_{All}(t) \geq d\} &= P\{L_{All}(t) \geq h(\alpha_{AAU}+x, \beta_{All})\} \\
  &\leqslant f_{AAU}\otimes g_{All}(x)
 \end{split}
 \end{equation}
@@ -621,7 +621,7 @@ According to stochastic service curve (\ref{eq_ssc}), $A_{AAU}\otimes \beta_{All
 For long-term running, if $t\rightarrow\infty$, $\alpha_{AAU}(t-s)-\beta_{All}(t+d-s)$ approximate to zero because of $\alpha_{AAU},\beta_{All}\in\mathcal{F}$.
 Finally, with Lemma. \ref{thrm_latency}, the delay of the URLLC system can be bounded by this
 \begin{equation}\label{eq_latency_urllc}
-P\{L(x)>h(\alpha_{AAU}+x, \beta_{All})\} < f_{AUU} \otimes g_{All}(x)
+P\{L(x)>h(\alpha_{AAU}+x, \beta_{All})\} < f_{AAU} \otimes g_{All}(x)
 \end{equation}
 Therefore, Theorem. \ref{crl_latency_urllc} is proved.
 \end{proof}
